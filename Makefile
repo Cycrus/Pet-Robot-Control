@@ -3,17 +3,17 @@
 # August 2022
 ################################################
 
-CC=g++ -std=c++17
-LDFLAGS= -lbcm2835 -lrt
+CC = g++ -std=c++17
+LDFLAGS = -lbcm2835 -lrt
 CFLAGS = -Iinclude/  -c -Wall 
 MD=mkdir
 
-SRC=src
-OBJ=obj
+SRC = src
+OBJ = obj
 SRCS = $(wildcard $(SRC)/*.cpp)
 OBJS = $(patsubst $(SRC)/%.cpp,  $(OBJ)/%.o, $(SRCS))
-BIN=./bin
-TARGET=$(BIN)/test
+BIN = ./bin
+TARGET = $(BIN)/test
 
 all: pre-build $(TARGET) 
 
@@ -34,7 +34,7 @@ $(TARGET): $(OBJS) $(OBJ)
 	@echo 'DONE!'
 	@echo '***************'
 
-$(OBJ)/%.o :  $(SRC)/%.cpp   $(OBJ) 
+$(OBJ)/%.o :  $(SRC)/%.cpp $(OBJ) 
 	@echo 'MAKE OBJECT FILE'
 	$(CC) $(CFLAGS) $< -o  $@ 
 

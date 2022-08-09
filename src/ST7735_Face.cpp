@@ -32,8 +32,8 @@ left_eye_color_(left_eye_color),
 right_eye_color_(right_eye_color),
 accent_color_(accent_color),
 frame_(screen_width, screen_height, face_color),
-left_eye_(128, 80, face_color, left_eye_color, accent_color),
-right_eye_(128, 80, face_color, right_eye_color, accent_color),
+left_eye_(LEFT_EYE, 128, 80, face_color, left_eye_color, accent_color),
+right_eye_(RIGHT_EYE, 128, 80, face_color, right_eye_color, accent_color),
 running_(false)
 {
 }
@@ -54,16 +54,10 @@ void ST7735_Face::faceLoop(ST7735_TFT *display)
     
     running_ = true;
     
-    int16_t upper_eyelid_left = 100;
-    int16_t upper_eyelid_right = 100;
-    int16_t lower_eyelid_left = 100;
-    int16_t lower_eyelid_right = 100;
     int8_t speed_x = 0;
     int8_t speed_y = 0;
     int16_t step_size = 5;
-    bool uper_eyelids_open = true;
-    bool lower_eyelids_open = true;
-    bool wink = false;
+    int16_t general_direction = -5;
     
     srand(time(NULL));
     display->TFTfillScreen(0x0000);
@@ -74,6 +68,14 @@ void ST7735_Face::faceLoop(ST7735_TFT *display)
 
         switch(keyboard.getCode())
         {
+            case K_PLUS:
+                general_direction = 5;
+                break;
+            
+            case K_MINUS:
+                general_direction = -5;
+                break;
+                
             case K_8:
                 speed_x = step_size;
                 break;
@@ -91,40 +93,13 @@ void ST7735_Face::faceLoop(ST7735_TFT *display)
                 break;
                 
             case K_7:
-                if(keyboard.getState() == ButtonState::PRESS)
-                {
-                    upper_eyelid_left -= 5;
-                    upper_eyelid_right -= 5;
-                    /*if(upper_eyelid_left == 70 || upper_eyelid_right == 70)
-                    {
-                        upper_eyelid_left = 20;
-                        upper_eyelid_right = 20;
-                    }
-                    else
-                    {
-                        upper_eyelid_left = 70;
-                        upper_eyelid_right = 70;
-                    }*/
-                }
+                right_eye_.moveUpperEyelid(general_direction);
+                left_eye_.moveUpperEyelid(general_direction);
                 break;
                 
             case K_9:
-                if(keyboard.getState() == ButtonState::PRESS)
-                {
-                    lower_eyelid_left -= 5;
-                    lower_eyelid_right -= 5;
-                    /*if(lower_eyelid_left == 70 || lower_eyelid_right == 100)
-                    {
-                        lower_eyelid_left = 20;
-                        lower_eyelid_right = 20;
-                    }
-                    else
-                    {
-                        lower_eyelid_left = 70;
-                        lower_eyelid_right = 70;
-                    }*/
-                    std::cout << lower_eyelid_left << std::endl;
-                }
+                right_eye_.moveLowerEyelid(general_direction);
+                left_eye_.moveLowerEyelid(general_direction);
                 break;
         }
         
@@ -136,10 +111,6 @@ void ST7735_Face::faceLoop(ST7735_TFT *display)
         
         right_eye_.moveEye(speed_x, speed_y);
         left_eye_.moveEye(speed_x, speed_y);
-        right_eye_.setUpperEyelid(upper_eyelid_right);
-        left_eye_.setUpperEyelid(upper_eyelid_left);
-        right_eye_.setLowerEyelid(lower_eyelid_right);
-        left_eye_.setLowerEyelid(lower_eyelid_left);
         
         render(display);
         

@@ -10,12 +10,15 @@
 #include "ST7735_Eye.hpp"
 
 #include <iostream>
+#include "ST7735_Utils.hpp"
 
-ST7735_Eye::ST7735_Eye(int16_t canvas_width,
+ST7735_Eye::ST7735_Eye(int16_t eye_side,
+                       int16_t canvas_width,
                        int16_t canvas_height,
                        uint16_t background_color,
                        uint16_t eye_color,
                        uint16_t glare_color) :
+eye_side_(eye_side),
 frame_(canvas_width, canvas_height, background_color),
 background_color_(background_color),
 eye_color_(eye_color),
@@ -24,8 +27,16 @@ norm_x_(45),
 norm_y_(10),
 norm_width_(60),
 norm_height_(60),
-upper_eyelid_(100),
-lower_eyelid_(100)
+MIN_X_(0),
+MIN_Y_(0),
+MAX_UPPER_EYELID_(100),
+MIN_UPPER_EYELID_(15),
+MAX_LOWER_EYELID_(100),
+MIN_LOWER_EYELID_(75),
+MAX_EYEBROW_DEPTH_(10),
+MIN_EYEBROW_DEPTH_(0),
+MAX_EYEBROW_ANGLE_(50),
+MIN_EYEBROW_ANGLE_(-50)
 {
     x_ = norm_x_;
     y_ = norm_y_;
@@ -33,14 +44,11 @@ lower_eyelid_(100)
     width_ = norm_width_;
     height_ = norm_height_;
     
-    MIN_X_ = 0;
-    MIN_Y_ = 0;
+    upper_eyelid_ = MAX_UPPER_EYELID_;
+    lower_eyelid_ = MAX_LOWER_EYELID_;
     
-    MAX_UPPER_EYELID_ = 100;
-    MIN_UPPER_EYELID_ = 15;
-    
-    MAX_LOWER_EYELID_ = 100;
-    MIN_LOWER_EYELID_ = 75;
+    eyebrow_depth_ = MIN_EYEBROW_DEPTH_;
+    eyebrow_angle_ = 0;
     
     update();
 }
@@ -71,14 +79,7 @@ void ST7735_Eye::update()
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::setUpperEyelid(int16_t percentage)
 {
-    if(percentage > MAX_UPPER_EYELID_)
-    {
-        percentage = MAX_UPPER_EYELID_;
-    }
-    else if(percentage < MIN_UPPER_EYELID_)
-    {
-        percentage = MIN_UPPER_EYELID_;
-    }
+    ST7735_Utils::checkLimits(percentage, MIN_UPPER_EYELID_, MAX_UPPER_EYELID_);
     
     int16_t new_height = (float)norm_height_ / 100.0 * (float)percentage;
     int16_t new_x = x_ - (new_height - height_) / 5;
@@ -88,39 +89,55 @@ void ST7735_Eye::setUpperEyelid(int16_t percentage)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::moveUpperEyelid(int16_t value)
+{
+    setUpperEyelid(upper_eyelid_ + value);
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::setLowerEyelid(int16_t percentage)
 {
-    if(percentage > MAX_LOWER_EYELID_)
-    {
-        percentage = MAX_LOWER_EYELID_;
-    }
-    else if(percentage < MIN_LOWER_EYELID_)
-    {
-        percentage = MIN_LOWER_EYELID_;
-    }
-    
+    ST7735_Utils::checkLimits(percentage, MIN_LOWER_EYELID_, MAX_LOWER_EYELID_);
     lower_eyelid_ = percentage;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::moveLowerEyelid(int16_t value)
+{
+    setLowerEyelid(lower_eyelid_ + value);
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::setEyebrowDepth(int16_t depth)
+{
+    ST7735_Utils::checkLimits(depth, MIN_EYEBROW_DEPTH_, MAX_EYEBROW_DEPTH_);
+    eyebrow_depth_ = depth;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::moveEyebrowDepth(int16_t depth)
+{
+    setEyebrowDepth(eyebrow_depth_ + depth);
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::setEyebrowAngle(int16_t angle)
+{
+    ST7735_Utils::checkLimits(angle, MIN_EYEBROW_ANGLE_, MAX_EYEBROW_ANGLE_);
+    eyebrow_angle_ = angle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::moveEyebrowAngle(int16_t angle)
+{
+    setEyebrowAngle(eyebrow_angle_ + angle);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::setEyePos(int16_t x, int16_t y)
 {
-    if(x < MIN_X_)
-    {
-        x = MIN_X_;
-    }
-    else if(x > MAX_X_)
-    {
-        x = MAX_X_;
-    }
-    if(y < MIN_Y_)
-    {
-        y = MIN_Y_;
-    }
-    else if(y > MAX_Y_)
-    {
-        y = MAX_Y_;
-    }
+    ST7735_Utils::checkLimits(x, MIN_X_, MAX_X_);
+    ST7735_Utils::checkLimits(y, MIN_Y_, MAX_Y_);
     
     x_ = x;
     y_ = y;
@@ -189,18 +206,15 @@ void ST7735_Eye::drawEye()
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::drawLowerEyelid()
 {
-    if(lower_eyelid_ < 100)
-    {
-        float eyelid_height = (100.0 - lower_eyelid_) * (float)upper_eyelid_ * 0.01;
-        
-        frame_.drawEllipse(x_, y_ + (width_ / 2),
-                           eyelid_height, width_ / 1.5,
-                           background_color_, 1, true);
-    }
+    float eyelid_height = (100.0 - lower_eyelid_) * (float)upper_eyelid_ * 0.01;
+    
+    frame_.drawEllipse(x_, y_ + (width_ / 2),
+                       eyelid_height, width_ / 1.5,
+                       background_color_, 1, true);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::drawEyebrow()
 {
-    
+    //frame_.drawLine(x_ + 10, 0, 
 }

@@ -83,3 +83,16 @@ void ST7735_Utils::swap(int16_t &x0, int16_t &x1)
     x0 = x1;
     x1 = x_temp;
 }
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Utils::checkLimits(int16_t &value, int16_t min, int16_t max)
+{
+    if(value < min)
+    {
+        value = min;
+    }
+    else if(value > max)
+    {
+        value = max;
+    }
+}

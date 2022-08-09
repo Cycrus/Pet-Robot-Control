@@ -70,6 +70,17 @@ class ST7735_Utils
     //
     static void swap(uint8_t &x0, uint8_t &x1);
     static void swap(int16_t &x0, int16_t &x1);
+    
+    //-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Checks if a number is inside some boundaries and corrects it if not.
+    ///
+    /// @param value  The value to check for a boundary violation.
+    /// @param min    The minimum of the boundary.
+    /// @param max    The maximum of the boundary.
+    /// 
+    //
+    static void checkLimits(int16_t &value, int16_t min, int16_t max);
 };
 
 #endif // ST7735_UTILS_HPP

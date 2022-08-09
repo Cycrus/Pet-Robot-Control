@@ -13,6 +13,9 @@
 #include <stdint.h>
 #include "ST7735_Canvas.hpp"
 
+#define LEFT_EYE -1
+#define RIGHT_EYE 1
+
 class ST7735_Eye
 {
     public:
@@ -20,13 +23,15 @@ class ST7735_Eye
         ///
         /// Constructor. Assembles the default eye.
         ///
+        /// @param eye_side              Defines if the eye is a left or a right one.
         /// @param canvas_width          The width of the canvas the eye is placed in.
         /// @param canvas_height         The height of the canvas the eye is placed in.
         /// @param background_color      The color of the transparent background, will not be visible later on.
         /// @param eye_color             The color of the eye.
         /// @param glare_color           The color of the glare on the eye.
         //
-        ST7735_Eye(int16_t canvas_width,
+        ST7735_Eye(int16_t eye_side,
+                   int16_t canvas_width,
                    int16_t canvas_height,
                    uint16_t background_color,
                    uint16_t eye_color,
@@ -49,10 +54,20 @@ class ST7735_Eye
         void update();
         
         void setUpperEyelid(int16_t percentage);
+        void moveUpperEyelid(int16_t value);
+        
         void setLowerEyelid(int16_t percentage);
+        void moveLowerEyelid(int16_t value);
+        
         void setEyePos(int16_t x, int16_t y);
         void moveEye(int16_t x, int16_t y);
         
+        void setEyebrowDepth(int16_t depth);
+        void moveEyebrowDepth(int16_t depth);
+        
+        void setEyebrowAngle(int16_t angle);
+        void moveEyebrowAngle(int16_t angle);
+                
         int16_t getX();
         int16_t getY();
         int16_t getNormX();
@@ -65,10 +80,13 @@ class ST7735_Eye
         
         
     private:
-        ST7735_Canvas frame_;
         const uint16_t background_color_;
         const uint16_t eye_color_;
         const uint16_t glare_color_;
+        
+        ST7735_Canvas frame_;
+        
+        int16_t eye_side_;
         
         int16_t MAX_UPPER_EYELID_ ;
         int16_t MIN_UPPER_EYELID_;
@@ -91,6 +109,14 @@ class ST7735_Eye
         int16_t MAX_LOWER_EYELID_;
         int16_t MIN_LOWER_EYELID_;
         int16_t lower_eyelid_;
+        
+        int16_t MAX_EYEBROW_DEPTH_;
+        int16_t MIN_EYEBROW_DEPTH_;
+        int16_t eyebrow_depth_;
+        
+        int16_t MAX_EYEBROW_ANGLE_;
+        int16_t MIN_EYEBROW_ANGLE_;
+        int16_t eyebrow_angle_;
         
         void drawEye();
         void drawLowerEyelid();
