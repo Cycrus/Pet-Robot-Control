@@ -67,6 +67,8 @@ void ST7735_Eye::blit(ST7735_Canvas &canvas, int16_t x, int16_t y)
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::update()
 {
+    simulatePerspective();
+    
     // Width and Height must be swapped to account for swapped x and y axis.
     MAX_X_ = frame_.getWidth() - height_;
     MAX_Y_ = frame_.getHeight() - width_;
@@ -220,8 +222,26 @@ void ST7735_Eye::drawEyebrow()
 {
     int16_t left_vert_x = x_ + height_ + 25 - eyebrow_depth_;
     int16_t right_vert_x = x_ + height_ + 25 - eyebrow_depth_;
+    int16_t left_vert_y = -norm_y_ + y_ - 20;
+    int16_t right_vert_y = -norm_y_ + y_ + frame_.getHeight() + 20;
 
     left_vert_x += eyebrow_angle_ / 2 * eye_side_;
     right_vert_x -= eyebrow_angle_ / 2 * eye_side_;
-    frame_.drawLine(left_vert_x, 0, right_vert_x, frame_.getHeight(), background_color_, 20); 
+    frame_.drawLine(left_vert_x, left_vert_y, right_vert_x, right_vert_y, background_color_, 20); 
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::simulatePerspective()
+{
+    if(eye_side_ == LEFT_EYE)
+    {
+        uint16_t new_width = norm_width_ - (norm_y_ - y_);
+        width_ = new_width;
+    }
+    else
+    {
+        uint16_t new_width = norm_width_ + (norm_y_ - y_) / 2;
+        y_ += width_ - new_width;
+        width_ = new_width;
+    }
 }

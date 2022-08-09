@@ -121,6 +121,7 @@ class ST7735_Eye
         void drawEye();
         void drawLowerEyelid();
         void drawEyebrow();
+        void simulatePerspective();
 };
 
 #endif // ST7735_EYE_HPP
