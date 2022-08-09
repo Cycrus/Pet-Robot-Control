@@ -186,6 +186,8 @@ class ST7735_Eye
         int16_t MIN_Y_;
         int16_t MAX_X_;
         int16_t MAX_Y_;
+        int16_t DEFAULT_MAX_X_;
+        int16_t DEFAULT_MAX_Y_;
         int16_t norm_x_;
         int16_t norm_y_;
         int16_t x_;

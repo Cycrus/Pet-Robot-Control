@@ -52,6 +52,7 @@ void stopDisplay(ST7735_TFT *display)
     display->TFTPowerDown();
     bcm2835_close();
     delete display;
+    display = nullptr;
     printf("TFT End\r\n");
 }
 
