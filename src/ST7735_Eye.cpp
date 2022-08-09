@@ -13,6 +13,7 @@
 #include "ST7735_Utils.hpp"
 
 ST7735_Eye::ST7735_Eye(int16_t eye_side,
+                       int16_t corner_radius,
                        int16_t canvas_width,
                        int16_t canvas_height,
                        uint16_t background_color,
@@ -23,6 +24,7 @@ eye_color_(eye_color),
 glare_color_(glare_color),
 frame_(canvas_width, canvas_height, background_color),
 eye_side_(eye_side),
+corner_radius_(corner_radius),
 MAX_UPPER_EYELID_(100),
 MIN_UPPER_EYELID_(15),
 MIN_X_(0),
@@ -62,22 +64,6 @@ void ST7735_Eye::blit(ST7735_Canvas &canvas, int16_t x, int16_t y)
     
     canvas.blitCanvas(frame_, 0, 0, frame_.getWidth(), frame_.getHeight(),
                       x, y, background_color_);
-}
-
-//-----------------------------------------------------------------------------------------------------------------
-void ST7735_Eye::update()
-{
-    simulatePerspective();
-    
-    // Width and Height must be swapped to account for swapped x and y axis.
-    MAX_X_ = frame_.getWidth() - height_;
-    MAX_Y_ = frame_.getHeight() - width_;
-    
-    frame_.fill(background_color_);
-    
-    drawEye();
-    drawLowerEyelid();
-    drawEyebrow();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -201,10 +187,27 @@ int16_t ST7735_Eye::getMaxY()
     return MAX_Y_;
 }
 
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Eye::update()
+{
+    simulatePerspective();
+    
+    // Width and Height must be swapped to account for swapped x and y axis.
+    MAX_X_ = frame_.getWidth() - height_;
+    MAX_Y_ = frame_.getHeight() - width_;
+    
+    frame_.fill(background_color_);
+    
+    drawEye();
+    drawLowerEyelid();
+    drawEyebrow();
+}
+
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::drawEye()
 {
-    frame_.drawRect(x_, y_, height_, width_, 10, eye_color_);
+    frame_.drawRect(x_, y_, height_, width_, corner_radius_, eye_color_);
 }
 
 //-----------------------------------------------------------------------------------------------------------------

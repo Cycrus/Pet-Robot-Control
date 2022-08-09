@@ -32,8 +32,8 @@ left_eye_color_(left_eye_color),
 right_eye_color_(right_eye_color),
 accent_color_(accent_color),
 frame_(screen_width, screen_height, face_color),
-left_eye_(LEFT_EYE, 128, 80, face_color, left_eye_color, accent_color),
-right_eye_(RIGHT_EYE, 128, 80, face_color, right_eye_color, accent_color),
+left_eye_(LEFT_EYE, 10, 128, 80, face_color, left_eye_color, accent_color),
+right_eye_(RIGHT_EYE, 10, 128, 80, face_color, right_eye_color, accent_color),
 running_(false)
 {
 }

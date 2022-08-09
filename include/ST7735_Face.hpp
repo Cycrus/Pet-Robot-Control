@@ -48,8 +48,21 @@ class ST7735_Face
         //
         ~ST7735_Face() = default;
         
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Renders the face with both eyes onto a ST7725_TFT display
+        ///
+        /// @param display    The display the face is rendered onto.
+        //
         void render(ST7735_TFT *display);
         
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// A loop showing and constantly updating the face based on certain values. Acts as the main entry point.
+        /// Should be changed and run on it's own thread.
+        ///
+        /// @param display    The display the face is rendered onto.
+        //
         void faceLoop(ST7735_TFT *display);
         
     private:

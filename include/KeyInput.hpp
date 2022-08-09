@@ -45,15 +45,62 @@ enum ButtonState {RELEASE, PRESS, HOLD, ERROR};
 class KeyInput
 {
     public:
-        // Bsp: "/dev/input/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-event-kbd"
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Constructor. Calls initializing function to connect to set keyboard.
+        ///
+        /// @param keyboard_path    The path to the Unix file of the keyboard input stream.
+        ///                         Bsp: "/dev/input/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-event-kbd"
+        /// @param is_blocking      Decides if the process is blocked when calling getKey() until a button is pressed.
+        //
         KeyInput(std::string keyboard_path, bool is_blocking);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Deleted copy constructor.
+        //
         KeyInput(const KeyInput&) = delete;
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Default destructor.
+        //
         ~KeyInput() = default;
         
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Initializes the keyboard input stream by opening a connection to the given file.
+        ///
+        /// @param keyboard_path    The path to the Unix file of the keyboard input stream.
+        ///                         Bsp: "/dev/input/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-event-kbd"
+        /// @param is_blocking      Decides if the process is blocked when calling getKey() until a button is pressed.
+        //
         void init(std::string keyboard_path, bool is_blocking);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Grabs a key if one is currently pressed and stores it in the internal key member variables.
+        /// It can be read with getCode() and getState().
+        /// If no key is pressed the stored code is 0 and state is ButtonState::ERROR.
+        //
         void getKey();
         
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Returns the code (identity) of the last stored key grabbed by getKey(). See definition list above. Please note,
+        /// that those codes are not equivalent to ASCII codes.
+        ///
+        /// @return     The code of the last stored key.
+        //
         int getCode();
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Returns the state (value) of the last stored key grabbed by getKey(). This state can be RELEASE, PRESS or HOLD.
+        /// It can also be ERROR if no key is pressed. Please see enum at top of the file.
+        ///
+        /// @return     The state of the last stored key.
+        //
         ButtonState getState();
     
     private:
