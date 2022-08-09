@@ -101,6 +101,16 @@ void ST7735_Face::faceLoop(ST7735_TFT *display)
                 right_eye_.moveLowerEyelid(general_direction);
                 left_eye_.moveLowerEyelid(general_direction);
                 break;
+                
+            case K_1:
+                right_eye_.moveEyebrowDepth(general_direction);
+                left_eye_.moveEyebrowDepth(general_direction);
+                break;
+                
+            case K_3:
+                right_eye_.moveEyebrowAngle(general_direction);
+                left_eye_.moveEyebrowAngle(general_direction);
+                break;
         }
         
         if(keyboard.getState() == ButtonState::ERROR)

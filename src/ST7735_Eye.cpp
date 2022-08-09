@@ -18,22 +18,24 @@ ST7735_Eye::ST7735_Eye(int16_t eye_side,
                        uint16_t background_color,
                        uint16_t eye_color,
                        uint16_t glare_color) :
-eye_side_(eye_side),
-frame_(canvas_width, canvas_height, background_color),
 background_color_(background_color),
 eye_color_(eye_color),
 glare_color_(glare_color),
+frame_(canvas_width, canvas_height, background_color),
+eye_side_(eye_side),
+MAX_UPPER_EYELID_(100),
+MIN_UPPER_EYELID_(15),
+MIN_X_(0),
+MIN_Y_(0),
+MAX_X_(100),
+MAX_Y_(100),
 norm_x_(45),
 norm_y_(10),
 norm_width_(60),
 norm_height_(60),
-MIN_X_(0),
-MIN_Y_(0),
-MAX_UPPER_EYELID_(100),
-MIN_UPPER_EYELID_(15),
 MAX_LOWER_EYELID_(100),
 MIN_LOWER_EYELID_(75),
-MAX_EYEBROW_DEPTH_(10),
+MAX_EYEBROW_DEPTH_(15),
 MIN_EYEBROW_DEPTH_(0),
 MAX_EYEBROW_ANGLE_(50),
 MIN_EYEBROW_ANGLE_(-50)
@@ -216,5 +218,10 @@ void ST7735_Eye::drawLowerEyelid()
 //-----------------------------------------------------------------------------------------------------------------
 void ST7735_Eye::drawEyebrow()
 {
-    //frame_.drawLine(x_ + 10, 0, 
+    int16_t left_vert_x = x_ + height_ + 25 - eyebrow_depth_;
+    int16_t right_vert_x = x_ + height_ + 25 - eyebrow_depth_;
+
+    left_vert_x += eyebrow_angle_ / 2 * eye_side_;
+    right_vert_x -= eyebrow_angle_ / 2 * eye_side_;
+    frame_.drawLine(left_vert_x, 0, right_vert_x, frame_.getHeight(), background_color_, 20); 
 }
