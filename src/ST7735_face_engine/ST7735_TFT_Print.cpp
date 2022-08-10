@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "ST7735_TFT_Print.h"
+#include "ST7735_TFT_Print.hpp"
 
 // Public Methods ///////////////
 /* default implementation: may be overridden */

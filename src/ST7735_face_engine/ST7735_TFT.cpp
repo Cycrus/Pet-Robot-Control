@@ -8,7 +8,7 @@
  * URL: https://github.com/gavinlyonsrepo/ST7735_TFT_RPI
  */
 
-#include "ST7735_TFT.h"
+#include "ST7735_TFT.hpp"
  
  
 ST7735_TFT :: ST7735_TFT()

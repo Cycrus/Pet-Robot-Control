@@ -11,7 +11,7 @@
 #include <array>
 #include <cmath>
 
-#include "ST7735_TFT.h"
+#include "ST7735_TFT.hpp"
 #include "ST7735_Canvas.hpp"
 #include "ST7735_Utils.hpp"
 #include "ST7735_Face.hpp"

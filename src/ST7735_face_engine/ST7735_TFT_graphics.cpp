@@ -10,9 +10,9 @@
  * Edited by: Cyril Marx August 2022
  */
 
-#include "ST7735_TFT_graphics.h"
-#include "ST7735_TFT.h"
-#include "ST7735_TFT_Font.h"
+#include "ST7735_TFT_graphics.hpp"
+#include "ST7735_TFT.hpp"
+#include "ST7735_TFT_Font.hpp"
 #include "ST7735_Utils.hpp"
 
 #include <iostream>
