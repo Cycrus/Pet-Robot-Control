@@ -19,8 +19,6 @@
 #include <cstdlib>
 #include <time.h>
 
-#include "KeyInput.hpp"
-
 ST7735_Face::ST7735_Face(int16_t screen_width,
                          int16_t screen_height,
                          uint16_t face_color,
@@ -48,82 +46,214 @@ void ST7735_Face::render(ST7735_TFT *display)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+void ST7735_Face::stopFaceLoop()
+{
+    running_ = false;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 void ST7735_Face::faceLoop(ST7735_TFT *display)
 {
-    KeyInput keyboard("/dev/input/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-event-kbd", false);
-    
     running_ = true;
-    
-    int8_t speed_x = 0;
-    int8_t speed_y = 0;
-    int16_t step_size = 5;
-    int16_t general_direction = -5;
-    
-    srand(time(NULL));
-    display->TFTfillScreen(0x0000);
     
     while(running_)
     {
-        keyboard.getKey();
+        // do something here...
+    }
+}
 
-        switch(keyboard.getCode())
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Face::faceDemoLoop(ST7735_TFT *display)
+{
+    const int16_t EVENT_WAKEUP = 0;
+    const int16_t EVENT_MOVEEYES = 1;
+    const int16_t EVENT_HAPPY = 2;
+    const int16_t EVENT_EMOTIONS = 3;
+    const int16_t EVENT_GOSLEEP = 4;
+    
+    bool running = true;
+    int16_t event = 0;
+    int16_t frame = 0;
+    
+    display->TFTfillScreen(0x0000);
+    
+    while(running)
+    {
+        switch(event)
         {
-            case K_PLUS:
-                general_direction = 5;
+            case EVENT_WAKEUP:
+                if(frame == 0)
+                {
+                    right_eye_.setUpperEyelid(0);
+                    left_eye_.setUpperEyelid(0);
+                }
+                else if(frame > 50 && frame < 80)
+                {
+                    right_eye_.moveUpperEyelid(5);
+                    left_eye_.moveUpperEyelid(5);
+                }
+                else if(frame > 80)
+                {
+                    event++;
+                    frame = 0;
+                }
+                break;
+                
+            case EVENT_MOVEEYES:
+                if(frame > 0 && frame < 10)
+                {
+                    right_eye_.moveUpperEyelid(-2);
+                    left_eye_.moveUpperEyelid(-2);
+                }
+                else if(frame > 10 && frame < 20)
+                {
+                    right_eye_.moveEye(0, 3);
+                    left_eye_.moveEye(0, 3);
+                }
+                else if(frame > 30 && frame < 35)
+                {
+                    right_eye_.moveEye(0, -5);
+                    left_eye_.moveEye(0, -5);
+                }
+                else if(frame > 40 && frame < 50)
+                {
+                    right_eye_.moveEye(0, 5);
+                    left_eye_.moveEye(0, 5);
+                }
+                else if(frame > 60)
+                {
+                    event++;
+                    frame = 0;
+                }
+                
+                break;
+                
+            case EVENT_HAPPY:
+                if(frame > 0 && frame < 5)
+                {
+                    right_eye_.moveLowerEyelid(-5);
+                    left_eye_.moveLowerEyelid(-5);
+                }
+                else if(frame == 10)
+                {
+                    right_eye_.moveEye(0, -5);
+                    left_eye_.moveEye(0, -5);
+                }
+                else if(frame == 20)
+                {
+                    right_eye_.moveEye(2, 0);
+                    left_eye_.moveEye(2, 0);
+                }
+                else if(frame == 22)
+                {
+                    right_eye_.moveEye(-4, 0);
+                    left_eye_.moveEye(-4, 0);
+                }
+                else if(frame == 24)
+                {
+                    right_eye_.moveEye(4, 0);
+                    left_eye_.moveEye(4, 0);
+                }
+                else if(frame == 26)
+                {
+                    right_eye_.moveEye(-4, 0);
+                    left_eye_.moveEye(-4, 0);
+                }
+                else if(frame == 28)
+                {
+                    right_eye_.moveEye(4, 0);
+                    left_eye_.moveEye(4, 0);
+                }
+                else if(frame == 30)
+                {
+                    right_eye_.moveEye(-4, 0);
+                    left_eye_.moveEye(-4, 0);
+                }
+                else if(frame > 40)
+                {
+                    event++;
+                    frame = 0;
+                }
+                break;
+                
+            case EVENT_EMOTIONS:
+                if(frame < 5)
+                {
+                    right_eye_.moveLowerEyelid(4);
+                    left_eye_.moveLowerEyelid(4);
+                    left_eye_.moveEyebrowDepth(4);
+                }
+                else if(frame > 40 && frame < 60)
+                {
+                    right_eye_.moveEyebrowDepth(1);
+                }
+                else if(frame > 80 && frame < 100)
+                {
+                    right_eye_.moveEyebrowAngle(-1);
+                    left_eye_.moveEyebrowAngle(-1);
+                }
+                else if(frame > 120 && frame < 130)
+                {
+                    right_eye_.moveLowerEyelid(-2);
+                }
+                else if(frame > 130 && frame < 140)
+                {
+                    left_eye_.moveLowerEyelid(-2);
+                }
+                else if(frame > 160 && frame < 200)
+                {
+                    right_eye_.moveEyebrowAngle(1);
+                    left_eye_.moveEyebrowAngle(1);
+                }
+                else if(frame > 220)
+                {
+                    event++;
+                    frame = 0;
+                }
                 break;
             
-            case K_MINUS:
-                general_direction = -5;
+            case EVENT_GOSLEEP:
+                if(frame < 20)
+                {
+                    right_eye_.moveEyebrowAngle(-1);
+                    left_eye_.moveEyebrowAngle(-1);
+                    right_eye_.moveLowerEyelid(2);
+                    left_eye_.moveLowerEyelid(2);
+                    right_eye_.moveEyebrowDepth(-1);
+                    left_eye_.moveEyebrowDepth(-1);
+                }
+                else if(frame > 30 && frame < 50)
+                {
+                    right_eye_.moveUpperEyelid(-5);
+                    left_eye_.moveUpperEyelid(-5);
+                }
+                else if(frame > 50)
+                {
+                    event++;
+                    frame = 0;
+                }
                 break;
                 
-            case K_8:
-                speed_x = step_size;
-                break;
-                
-            case K_6:
-                speed_y = step_size;
-                break;
-            
-            case K_2:
-                speed_x = -step_size;
-                break;
-                
-            case K_4:
-                speed_y = -step_size;
-                break;
-                
-            case K_7:
-                right_eye_.moveUpperEyelid(general_direction);
-                left_eye_.moveUpperEyelid(general_direction);
-                break;
-                
-            case K_9:
-                right_eye_.moveLowerEyelid(general_direction);
-                left_eye_.moveLowerEyelid(general_direction);
-                break;
-                
-            case K_1:
-                right_eye_.moveEyebrowDepth(general_direction);
-                left_eye_.moveEyebrowDepth(general_direction);
-                break;
-                
-            case K_3:
-                right_eye_.moveEyebrowAngle(general_direction);
-                left_eye_.moveEyebrowAngle(general_direction);
+            default:
+                running = false;
                 break;
         }
         
-        if(keyboard.getState() == ButtonState::ERROR)
-        {
-            speed_x = 0;
-            speed_y = 0;
-        }
-        
+        /*
         right_eye_.moveEye(speed_x, speed_y);
         left_eye_.moveEye(speed_x, speed_y);
+        right_eye_.moveEyebrowAngle(general_direction);
+        left_eye_.moveEyebrowAngle(general_direction);
+        right_eye_.moveEyebrowDepth(general_direction);
+        left_eye_.moveEyebrowDepth(general_direction);
+        right_eye_.moveLowerEyelid(general_direction);
+        left_eye_.moveLowerEyelid(general_direction);
+        right_eye_.moveUpperEyelid(general_direction);
+        left_eye_.moveUpperEyelid(general_direction);
+        */
         
         render(display);
-        
         bcm2835_delay(FRAME_DELAY_);
+        frame++;
     }
 }

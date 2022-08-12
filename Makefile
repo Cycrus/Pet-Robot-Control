@@ -14,8 +14,8 @@
 # Compiler Definitions
 #
 
-CC = gcc -Wall -std=c14
-CXX = g++ -Wall -std=c++14 -pthread
+CC = gcc -Wall -std=c17
+CXX = g++ -Wall -std=c++17 -pthread
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Compiler Flags
@@ -52,19 +52,14 @@ TARGET_TEST = $(subst src_test, build/tests, $(SRC_TEST:.cpp=))
 #
 
 tests: $(TARGET_TEST)
+	@echo " "
 	@echo "Finished compiling tests! Everything went file."
 	@echo "**************************************************"
 	@echo " "
 
 build/tests/%: src_test/%.cpp $(OBJECTS)
-	@echo " "
-	@echo "Finished compiling source files."
-	@echo "**************************************************"
-	@echo " "
+	@echo Building $@
 	@$(CXX) $< $(OBJECTS) -o $@ $(CFLAGS) $(LDFLAGS)
-	@echo "Finished compiling tests!"
-	@echo "**************************************************"
-	@echo " "
 
 build/objects/%.o: src/%.c build
 	@echo Building $@

@@ -63,29 +63,12 @@ class ST7735_Eye
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
-        /// Sets the position of the upper eyelid. Mainly responsible for closure and openness of the eye.
-        ///
-        /// @param percentage    The percentage how open the upper eyelid should be.
-        //
-        void setUpperEyelid(int16_t percentage);
-        
-        //-----------------------------------------------------------------------------------------------------------------
-        ///
         /// Opens/closes the upper eyelid a certain amount. Mainly responsible for closure and openness of the eye.
         ///
         /// @param value    The amount how much the upper eyelid should be opened or closed. Negative for close, positive
         ///                 for open.
         //
         void moveUpperEyelid(int16_t value);
-        
-        //-----------------------------------------------------------------------------------------------------------------
-        ///
-        /// Sets the position of the lower eyelid. Mainly responsible for increased emotional expression.
-        /// Defaults to "happy" without eyebrows.
-        ///
-        /// @param percentage    The percentage how open the lower eyelid should be.
-        //
-        void setLowerEyelid(int16_t percentage);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
@@ -99,21 +82,57 @@ class ST7735_Eye
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
-        /// Sets the position of the eye on the frame/canvas.
-        ///
-        /// @param x    The new x position of the eye.
-        /// @param y    The new y position of the eye.
-        //
-        void setEyePos(int16_t x, int16_t y);
-        
-        //-----------------------------------------------------------------------------------------------------------------
-        ///
         /// Moves the eye a certain amount on the x and y axis.
         ///
         /// @param x    The change of positon on the x axis.
         /// @param y    The change of positon on the y axis.
         //
         void moveEye(int16_t x, int16_t y);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Moves the eyebrows up or down a certain amount. Enables a range of
+        /// emotions when further down (value is higher). Defaults to "annoyed" with default eyebrow angle.
+        ///
+        /// @param depth    The amount the eyebrow should be lowered (positive) or raised (negative).
+        //
+        void moveEyebrowDepth(int16_t depth);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Rotates the eyebrows a certain angle. Is mainly enabled by lowered eyebrow. Negative values indicate more
+        /// aggression & suspicion, while positive values indicate fear & devotion.
+        /// Please note, that the angle is not a real radian angle, but a value for the steepness (slope) of the eyebrow.
+        ///
+        /// @param angle    The amount the eyebrow should be rotated.
+        //
+        void moveEyebrowAngle(int16_t angle);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Sets the position of the upper eyelid. Mainly responsible for closure and openness of the eye.
+        ///
+        /// @param percentage    The percentage how open the upper eyelid should be.
+        //
+        void setUpperEyelid(int16_t percentage);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Sets the position of the lower eyelid. Mainly responsible for increased emotional expression.
+        /// Defaults to "happy" without eyebrows.
+        ///
+        /// @param percentage    The percentage how open the lower eyelid should be.
+        //
+        void setLowerEyelid(int16_t percentage);
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Sets the position of the eye on the frame/canvas.
+        ///
+        /// @param x    The new x position of the eye.
+        /// @param y    The new y position of the eye.
+        //
+        void setEyePos(int16_t x, int16_t y);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
@@ -126,15 +145,6 @@ class ST7735_Eye
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
-        /// Moves the eyebrows up or down a certain amount. Enables a range of
-        /// emotions when further down (value is higher). Defaults to "happy" without eyebrows.
-        ///
-        /// @param depth    The amount the eyebrow should be lowered (positive) or raised (negative).
-        //
-        void moveEyebrowDepth(int16_t depth);
-        
-        //-----------------------------------------------------------------------------------------------------------------
-        ///
         /// Sets the angle of the eyebrow. Mainly responsible for general emotional expression. Is mainly enabled by lowered
         /// eyebrow. Negative values indicate more aggression & suspicion, while positive values indicate fear & devotion.
         /// Please note, that the angle is not a real radian angle, but a rough estimation for the slope of the eyebrow.
@@ -142,16 +152,6 @@ class ST7735_Eye
         /// @param angle    The angle of the eyebrow.
         //
         void setEyebrowAngle(int16_t angle);
-        
-        //-----------------------------------------------------------------------------------------------------------------
-        ///
-        /// Rotates the eyebrows a certain angle. Is mainly enabled by lowered eyebrow. Negative values indicate more
-        /// aggression & suspicion, while positive values indicate fear & devotion.
-        /// Please note, that the angle is not a real radian angle, but a rough estimation for the slope of the eyebrow.
-        ///
-        /// @param depth    The amount the eyebrow should be lowered (positive) or raised (negative).
-        //
-        void moveEyebrowAngle(int16_t angle);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///

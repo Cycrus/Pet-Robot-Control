@@ -27,7 +27,7 @@ eye_side_(eye_side),
 corner_radius_(corner_radius),
 MAX_UPPER_EYELID_(100),
 MIN_UPPER_EYELID_(15),
-MIN_X_(20),
+MIN_X_(10),
 MIN_Y_(0),
 MAX_X_(40),
 MAX_Y_(100),
@@ -199,6 +199,7 @@ void ST7735_Eye::update()
     // Width and Height must be swapped to account for swapped x and y axis.
     MAX_X_ = DEFAULT_MAX_X_; //frame_.getWidth() - height_;
     MAX_Y_ = frame_.getHeight() - width_; //DEFAULT_MAX_Y_;
+    setEyePos(x_, y_);
     
     frame_.fill(background_color_);
     
@@ -247,7 +248,7 @@ void ST7735_Eye::simulatePerspective()
     else
     {
         uint16_t new_width = norm_width_ + (norm_y_ - y_) / 2;
-        y_ += width_ - new_width;
+        moveEye(0, width_ - new_width);
         width_ = new_width;
     }
 }

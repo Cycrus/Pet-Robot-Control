@@ -58,6 +58,12 @@ class ST7735_Face
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
+        /// Sets the running_ parameter to false and stops the FaceLoop() method therefore.
+        //
+        void stopFaceLoop();
+        
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
         /// A loop showing and constantly updating the face based on certain values. Acts as the main entry point.
         /// Should be changed and run on it's own thread.
         ///
@@ -65,8 +71,16 @@ class ST7735_Face
         //
         void faceLoop(ST7735_TFT *display);
         
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// A loop showing some capabilities of the face engine.
+        ///
+        /// @param display    The display the face is rendered onto for the demonstration.
+        //
+        void faceDemoLoop(ST7735_TFT *display);
+        
     private:
-        const uint16_t FRAME_DELAY_ = 20;
+        const uint16_t FRAME_DELAY_ = 45;
     
         uint16_t face_color_;
         uint16_t left_eye_color_;
