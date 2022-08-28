@@ -24,7 +24,7 @@ CXX = g++ -Wall -std=c++17 -pthread
 INCLUDES = -I inc/keyboard_input -I inc/ST7735_face_engine -I src/header_only_libs
 
 CFLAGS = $(INCLUDES)
-LDFLAGS = -lm -lbcm2835 -lrt
+LDFLAGS = -lm -lbcm2835 -lrt -li2c
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Files
