@@ -1,4 +1,4 @@
-// Connect SCL to A4 and SDA to A5
+// Connect SCL to A5 and SDA to A4
 // Do not forget the servo power to an external powr source (not one of the boards).
 
 #include <Wire.h>
@@ -18,11 +18,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  pwm.setPWM(0, 0, servoMIN);
-  Serial.println("MIN");
-  delay(1000);
-
   pwm.setPWM(0, 0, servoMAX);
+  Serial.println("MIN");
+  //delay(1000);
+
+  /*pwm.setPWM(0, 0, servoMAX);
   Serial.println("MAX");
-  delay(1000);
+  delay(1000);*/
 }
