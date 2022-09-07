@@ -1,18 +1,9 @@
 /* 
- CREATED BY AATIK"s LAB
- FOR TESTING PURPOSE
+ A small script for interpreting 20 volt current sensor.
 
-SENSOR CONNECTIONS
-
-GND_PIN -> GND OF ARDUINO
-VCC     -> 5v PIN OF ARDUINO
-OUT     -> A0 PIN OF ARDUNO
+ Author Cyril Marx
  
- This code is for the 5A sensor, if 20A or 30A sensor.
- You need to MODIFY/REPLACE (.0264 * analogRead(A0) -13.51) this formula to 
- 
-(.19 * analogRead(A0) -25) for 20A sensor
-(.044 * analogRead(A0) -3.78) for 30A sensor
+ Date August 2022
 */
 
 // Extra Source: https://funduino.de/nr-41-stromstaerkesensor-arduino
@@ -32,7 +23,6 @@ void loop() {
   for(int i = 0; i < 1000; i++) 
   {
     value = analogRead(A0);
-    //average = average + (.0264 * value - 13.51) / 1000;
     average += value;
     delay(1);
   }
