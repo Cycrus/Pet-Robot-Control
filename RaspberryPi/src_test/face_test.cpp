@@ -36,7 +36,7 @@ void startDisplay(ST7735_TFT *display)
     int8_t GPIO_SDIN_TFT = -1;
     int8_t GPIO_CS_TFT = -1;
 
-    std::cout << "TFT Start\r" << std::endl;
+    std::cout << "TFT Start" << std::endl;
     display->TFTSetupGPIO(GPIO_RST_TFT, GPIO_DC_TFT, GPIO_CS_TFT,
                           GPIO_SCLK_TFT, GPIO_SDIN_TFT);
     display->TFTInitScreenSize(OFFSET_COL, OFFSET_ROW ,
@@ -87,7 +87,7 @@ int main(void)
         return -1;
     }
     
-    bcm2835_delay(DELAY1);
+    //bcm2835_delay(DELAY1);
     startDisplay(display);
     
     testFace(display);

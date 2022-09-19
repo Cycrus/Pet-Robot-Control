@@ -8,6 +8,7 @@
 
 // Extra Source: https://funduino.de/nr-41-stromstaerkesensor-arduino
 
+#define SENSOR_GPIO A2
 #define NULLVALUE 531.5
 #define VpA 125           // Value has been empirically derived
 #define VOLTFACTOR 5000
@@ -22,7 +23,7 @@ void loop() {
   double average = 0.0;
   for(int i = 0; i < 1000; i++) 
   {
-    value = analogRead(A0);
+    value = analogRead(SENSOR_GPIO);
     average += value;
     delay(1);
   }

@@ -8,7 +8,7 @@
  */
 
 int instruction = 0;
-const float MOTOR_DIFF_CORRECTION = 0.94;
+const float MOTOR_DIFF_CORRECTION = 0.66;
 
 int right_speed = 150;
 int left_speed = (float)right_speed * MOTOR_DIFF_CORRECTION;

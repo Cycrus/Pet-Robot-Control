@@ -1,5 +1,5 @@
-#define TRIGGER_PIN 8
-#define ECHO_PIN 9
+#define TRIGGER_PIN 24
+#define ECHO_PIN 13
 
 int duration = 0;
 int distance = 0;

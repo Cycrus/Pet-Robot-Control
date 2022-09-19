@@ -1,5 +1,5 @@
 // Connect SCL to A5 and SDA to A4
-// Do not forget the servo power to an external powr source (not one of the boards).
+// Do not forget the servo power to an external power source (not one of the boards).
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>

@@ -2,7 +2,7 @@
 
 #include <Adafruit_NeoPixel.h>
 
-#define LEDPIN 3
+#define LEDPIN 13
 #define NUMPIXELS 12
 
 int loop_num = 0;

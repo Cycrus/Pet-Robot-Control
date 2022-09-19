@@ -2,7 +2,7 @@
 
 #include "MQ135.h"
 
-#define ANALOGPIN A0
+#define ANALOGPIN A3
 
 MQ135 gasSensor = MQ135(ANALOGPIN);
 
