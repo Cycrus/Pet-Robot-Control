@@ -44,7 +44,7 @@ class Module
   ///
   /// @param curr_time  The current time in milliseconds since the start of the script.
   //
-  void getMeasurement(uint32_t curr_time);
+  void triggerModule(uint32_t curr_time);
 
   protected:
   uint8_t max_steps_;

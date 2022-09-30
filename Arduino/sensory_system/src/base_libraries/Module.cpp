@@ -31,7 +31,7 @@ Module::~Module()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void Module::getMeasurement(uint32_t curr_time)
+void Module::triggerModule(uint32_t curr_time)
 {
   uint16_t time_diff = calcTimeDiff(curr_time);
 

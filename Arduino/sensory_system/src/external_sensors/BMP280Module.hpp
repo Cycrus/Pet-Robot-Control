@@ -1,78 +1,86 @@
 /**********************************************************************
- * UltrasonicDistance.hpp
+ * BMP280Module.hpp
  * 
- * A class representing a single ultrasonic distance measuring module.
- * Extends the Module base class.
+ * A class representing a single BMP280 Module.
+ * Extends the base Module class.
  * 
  * Author: Cyril Marx
  * Created: September 2022
  **********************************************************************/
 
-#ifndef ULTRASONICDISTANCEMODULE_HPP
-#define ULTRASONICDISTANCEMODULE_HPP
+#ifndef BMP280MODULE_HPP
+#define BMP280MODULE_HPP
 
-#include "Module.hpp"
+#include <Adafruit_BMP280.h>
+#include "../base_libraries/Module.hpp"
 
-#define SONIC_SPEED 0.03432
-#define MAX_DISTANCE 500
-
-class UltrasonicDistanceModule : public Module
+class BMP280Module : public Module
 {
   public:
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Constructor. Sets the timing and the pins of the module.
-  ///
-  /// @param trigger_pin    The pin used for triggering the ultrasound signal.
-  /// @param echo_pin       The pin used for measuring the time the sound needs to return.
+  /// Constructor.
   //
-  UltrasonicDistanceModule(uint8_t trigger_pin, uint8_t echo_pin);
+  BMP280Module();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
   /// Default copy constructor.
   //
-  UltrasonicDistanceModule(const UltrasonicDistanceModule&) = default;
+  BMP280Module(const BMP280Module&) = default;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Destructor.
+  /// Default destructor.
   //
-  ~UltrasonicDistanceModule();
+  ~BMP280Module() = default;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Initializes the pins of the module.
+  /// Initializes the address of the module on the I2C bus.
   //
   void initModule();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Returns the last valid distance measured by the module.
+  /// Returns the last valid temperature measured by the module in degree Celsius.
   //
-  int16_t getDistance();
+  int16_t getTemperature();
 
-  private:
-  int16_t distance_;
-  uint8_t trigger_pin_;
-  uint8_t echo_pin_;
-
-  protected:
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 1. Turns the ultrasound off.
+  /// Returns the last valid pressure value measured by the module in hectopascal.
+  //
+  uint16_t getPressure();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the last valid altitude calculated by the module in meter.
+  //
+  uint16_t getAltitude();
+
+  private:
+  Adafruit_BMP280 module_object_;
+  
+  int16_t temperature_;
+  uint16_t pressure_;
+  uint16_t altitude_;
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Step 1. Measures temperature.
   //
   void stepOne() override;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 2. Turns the ultrasound on.
+  /// Step 2. Measures pressure.
   //
   void stepTwo() override;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 3. Turns the ultrasound off and measures the distance.
+  /// Step 3. Calculates altitude.
   //
   void stepThree() override;
 
@@ -83,4 +91,4 @@ class UltrasonicDistanceModule : public Module
   void stepFour() override;
 };
 
-#endif //ULTRASONICDISTANCEMODULE_HPP
+#endif //BMP280MODULE_HPP

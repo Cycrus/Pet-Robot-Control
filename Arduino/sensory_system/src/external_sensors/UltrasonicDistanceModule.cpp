@@ -1,7 +1,7 @@
 /**********************************************************************
- * module.cpp
+ * UltrasonicDistanceModule.cpp
  * 
- * Implementation of the ultrasonic distance measuring base class.
+ * Implementation of the ultrasonic distance measuring class.
  * 
  * Author: Cyril Marx
  * Created: September 2022
@@ -17,14 +17,7 @@ echo_pin_(echo_pin)
   time_list_[0] = 0;
   time_list_[1] = 5;
   time_list_[2] = 10;
-
-  max_steps_ = 3;
-}
-
-//-----------------------------------------------------------------------------------------------------------------
-UltrasonicDistanceModule::~UltrasonicDistanceModule()
-{
-  
+  setMaxSteps(3);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -72,5 +65,5 @@ void UltrasonicDistanceModule::stepThree()
 //-----------------------------------------------------------------------------------------------------------------
 void UltrasonicDistanceModule::stepFour()
 {
-  
+  // Not used.
 }
