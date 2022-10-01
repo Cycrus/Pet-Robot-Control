@@ -15,6 +15,7 @@
 #include "src/external_sensors/RFIDReader.hpp"
 
 #include "src/internal_sensors/CompassModule.hpp"
+#include "src/internal_sensors/CurrentSensor.hpp"
 
 uint32_t curr_time = 0;
 uint32_t last_time = 0;
@@ -29,6 +30,9 @@ RFIDReader rfid_reader(10, 9);
 
 // Internal Module Declarations
 CompassModule compass(12345, -0.0890118);
+CurrentSensor current_1(A0);
+CurrentSensor current_2(A1);
+CurrentSensor current_3(A2);
 
 void setup() {
   Serial.begin(9600);
@@ -39,7 +43,11 @@ void setup() {
   dht11.initModule();
   mq135.initModule();
   rfid_reader.initModule();
+
   compass.initModule();
+  current_1.initModule();
+  current_2.initModule();
+  current_3.initModule();
 }
 
 void loop() {
@@ -51,7 +59,11 @@ void loop() {
   dht11.triggerModule(curr_time);
   mq135.triggerModule(curr_time);
   rfid_reader.triggerModule(curr_time);
+
   compass.triggerModule(curr_time);
+  current_1.triggerModule(curr_time);
+  current_2.triggerModule(curr_time);
+  current_3.triggerModule(curr_time);
 
   if(curr_time - last_time >= 1000)
   {
@@ -79,7 +91,15 @@ void loop() {
     Serial.println(compass.getZ());
     Serial.print("Compass heading = ");
     Serial.println(compass.getHeading());
+    Serial.print("Current in mAh = ");
+    Serial.println(current_1.getCurrentPerHour() + current_2.getCurrentPerHour() + current_3.getCurrentPerHour());
+    Serial.print("Current in Ampere = ");
+    Serial.println(current_1.getCurrent() + current_2.getCurrent() + current_3.getCurrent())
     Serial.println("*******************************************");
     last_time = curr_time;
+
+    current_1.resetBuffers();
+    current_2.resetBuffers();
+    current_3.resetBuffers();
   }
 }
