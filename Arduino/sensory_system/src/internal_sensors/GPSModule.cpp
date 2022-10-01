@@ -11,7 +11,7 @@
 
 GPSModule::GPSModule(int8_t timezone_correction) :
 gps_lat_(0.0),
-gps_long_(0.0),
+gps_lon_(0.0),
 gps_year_(0),
 gps_month_(0),
 gps_day_(0),
@@ -32,7 +32,7 @@ course_validity_(false),
 satellite_validity_(false),
 timezone_correction_(timezone_correction)
 {
-  time_list_[0] = 16;
+  time_list_[0] = 100;
   setMaxSteps(2);
 }
 
@@ -173,7 +173,7 @@ void GPSModule::stepOne()
 {
   while(GPS_UART.available())
   {
-    module_object_.encode(GPS_UART.read())
+    module_object_.encode(GPS_UART.read());
   }
   GPS_UART.flush();
 
@@ -208,7 +208,7 @@ void GPSModule::stepOne()
 
   if(speed_validity_)
   {
-    gps_speed_ = (float)module_object_.speed.kmph / 3.6;
+    gps_speed_ = (float)module_object_.speed.kmph() / 3.6;
   }
   else
   {

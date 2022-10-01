@@ -56,6 +56,7 @@ void setup() {
   current_2.initModule();
   current_3.initModule();
   wt61_module.initModule();
+  gps_module.initModule();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -111,7 +112,7 @@ void loop() {
     Serial.print(wt61_module.getGyrX()); Serial.print(" | "); Serial.print(wt61_module.getGyrY()); Serial.print(" | "); Serial.println(wt61_module.getGyrZ());
     Serial.print("Angle = ");
     Serial.print(wt61_module.getAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
-    Serial.print("GPS Location = ")
+    Serial.print("GPS Location = ");
     Serial.print(gps_module.getLon()); Serial.print(" | "); Serial.println(gps_module.getLat());
     Serial.print("GPS Datetime = ");
     Serial.print(gps_module.getDay()); Serial.print("."); Serial.print(gps_module.getMonth()); Serial.print("."); Serial.print(gps_module.getDay());
