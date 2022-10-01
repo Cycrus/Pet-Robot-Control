@@ -33,6 +33,11 @@ Module::~Module()
 //-----------------------------------------------------------------------------------------------------------------
 void Module::triggerModule(uint32_t curr_time)
 {
+  if(!triggeringRequirements())
+  {
+    return;
+  }
+
   uint16_t time_diff = calcTimeDiff(curr_time);
 
   if(time_diff >= time_list_[curr_step_])
@@ -51,6 +56,12 @@ void Module::setMaxSteps(uint8_t max_steps)
   {
     max_steps_ = STEP_NUM;
   }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+bool Module::triggeringRequirements()
+{
+  return true;
 }
 
 //-----------------------------------------------------------------------------------------------------------------

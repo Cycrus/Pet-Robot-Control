@@ -60,6 +60,14 @@ class Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
+  /// A method to override to set requirements that the triggerModule() function can even be called.
+  ///
+  /// @return   bool    If true, the triggerModule() function can be triggered.
+  //
+  bool triggeringRequirements();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
   /// The first step the module can carry out in the loop. MUST be overridden, even if not used.
   //
   virtual void stepOne() = 0;

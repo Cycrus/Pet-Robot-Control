@@ -12,6 +12,7 @@
 #include "src/external_sensors/BMP280Module.hpp"
 #include "src/external_sensors/HumidityModule.hpp"
 #include "src/external_sensors/GasModule.hpp"
+#include "src/external_sensors/RFIDReader.hpp"
 
 uint32_t curr_time = 0;
 uint32_t last_time = 0;
