@@ -70,7 +70,7 @@ class Module
   ///
   /// @return   bool    If true, the triggerModule() function can be triggered.
   //
-  bool triggeringRequirements();
+  virtual bool triggeringRequirements();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

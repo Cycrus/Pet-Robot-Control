@@ -64,9 +64,9 @@ bool RFIDReader::checkByteArray(byte *arr, String str)
   }
 
 //-----------------------------------------------------------------------------------------------------------------
-bool triggeringRequirements()
+bool RFIDReader::triggeringRequirements()
 {
-  if ( !mfrc522.PICC_IsNewCardPresent() || !mfrc522.PICC_ReadCardSerial()) {
+  if ( !module_object_.PICC_IsNewCardPresent() || !module_object_.PICC_ReadCardSerial()) {
     resetCurrStep();
     return;
   }
