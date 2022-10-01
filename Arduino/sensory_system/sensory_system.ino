@@ -17,12 +17,13 @@
 uint32_t curr_time = 0;
 uint32_t last_time = 0;
 
-// Module Declarations
+// External Module Declarations
 UltrasonicDistanceModule distance_front(24, 13);
 UltrasonicDistanceModule distance_back(22, 12);
 BMP280Module bmp280;
 HumidityModule dht11(30, DHT11); 
 GasModule mq135(A3);
+RFIDReader rfid_reader(9, 10);
 
 void setup() {
   Serial.begin(9600);
@@ -32,6 +33,7 @@ void setup() {
   bmp280.initModule();
   dht11.initModule();
   mq135.initModule();
+  rfid_reader.initModule();
 }
 
 void loop() {
@@ -42,6 +44,7 @@ void loop() {
   bmp280.triggerModule(curr_time);
   dht11.triggerModule(curr_time);
   mq135.triggerModule(curr_time);
+  rfid_reader.triggerModule(curr_time);
 
   if(curr_time - last_time >= 1000)
   {
@@ -59,6 +62,8 @@ void loop() {
     Serial.println(dht11.getHumidity());
     Serial.print("Gas PPM = ");
     Serial.println(mq135.getGasPPM());
+    Serial.print("RFID Message = ");
+    Serial.println(rfid_reader.getMessageCode());
     Serial.println("*******************************************");
     last_time = curr_time;
   }

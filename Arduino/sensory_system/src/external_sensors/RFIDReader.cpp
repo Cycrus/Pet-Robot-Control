@@ -9,8 +9,8 @@
 
 #include "RFIDReader.hpp"
 
-RFIDReader::RFIDReader(uint8_t rst_pin, uint8_t ss_pin) :
-module_object_(rst_pin, ss_pin),
+RFIDReader::RFIDReader(uint8_t ss_pin, uint8_t rst_pin) :
+module_object_(ss_pin, rst_pin),
 message_code_(0)
 {
   time_list_[0] = 2;

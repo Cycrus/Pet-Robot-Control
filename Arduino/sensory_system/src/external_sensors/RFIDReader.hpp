@@ -24,7 +24,7 @@ class RFIDReader : public Module
   ///
   /// Constructor. Defines the pin and type of the DHT module.
   //
-  RFIDReader(uint8_t rst_pin, uint8_t ss_pin);
+  RFIDReader(uint8_t ss_pin, uint8_t rst_pin);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
