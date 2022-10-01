@@ -21,12 +21,8 @@ ang_y_(0.0),
 ang_z_(0.0),
 do_initial_calibration_(calibrate)
 {
-  time_list_[0] = 30;
+  time_list_[0] = 16;
   setMaxSteps(2);
-
-  acc_correction_ = 32768 * 16;
-  gyr_correction_ = 32768 * 2000;
-  ang_correction_ = 32768 * 180;
 }
 
 //-----------------------------------------------------------------------------------------------------------------

@@ -36,14 +36,13 @@ void Module::triggerModule(uint32_t curr_time)
 {
   uint16_t time_diff = calcTimeDiff(curr_time);
 
+  if(!triggeringRequirements())
+  {
+    return;
+  }
+
   if(time_diff >= time_list_[curr_step_])
   {
-    if(!triggeringRequirements())
-    {
-      last_activation_time_ = curr_time;
-      return;
-    }
-    
     (this->*method_list_[curr_step_])();
     incrementCurrStep();
     last_activation_time_ = curr_time;

@@ -17,6 +17,7 @@
 #include "src/internal_sensors/CompassModule.hpp"
 #include "src/internal_sensors/CurrentSensor.hpp"
 #include "src/internal_sensors/WT61Module.hpp"
+#include "src/internal_sensors/GPSModule.hpp"
 
 //-----------------------------------------------------------------------------------------------------------------
 uint32_t curr_time = 0;
@@ -37,6 +38,7 @@ CurrentSensor current_1(A0);
 CurrentSensor current_2(A1);
 CurrentSensor current_3(A2);
 WT61Module wt61_module(true);
+GPSModule gps_module(2);
 
 //-----------------------------------------------------------------------------------------------------------------
 void setup() {
@@ -109,6 +111,15 @@ void loop() {
     Serial.print(wt61_module.getGyrX()); Serial.print(" | "); Serial.print(wt61_module.getGyrY()); Serial.print(" | "); Serial.println(wt61_module.getGyrZ());
     Serial.print("Angle = ");
     Serial.print(wt61_module.getAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
+    Serial.print("GPS Location = ")
+    Serial.print(gps_module.getLon()); Serial.print(" | "); Serial.println(gps_module.getLat());
+    Serial.print("GPS Datetime = ");
+    Serial.print(gps_module.getDay()); Serial.print("."); Serial.print(gps_module.getMonth()); Serial.print("."); Serial.print(gps_module.getDay());
+    Serial.print(" ... "); Serial.print(gps_module.getHour()); Serial.print(":"); Serial.print(gps_module.getMinute()); Serial.print(":");
+    Serial.print(gps_module.getSecond()); Serial.print("."); Serial.println(gps_module.getCentisecond());
+    Serial.print("GPS Data = ");
+    Serial.print("Altitude: "); Serial.print(gps_module.getAltitude()); Serial.print(" | Speed: "); Serial.print(gps_module.getSpeed());
+    Serial.print(" | Course: "); Serial.print(gps_module.getCourse()); Serial.print(" | Satellites: "); Serial.println(gps_module.getSatelliteNumber());
     Serial.print("FPS = ");
     Serial.println(fps);
     Serial.print("Frame Delay = ");
@@ -121,6 +132,12 @@ void loop() {
     current_2.resetBuffers();
     current_3.resetBuffers();
   }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void serialEvent1()
+{
+  gps_module.triggerModule(curr_time);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
