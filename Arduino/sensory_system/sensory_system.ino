@@ -16,10 +16,13 @@
 
 #include "src/internal_sensors/CompassModule.hpp"
 #include "src/internal_sensors/CurrentSensor.hpp"
+#include "src/internal_sensors/WT61Module.hpp"
 
+//-----------------------------------------------------------------------------------------------------------------
 uint32_t curr_time = 0;
 uint32_t last_time = 0;
 
+//-----------------------------------------------------------------------------------------------------------------
 // External Module Declarations
 UltrasonicDistanceModule distance_front(24, 13);
 UltrasonicDistanceModule distance_back(22, 12);
@@ -33,7 +36,9 @@ CompassModule compass(12345, -0.0890118);
 CurrentSensor current_1(A0);
 CurrentSensor current_2(A1);
 CurrentSensor current_3(A2);
+WT61Module wt61_module(true);
 
+//-----------------------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin(19200);
   
@@ -48,8 +53,10 @@ void setup() {
   current_1.initModule();
   current_2.initModule();
   current_3.initModule();
+  wt61_module.initModule();
 }
 
+//-----------------------------------------------------------------------------------------------------------------
 void loop() {
   curr_time = millis();
 
@@ -83,18 +90,21 @@ void loop() {
     Serial.println(mq135.getGasPPM());
     Serial.print("RFID Message = ");
     Serial.println(rfid_reader.getMessageCode());
+
     Serial.print("Compass coords = ");
-    Serial.print(compass.getX());
-    Serial.print(" - ");
-    Serial.print(compass.getY());
-    Serial.print(" - ");
-    Serial.println(compass.getZ());
+    Serial.print(compass.getX()); Serial.print(" | "); Serial.print(compass.getY()); Serial.print(" | "); Serial.println(compass.getZ());
     Serial.print("Compass heading = ");
     Serial.println(compass.getHeading());
     Serial.print("Current in mAh = ");
     Serial.println(current_1.getCurrentPerHour() + current_2.getCurrentPerHour() + current_3.getCurrentPerHour());
     Serial.print("Current in Milliampere = ");
     Serial.println(current_1.getCurrent() + current_2.getCurrent() + current_3.getCurrent());
+    Serial.print("Acceleration = ");
+    Serial.print(wt61_module.getAccX()); Serial.print(" | "); Serial.print(wt61_module.getAccY()); Serial.print(" | "); Serial.println(wt61_module.getAccZ());
+    Serial.print("Gyroscope = ");
+    Serial.print(wt61_module.getGyrX()); Serial.print(" | "); Serial.print(wt61_module.getGyrY()); Serial.print(" | "); Serial.println(wt61_module.getGyrZ());
+    Serial.print("Angle = ");
+    Serial.print(wt61_module.GetAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
     Serial.println("*******************************************");
     last_time = curr_time;
 
@@ -102,4 +112,10 @@ void loop() {
     current_2.resetBuffers();
     current_3.resetBuffers();
   }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void serialEvent2() 
+{
+  wt61_module.triggerModule(curr_time);
 }
