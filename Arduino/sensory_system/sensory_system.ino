@@ -35,7 +35,7 @@ CurrentSensor current_2(A1);
 CurrentSensor current_3(A2);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(19200);
   
   distance_front.initModule();
   distance_back.initModule();
@@ -93,8 +93,8 @@ void loop() {
     Serial.println(compass.getHeading());
     Serial.print("Current in mAh = ");
     Serial.println(current_1.getCurrentPerHour() + current_2.getCurrentPerHour() + current_3.getCurrentPerHour());
-    Serial.print("Current in Ampere = ");
-    Serial.println(current_1.getCurrent() + current_2.getCurrent() + current_3.getCurrent())
+    Serial.print("Current in Milliampere = ");
+    Serial.println(current_1.getCurrent() + current_2.getCurrent() + current_3.getCurrent());
     Serial.println("*******************************************");
     last_time = curr_time;
 

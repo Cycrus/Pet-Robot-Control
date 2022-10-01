@@ -11,7 +11,6 @@
 
 CurrentSensor::CurrentSensor(uint8_t analog_pin) :
 mAh_(0.0),
-passed_time_(0),
 ampere_(0.0),
 module_pin_(analog_pin)
 {
@@ -48,15 +47,15 @@ void CurrentSensor::resetBuffers()
 void CurrentSensor::stepOne()
 {
   double sensor_value = 0.0;
-  sensor_value = analogRead(module_pin);
+  sensor_value = analogRead(module_pin_);
   sensor_value -= NULLVALUE;
   if(sensor_value < 0.0)
   {
     sensor_value = 0.0;
   }
 
-  float voltage = (average / 1024.0) * VOLTFACTOR;
-  mAh_ = (volt /  VpA);
+  float sensor_voltage = (sensor_value / 1024.0) * VOLTFACTOR;
+  mAh_ = (sensor_voltage /  VpA);
 
   double mA_ms = mAh_ / 3600000;
   ampere_ += mA_ms * last_activation_time_;

@@ -14,7 +14,7 @@
 #include "../base_libraries/Module.hpp"
 
 #define NULLVALUE 531.5
-#define VpA 125           // Value has been empirically derived
+#define VpA 100           // Value has been empirically derived
 #define VOLTFACTOR 5000
 
 class CurrentSensor : public Module
