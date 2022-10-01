@@ -20,7 +20,7 @@ message_code_(0)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void RIFDReader::initModule()
+void RFIDReader::initModule()
 {
   SPI.begin();
   module_object_.PCD_Init();
@@ -64,31 +64,24 @@ bool RFIDReader::checkByteArray(byte *arr, String str)
   }
 
 //-----------------------------------------------------------------------------------------------------------------
-void RFIDReader::stepOne()
+bool triggeringRequirements()
 {
-  // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
-  if ( ! mfrc522.PICC_IsNewCardPresent()) {
-    return;
-  }
-
-  // Select one of the cards
-  if ( ! mfrc522.PICC_ReadCardSerial()) {
+  if ( !mfrc522.PICC_IsNewCardPresent() || !mfrc522.PICC_ReadCardSerial()) {
+    resetCurrStep();
     return;
   }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+void RFIDReader::stepOne()
+{
+  
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::stepTwo()
 {
-  // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
-  if ( ! mfrc522.PICC_IsNewCardPresent()) {
-    return;
-  }
 
-  // Select one of the cards
-  if ( ! mfrc522.PICC_ReadCardSerial()) {
-    return;
-  }
 }
 
 //-----------------------------------------------------------------------------------------------------------------

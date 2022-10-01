@@ -63,6 +63,12 @@ class RFIDReader : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
+  /// Sets the general requirements of triggering this module. Mainly that an RFID card is present.
+  //
+  bool triggeringRequirements() override;
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
   /// Step 1. Used for Authentification.
   //
   void stepOne() override;

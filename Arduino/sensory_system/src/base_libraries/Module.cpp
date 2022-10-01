@@ -11,7 +11,8 @@
 
 Module::Module() :
 last_activation_time_(0),
-max_steps_(4)
+max_steps_(4),
+curr_step_(0)
 {
   for(uint8_t i = 0; i < STEP_NUM; i++)
   {
@@ -56,6 +57,12 @@ void Module::setMaxSteps(uint8_t max_steps)
   {
     max_steps_ = STEP_NUM;
   }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void Module::resetCurrStep()
+{
+  curr_step_ = 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------

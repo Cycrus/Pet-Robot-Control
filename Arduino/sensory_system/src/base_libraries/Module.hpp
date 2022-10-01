@@ -60,6 +60,12 @@ class Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
+  /// Resets the current step back to 0.
+  //
+  void resetCurrStep();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
   /// A method to override to set requirements that the triggerModule() function can even be called.
   ///
   /// @return   bool    If true, the triggerModule() function can be triggered.
