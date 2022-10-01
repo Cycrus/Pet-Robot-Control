@@ -22,7 +22,7 @@ ang_z_(0.0),
 do_initial_calibration_(calibrate)
 {
   time_list_[0] = 16;
-  setMaxSteps(1);
+  setMaxSteps(2);
 
   acc_correction_ = 32768 * 16;
   gyr_correction_ = 32768 * 2000;
@@ -63,23 +63,77 @@ void WT61Module::initModule()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAccX()
+{
+  return acc_x_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAccY()
+{
+  return acc_y_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAccZ()
+{
+  return acc_z_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getGyrX()
+{
+  return gyr_x_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getGyrY()
+{
+  return gyr_y_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getGyrZ()
+{
+  return gyr_z_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAngX()
+{
+  return ang_x_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAngY()
+{
+  return ang_y_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+float WT61Module::getAngZ()
+{
+  return ang_z_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 void WT61Module::stepOne()
 {
   while (WT61_UART.available())
   {
-    JY901.CopeSerialData(SENSOR.read());
+    JY901.CopeSerialData(WT61_UART.read());
   }
   WT61_UART.flush();
 
-  acc_x_ = (float)JY901.stcAcc.a[0] / acc_correction_;
-  acc_y_ = (float)JY901.stcAcc.a[1] / acc_correction_;
-  acc_z_ = (float)JY901.stcAcc.a[2] / acc_correction_;
-  gyr_x_ = (float)JY901.stcGyro.w[0] / gyr_correction_;
-  gyr_y_ = (float)JY901.stcGyro.w[1] / gyr_correction_;
-  gyr_z_ = (float)JY901.stcGyro.w[2] / gyr_correction_;
-  ang_x_ = (float)JY901.stcAngle.Angle[0] / ang_correction_;
-  ang_y_ = (float)JY901.stcAngle.Angle[1] / ang_correction_;
-  ang_z_ = (float)JY901.stcAngle.Angle[2] / ang_correction_;
+  acc_x_ = (float)JY901.stcAcc.a[0] / 32768 * 16;
+  acc_y_ = (float)JY901.stcAcc.a[1] / 32768 * 16;
+  acc_z_ = (float)JY901.stcAcc.a[2] / 32768 * 16;
+  gyr_x_ = (float)JY901.stcGyro.w[0] / 32768 * 2000;
+  gyr_y_ = (float)JY901.stcGyro.w[1] / 32768 * 2000;
+  gyr_z_ = (float)JY901.stcGyro.w[2] / 32768 * 2000;
+  ang_x_ = (float)JY901.stcAngle.Angle[0] / 32768 * 180;
+  ang_y_ = (float)JY901.stcAngle.Angle[1] / 32768 * 180;
+  ang_z_ = (float)JY901.stcAngle.Angle[2] / 32768 * 180;
 }
 
 //-----------------------------------------------------------------------------------------------------------------

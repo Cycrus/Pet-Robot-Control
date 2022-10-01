@@ -58,6 +58,8 @@ void setup() {
 
 //-----------------------------------------------------------------------------------------------------------------
 void loop() {
+  uint32_t fps_check_time = millis();
+  uint32_t fps = 1000 / (fps_check_time - curr_time);
   curr_time = millis();
 
   distance_front.triggerModule(curr_time);
@@ -104,8 +106,11 @@ void loop() {
     Serial.print("Gyroscope = ");
     Serial.print(wt61_module.getGyrX()); Serial.print(" | "); Serial.print(wt61_module.getGyrY()); Serial.print(" | "); Serial.println(wt61_module.getGyrZ());
     Serial.print("Angle = ");
-    Serial.print(wt61_module.GetAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
+    Serial.print(wt61_module.getAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
+    Serial.print("FPS = ");
+    Serial.println(fps);
     Serial.println("*******************************************");
+    Serial.println("");
     last_time = curr_time;
 
     current_1.resetBuffers();

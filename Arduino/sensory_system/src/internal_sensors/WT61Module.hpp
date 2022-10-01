@@ -35,7 +35,7 @@ class WT61Module : public Module
   ///
   /// Default destructor.
   //
-  ~CurrentSWT61Moduleensor() = default;
+  ~WT61Module() = default;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
