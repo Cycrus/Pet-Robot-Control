@@ -36,6 +36,11 @@ uint8_t RFIDReader::getMessageCode()
   return message_code_;
 }
 
+void RFIDReader::resetMessageCode()
+{
+  message_code_ = 0;
+}
+
 //-----------------------------------------------------------------------------------------------------------------
 bool RFIDReader::checkByteArray(byte *arr, String str)
   {
@@ -68,20 +73,48 @@ bool RFIDReader::triggeringRequirements()
 {
   if ( !module_object_.PICC_IsNewCardPresent() || !module_object_.PICC_ReadCardSerial()) {
     resetCurrStep();
-    return;
+    return false;
   }
+
+  return true;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::stepOne()
 {
-  
+  MFRC522::StatusCode status;
+
+  status = module_object_.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 1, &key, &(mfrc522.uid)); //line 834
+  if (status != MFRC522::STATUS_OK) {
+    Serial.print(F("Authentication failed: "));
+    Serial.println(module_object_.GetStatusCodeName(status));
+    module_object_.PCD_StopCrypto1();
+    resetCurrStep();
+    return;
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::stepTwo()
 {
+  MFRC522::StatusCode status;
+  uint8_t block = 1;
+  uint8_t length = MSG_LEN;
+  uint8_t payload_buffer[length];
 
+  status = module_object_.MIFARE_Read(block, payload_buffer, &len);
+  if (status != MFRC522::STATUS_OK) {
+    Serial.print(F("Reading failed: "));
+    Serial.println(module_object_.GetStatusCodeName(status));
+    module_object_.PCD_StopCrypto1();
+    message_code = 0;
+    resetCurrStep();
+    return;
+  }
+  else
+  {
+    message_code = payload_buffer[0];
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
