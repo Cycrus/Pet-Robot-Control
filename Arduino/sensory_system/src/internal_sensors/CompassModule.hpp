@@ -11,8 +11,9 @@
 #ifndef COMPASSMODULE_HPP
 #define COMPASSMODULE_HPP
 
+#include <Wire.h>
 #include <Adafruit_HMC5883_U.h>
-#include "src../base_libraries/Module.hpp"
+#include "../base_libraries/Module.hpp"
 
 class CompassModule : public Module
 {
@@ -45,7 +46,7 @@ class CompassModule : public Module
   ///
   /// Sets the declination angle to a new value.
   //
-  void setDeclinationAngle(float delination_angle);
+  void setDeclinationAngle(float declination_angle);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

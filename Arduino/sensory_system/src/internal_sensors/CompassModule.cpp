@@ -12,13 +12,13 @@
 CompassModule::CompassModule(uint16_t module_id, float declination_angle) :
 module_object_(module_id),
 declination_angle_(declination_angle),
-mag_x_(0.0);
-mag_y_(0.0);
-mag_z_(0.0);
-heading_(0.0);
+mag_x_(0.0),
+mag_y_(0.0),
+mag_z_(0.0),
+heading_(0.0)
 {
-  time_list_[0] = 5;
-  time_list_[1] = 5;
+  time_list_[0] = 14;
+  time_list_[1] = 0;
   setMaxSteps(2);
 }
 
@@ -29,7 +29,7 @@ void CompassModule::initModule()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void CompassModule::setDeclinationAngle(float delination_angle)
+void CompassModule::setDeclinationAngle(float declination_angle)
 {
   declination_angle_ = declination_angle;
 }
@@ -67,10 +67,10 @@ void CompassModule::stepOne()
 //-----------------------------------------------------------------------------------------------------------------
 void CompassModule::stepTwo()
 {
-  mag_x_ = event.magnetic.x;
-  mag_y_ = event.magnetic_y;
-  mag_z_ = event.magnetic_z;
-  heading_ = atan(max_y_, mag_x_);
+  mag_x_ = module_event_.magnetic.x;
+  mag_y_ = module_event_.magnetic.y;
+  mag_z_ = module_event_.magnetic.z;
+  heading_ = atan2(mag_y_, mag_x_);
 
   heading_ += declination_angle_;
 
