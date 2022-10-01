@@ -15,7 +15,7 @@
 #include <MFRC522.h>
 #include "../base_libraries/Module.hpp"
 
-#define MSG_LEN 1
+#define MSG_LEN 18
 
 class RFIDReader : public Module
 {
@@ -75,13 +75,13 @@ class RFIDReader : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 1. Used for Authentification.
+  /// Step 1. Resets the collected message code.
   //
   void stepOne() override;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 2. Used for Collecting the message.
+  /// Step 2. Collects a new message if an RFID chip is detected in triggeringRequirements().
   //
   void stepTwo() override;
 

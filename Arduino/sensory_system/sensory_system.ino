@@ -23,7 +23,7 @@ UltrasonicDistanceModule distance_back(22, 12);
 BMP280Module bmp280;
 HumidityModule dht11(30, DHT11); 
 GasModule mq135(A3);
-RFIDReader rfid_reader(9, 10);
+RFIDReader rfid_reader(10, 9);
 
 void setup() {
   Serial.begin(9600);
