@@ -12,7 +12,7 @@
 #define RFIDREADER_HPP
 
 #include <SPI.h>
-#include <MFRC522.h>
+#include "../base_libraries/MFRC522.h"
 #include "../base_libraries/Module.hpp"
 
 #define MSG_LEN 18

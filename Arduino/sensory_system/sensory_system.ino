@@ -59,7 +59,9 @@ void setup() {
 //-----------------------------------------------------------------------------------------------------------------
 void loop() {
   uint32_t fps_check_time = millis();
-  uint32_t fps = 1000 / (fps_check_time - curr_time);
+  uint32_t frame_delay = fps_check_time - curr_time;
+  uint32_t fps = 1000 / frame_delay;
+
   curr_time = millis();
 
   distance_front.triggerModule(curr_time);
@@ -109,6 +111,8 @@ void loop() {
     Serial.print(wt61_module.getAngX()); Serial.print(" | "); Serial.print(wt61_module.getAngY()); Serial.print(" | "); Serial.println(wt61_module.getAngZ());
     Serial.print("FPS = ");
     Serial.println(fps);
+    Serial.print("Frame Delay = ");
+    Serial.println(frame_delay);
     Serial.println("*******************************************");
     Serial.println("");
     last_time = curr_time;

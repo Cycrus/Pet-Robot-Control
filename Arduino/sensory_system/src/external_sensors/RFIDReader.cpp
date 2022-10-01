@@ -35,6 +35,7 @@ uint8_t RFIDReader::getMessageCode()
   return message_code_;
 }
 
+//-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::resetMessageCode()
 {
   message_code_ = 0;
