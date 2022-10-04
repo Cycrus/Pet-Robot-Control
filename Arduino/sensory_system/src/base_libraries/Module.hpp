@@ -80,6 +80,12 @@ class Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
+  /// Used for module initialization in the setup of the microcontroller.
+  //
+  virtual void initModule() = 0;
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
   /// The first step the module can carry out in the loop. MUST be overridden, even if not used.
   //
   virtual void stepOne() = 0;
