@@ -19,7 +19,10 @@
 #include "src/internal_sensors/WT61Module.hpp"
 #include "src/internal_sensors/GPSModule.hpp"
 
+#include "src/utilities/ModuleSyncer.hpp"
+
 //-----------------------------------------------------------------------------------------------------------------
+// Timers
 uint32_t curr_time = 0;
 uint32_t last_time = 0;
 
@@ -40,12 +43,13 @@ CurrentSensor *current_3 = new CurrentSensor(A2);
 WT61Module *wt61_module = new WT61Module(true);
 GPSModule *gps_module = new GPSModule(2);
 
+// Module Syncer for Ultrasonic Distance Modules
+ModuleSyncer *ultrasonic = new ModuleSyncer();
+
 //-----------------------------------------------------------------------------------------------------------------
 void setup() {
-  Serial->begin(19200);
+  Serial.begin(19200);
   
-  distance_front->initModule();
-  distance_back->initModule();
   bmp280->initModule();
   dht11->initModule();
   mq135->initModule();
@@ -57,6 +61,10 @@ void setup() {
   current_3->initModule();
   wt61_module->initModule();
   gps_module->initModule();
+
+  ultrasonic->addModule(distance_front);
+  ultrasonic->addModule(distance_back);
+  ultrasonic->initAllModules();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -67,8 +75,7 @@ void loop() {
 
   curr_time = millis();
 
-  distance_front->triggerModule(curr_time);
-  distance_back->triggerModule(curr_time);
+  ultrasonic->triggerModule(curr_time);
   bmp280->triggerModule(curr_time);
   dht11->triggerModule(curr_time);
   mq135->triggerModule(curr_time);

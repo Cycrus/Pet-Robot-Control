@@ -7,7 +7,7 @@
  * Created: September 2022
  **********************************************************************/
 
- #include "UltrasonicDistanceModule.hpp"
+#include "UltrasonicDistanceModule.hpp"
 
 UltrasonicDistanceModule::UltrasonicDistanceModule(uint8_t trigger_pin, uint8_t echo_pin) :
 distance_(0),

@@ -17,23 +17,42 @@ curr_module_(0)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-ModuleSyncer::addModule(Module &new_module)
+void ModuleSyncer::addModule(Module *new_module)
 {
-  module_list_.push_back(module);
+  module_list_.push_back(new_module);
   module_number_++;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void ModuleSyncer::initAllModules()
 {
-  for(Module &module : module_list_)
+  for(Module *module : module_list_)
   {
-    module.initModule();
+    module->initModule();
   }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void ModuleSyncer::triggerModule()
+void ModuleSyncer::triggerModule(uint32_t curr_time)
 {
-  module_list.at(curr_module_).triggerModule();
+  Module *curr_module_instance = module_list_.at(curr_module_);
+  curr_module_instance->triggerModule(curr_time);
+  if(curr_module_instance->getCurrStep() == 0)
+  {
+    curr_module_++;
+    if(curr_module_ >= module_number_)
+    {
+      curr_module_ = 0;
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+Module *ModuleSyncer::getModule(uint8_t module_id)
+{
+  if(module_id >= module_number_)
+  {
+    return nullptr;
+  }
+  return module_list_.at(module_id);
 }

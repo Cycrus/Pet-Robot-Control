@@ -43,8 +43,22 @@ class Module
   /// methods based on the times inserted in the time_list.
   ///
   /// @param curr_time  The current time in milliseconds since the start of the script.
+  ///
+  /// @return           The id of the current step the module currently is in.
   //
-  void triggerModule(uint32_t curr_time);
+  uint8_t triggerModule(uint32_t curr_time);
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Used for module initialization in the setup of the microcontroller.
+  //
+  virtual void initModule() = 0;
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the current step the module is in.
+  //
+  uint8_t getCurrStep();
 
   protected:
   uint8_t max_steps_;
@@ -63,12 +77,6 @@ class Module
   /// Resets the current step back to 0.
   //
   void resetCurrStep();
-  
-  //-----------------------------------------------------------------------------------------------------------------
-  ///
-  /// Returns the current step the module is in.
-  //
-  uint8_t getCurrStep();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
@@ -77,12 +85,6 @@ class Module
   /// @return   bool    If true, the triggerModule() function can be triggered.
   //
   virtual bool triggeringRequirements();
-
-  //-----------------------------------------------------------------------------------------------------------------
-  ///
-  /// Used for module initialization in the setup of the microcontroller.
-  //
-  virtual void initModule() = 0;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

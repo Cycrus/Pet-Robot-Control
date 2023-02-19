@@ -12,8 +12,8 @@
 #ifndef MODULESYNCER_HPP
 #define MODULESYNCER_HPP
 
-#include "Module.hpp"
-#include <vector>
+#include "../base_libraries/Module.hpp"
+#include <ArduinoSTL.h>
 
 class ModuleSyncer
 {
@@ -53,10 +53,20 @@ class ModuleSyncer
   //-----------------------------------------------------------------------------------------------------------------
   ///
   /// Triggers one of the modules based on the internal counter curr_module_.
+  ///
+  /// @param  curr_time   The time of the current CPU loop.
   //
-  void triggerModule();
+  void triggerModule(uint32_t curr_time);
 
-   getModule(uint8_t)
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns one of the included modules based on its id in the vector. Returns nullptr if id is invalid.
+  ///
+  /// @param  module_id   The id of the module to return.
+  ///
+  /// @return Module*     The module with the given id in the vector.
+  //
+  Module *getModule(uint8_t module_id);
 
   private:
   uint8_t module_number_;

@@ -23,6 +23,8 @@ class CurrentSensor : public Module
   //-----------------------------------------------------------------------------------------------------------------
   ///
   /// Constructor. Defines the pin and type of the DHT module.
+  ///
+  /// @param  analog_pin  The GPIO pin where the current sensor is plugged in.
   //
   CurrentSensor(uint8_t analog_pin);
 

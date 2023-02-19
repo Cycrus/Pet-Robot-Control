@@ -32,7 +32,7 @@ Module::~Module()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void Module::triggerModule(uint32_t curr_time)
+uint8_t Module::triggerModule(uint32_t curr_time)
 {
   uint16_t time_diff = calcTimeDiff(curr_time);
 
@@ -41,12 +41,16 @@ void Module::triggerModule(uint32_t curr_time)
     return;
   }
 
+  uint8_t prev_step = curr_step_;
+
   if(time_diff >= time_list_[curr_step_])
   {
     (this->*method_list_[curr_step_])();
     incrementCurrStep();
     last_activation_time_ = curr_time;
   }
+
+  return prev_step;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
