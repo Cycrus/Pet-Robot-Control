@@ -20,11 +20,11 @@
 #include "src/internal_sensors/GPSModule.hpp"
 
 #include "src/utilities/ModuleSyncer.hpp"
+#include "src/utilities/DataSender.hpp"
 
 //-----------------------------------------------------------------------------------------------------------------
 // Timers
 uint32_t curr_time = 0;
-uint32_t last_time = 0;
 
 //-----------------------------------------------------------------------------------------------------------------
 // External Module Declarations
@@ -46,10 +46,11 @@ GPSModule *gps_module = new GPSModule(2);
 // Module Syncer for Ultrasonic Distance Modules
 ModuleSyncer *ultrasonic = new ModuleSyncer();
 
+// DataSender
+DataSender *data_sender = new DataSender(19200, 200);
+
 //-----------------------------------------------------------------------------------------------------------------
 void setup() {
-  Serial.begin(19200);
-  
   bmp280->initModule();
   dht11->initModule();
   mq135->initModule();
@@ -65,6 +66,8 @@ void setup() {
   ultrasonic->addModule(distance_front);
   ultrasonic->addModule(distance_back);
   ultrasonic->initAllModules();
+
+  data_sender->initModule();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -86,7 +89,27 @@ void loop() {
   current_2->triggerModule(curr_time);
   current_3->triggerModule(curr_time);
 
-  if(curr_time - last_time >= 1000)
+  data_sender->addData(distance_front->getDistance());
+  data_sender->addData(distance_back->getDistance());
+  data_sender->addData((bmp280->getTemperature() + dht11->getTemperature()) / 2);
+  data_sender->addData(bmp280->getPressure());
+  data_sender->addData(bmp280->getAltitude());
+  data_sender->addData(dht11->getHumidity());
+  data_sender->addData(mq135->getGasPPM());
+  data_sender->addData(rfid_reader->getMessageCode());
+
+  bool has_sent = data_sender->triggerModule(curr_time);
+
+  if(has_sent)
+  {
+    current_1->resetBuffers();
+    current_2->resetBuffers();
+    current_3->resetBuffers();
+  }
+
+  data_sender->resetData();
+
+  /*if(curr_time - last_time >= 1000)
   {
     Serial.print("Front distance = ");
     Serial.println(distance_front->getDistance());
@@ -134,12 +157,7 @@ void loop() {
     Serial.println(frame_delay);
     Serial.println("*******************************************");
     Serial.println("");
-    last_time = curr_time;
-
-    current_1->resetBuffers();
-    current_2->resetBuffers();
-    current_3->resetBuffers();
-  }
+  }*/
 }
 
 //-----------------------------------------------------------------------------------------------------------------

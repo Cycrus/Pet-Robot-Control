@@ -44,9 +44,9 @@ class Module
   ///
   /// @param curr_time  The current time in milliseconds since the start of the script.
   ///
-  /// @return           The id of the current step the module currently is in.
+  /// @return           True if the next stage is triggered. False if the time for the next stage has not yet come.
   //
-  uint8_t triggerModule(uint32_t curr_time);
+  bool triggerModule(uint32_t curr_time);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

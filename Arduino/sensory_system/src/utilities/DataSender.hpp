@@ -13,6 +13,8 @@
 
 #include "../base_libraries/Module.hpp"
 
+#define MIN_BUFFER_SIZE 2
+
 class DataSender : public Module
 {
   public:
@@ -45,12 +47,22 @@ class DataSender : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Adds a number of bytes to the data buffer.
+  /// Adds a number of bytes to the end of the data buffer.
   ///
   /// @param  bytes   The byte list to add to the buffer.
   /// @param  size    The size of the bytes list to add.
   //
   void addBytes(uint8_t *bytes, uint16_t size);
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Changes a number of bytes somewhere in the data buffer.
+  ///
+  /// @param  bytes     The byte list to add to the buffer.
+  /// @param  size      The size of the bytes list to add.
+  /// @param  offset    The position where the byte array should be inserted.
+  //
+  void changeBytes(uint8_t *bytes, uint16_t size, uint16_t offset);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
@@ -61,7 +73,16 @@ class DataSender : public Module
   void addData(uint8_t data);
   void addData(uint16_t data);
   void addData(uint32_t data);
+  void addData(int8_t data);
+  void addData(int16_t data);
+  void addData(int32_t data);
   void addData(float data);
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Resets all data in the data buffer and sets its size back to 2, which is the default length to send the size.
+  //
+  void resetData();
 
   private:
   uint8_t *data_buffer_;
@@ -71,15 +92,17 @@ class DataSender : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Formats and sends all data via the UART serial connection.
+  /// Formats the data to allow for structured communication.
+  /// Adds the length of the message to the start of the message as a 2 byte value.
+  /// Adds four completely set bytes to the end of the message to act as a
   //
-  void sendData();
+  void formatData();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Resets all data in the data buffer.
+  /// Sends all data via the UART serial connection.
   //
-  void resetData();
+  void sendData();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

@@ -22,4 +22,5 @@ build_sensor: sensory_system/sensory_system.ino
 
 connect_sensor:
 	@echo "Connecting to sensory system via CLI terminal."
-	minicom -D $(SENSORY_PORT) -b $(SENSORY_BAUD)
+	python3 ../UtilityScripts/uart_listener.py $(SENSORY_PORT) $(SENSORY_BAUD)
+	# minicom -D $(SENSORY_PORT) -b $(SENSORY_BAUD)
