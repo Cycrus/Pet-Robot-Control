@@ -32,12 +32,17 @@ DataSender::~DataSender()
 void DataSender::initModule()
 {
   Serial.begin(baud_rate_);
-  data_buffer_ = malloc(buffer_size);
+  data_buffer_ = malloc(max_buffer_size_);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::addBytes(uint8_t *bytes, uint16_t size)
 {
+  if(curr_buffer_size_ + size >= max_buffer_size_)
+    {
+      return;
+    }
+
   for(uint8_t byte_pos = 0; byte_pos < size; byte_pos++)
   {
     data_buffer_[curr_buffer_size_] = bytes[byte_pos];
@@ -59,10 +64,10 @@ void DataSender::addData(uint16_t data)
 
 void DataSender::addData(uint32_t data)
 {
-  addBytes((uint8_t*)(%data), 4);
+  addBytes((uint8_t*)(&data), 4);
 }
 
 void DataSender::addData(float data)
 {
-  addBytes((uint8_t*)(%data), 4);
+  addBytes((uint8_t*)(&data), 4);
 }

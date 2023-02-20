@@ -13,14 +13,15 @@
 
 #include "../base_libraries/Module.hpp"
 
-class DataSender(Module)
+class DataSender : public Module
 {
   public:
   //-----------------------------------------------------------------------------------------------------------------
   ///
   /// Constructor. Defines the baud rate of the sender.
   ///
-  /// @param  baud_rate   The baud rate of the serial connection.
+  /// @param  baud_rate    The baud rate of the serial connection.
+  /// @param  buffer_size  The maximum size of the buffer. Constantly reserves that amount of bytes in memory and
   //
   DataSender(uint32_t baud_rate, uint16_t buffer_size);
 
@@ -32,15 +33,15 @@ class DataSender(Module)
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Default destructor.
+  /// Destructor. Frees memory for data buffer. Probably never used on microcontroller.
   //
-  ~DataSender() = default;
+  ~DataSender();
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
   /// Initializes the module.
   //
-  void initModule();
+  void initModule() override;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
@@ -103,7 +104,6 @@ class DataSender(Module)
   /// Step 4. Is not called.
   //
   void stepFour() override;
-
-}
+};
 
 #endif // DATASENDER_HPP
