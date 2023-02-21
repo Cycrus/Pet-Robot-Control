@@ -103,6 +103,11 @@ void DataSender::addData(float data)
   addBytes((uint8_t*)(&data), 4);
 }
 
+void DataSender::addData(double data)
+{
+  addBytes((uint8_t*)(&data), 8);
+}
+
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::formatData()
 {
@@ -114,6 +119,7 @@ void DataSender::formatData()
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::sendData()
 {
+  Serial.flush();
   Serial.write(data_buffer_, curr_buffer_size_);
 }
 
@@ -122,7 +128,6 @@ void DataSender::resetData()
 {
   curr_buffer_size_ = MIN_BUFFER_SIZE;
   changeBytes((uint8_t*)(&curr_buffer_size_), 2, 0);
-  Serial.flush();
 }
 
 //-----------------------------------------------------------------------------------------------------------------

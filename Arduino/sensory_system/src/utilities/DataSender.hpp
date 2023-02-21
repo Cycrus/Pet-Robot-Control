@@ -77,6 +77,7 @@ class DataSender : public Module
   void addData(int16_t data);
   void addData(int32_t data);
   void addData(float data);
+  void addData(double data);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///

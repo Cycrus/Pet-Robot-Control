@@ -74,7 +74,7 @@ void setup() {
 void loop() {
   uint32_t fps_check_time = millis();
   uint32_t frame_delay = fps_check_time - curr_time;
-  uint32_t fps = 1000 / frame_delay;
+  uint16_t fps = 1000 / frame_delay;
 
   curr_time = millis();
 
@@ -97,6 +97,39 @@ void loop() {
   data_sender->addData(dht11->getHumidity());
   data_sender->addData(mq135->getGasPPM());
   data_sender->addData(rfid_reader->getMessageCode());
+
+  data_sender->addData(compass->getX());
+  data_sender->addData(compass->getY());
+  data_sender->addData(compass->getZ());
+  data_sender->addData(compass->getHeading());
+  data_sender->addData(current_1->getCurrentPerHour() + current_2->getCurrentPerHour() + current_3->getCurrentPerHour());
+  data_sender->addData(current_1->getCurrent() + current_2->getCurrent() + current_3->getCurrent());
+
+  data_sender->addData(wt61_module->getAccX());
+  data_sender->addData(wt61_module->getAccY());
+  data_sender->addData(wt61_module->getAccZ());
+  data_sender->addData(wt61_module->getGyrX());
+  data_sender->addData(wt61_module->getGyrY());
+  data_sender->addData(wt61_module->getGyrZ());
+  data_sender->addData(wt61_module->getAngX());
+  data_sender->addData(wt61_module->getAngY());
+  data_sender->addData(wt61_module->getAngZ());
+  data_sender->addData(gps_module->getLon());
+  data_sender->addData(gps_module->getLat());
+
+  data_sender->addData(gps_module->getYear());
+  data_sender->addData(gps_module->getMonth());
+  data_sender->addData(gps_module->getDay());
+  data_sender->addData(gps_module->getHour());
+  data_sender->addData(gps_module->getMinute());
+  data_sender->addData(gps_module->getSecond());
+  data_sender->addData(gps_module->getCentisecond());
+  data_sender->addData(gps_module->getAltitude());
+  data_sender->addData(gps_module->getSpeed());
+  data_sender->addData(gps_module->getCourse());
+  data_sender->addData(gps_module->getSatelliteNumber());
+  data_sender->addData(fps);
+  data_sender->addData(uint8_t(13)); // Testing length of message
 
   bool has_sent = data_sender->triggerModule(curr_time);
 
