@@ -47,7 +47,7 @@ GPSModule *gps_module = new GPSModule(2);
 ModuleSyncer *ultrasonic = new ModuleSyncer();
 
 // DataSender
-DataSender *data_sender = new DataSender(19200, 200);
+DataSender *data_sender = new DataSender(115200, 200);
 
 //-----------------------------------------------------------------------------------------------------------------
 void setup() {
@@ -141,56 +141,6 @@ void loop() {
   }
 
   data_sender->resetData();
-
-  /*if(curr_time - last_time >= 1000)
-  {
-    Serial.print("Front distance = ");
-    Serial.println(distance_front->getDistance());
-    Serial.print("Back distance = ");
-    Serial.println(distance_back->getDistance());
-    Serial.print("Temperature = ");
-    Serial.println((bmp280->getTemperature() + dht11->getTemperature()) / 2);
-    Serial.print("Pressure = ");
-    Serial.println(bmp280->getPressure());
-    Serial.print("Altitude = ");
-    Serial.println(bmp280->getAltitude());
-    Serial.print("Humidity = ");
-    Serial.println(dht11->getHumidity());
-    Serial.print("Gas PPM = ");
-    Serial.println(mq135->getGasPPM());
-    Serial.print("RFID Message = ");
-    Serial.println(rfid_reader->getMessageCode());
-
-    Serial.print("Compass coords = ");
-    Serial.print(compass->getX()); Serial.print(" | "); Serial.print(compass->getY()); Serial.print(" | "); Serial.println(compass->getZ());
-    Serial.print("Compass heading = ");
-    Serial.println(compass->getHeading());
-    Serial.print("Current in mAh = ");
-    Serial.println(current_1->getCurrentPerHour() + current_2->getCurrentPerHour() + current_3->getCurrentPerHour());
-    Serial.print("Current in Milliampere = ");
-    Serial.println(current_1->getCurrent() + current_2->getCurrent() + current_3->getCurrent());
-    Serial.print("Acceleration = ");
-    Serial.print(wt61_module->getAccX()); Serial.print(" | "); Serial.print(wt61_module->getAccY()); Serial.print(" | "); Serial.println(wt61_module->getAccZ());
-    Serial.print("Gyroscope = ");
-    Serial.print(wt61_module->getGyrX()); Serial.print(" | "); Serial.print(wt61_module->getGyrY()); Serial.print(" | "); Serial.println(wt61_module->getGyrZ());
-    Serial.print("Angle = ");
-    Serial.print(wt61_module->getAngX()); Serial.print(" | "); Serial.print(wt61_module->getAngY()); Serial.print(" | "); Serial.println(wt61_module->getAngZ());
-    Serial.print("GPS Location = ");
-    Serial.print(gps_module->getLon()); Serial.print(" | "); Serial.println(gps_module->getLat());
-    Serial.print("GPS Datetime = ");
-    Serial.print(gps_module->getDay()); Serial.print("."); Serial.print(gps_module->getMonth()); Serial.print("."); Serial.print(gps_module->getDay());
-    Serial.print(" ... "); Serial.print(gps_module->getHour()); Serial.print(":"); Serial.print(gps_module->getMinute()); Serial.print(":");
-    Serial.print(gps_module->getSecond()); Serial.print("."); Serial.println(gps_module->getCentisecond());
-    Serial.print("GPS Data = ");
-    Serial.print("Altitude: "); Serial.print(gps_module->getAltitude()); Serial.print(" | Speed: "); Serial.print(gps_module->getSpeed());
-    Serial.print(" | Course: "); Serial.print(gps_module->getCourse()); Serial.print(" | Satellites: "); Serial.println(gps_module->getSatelliteNumber());
-    Serial.print("FPS = ");
-    Serial.println(fps);
-    Serial.print("Frame Delay = ");
-    Serial.println(frame_delay);
-    Serial.println("*******************************************");
-    Serial.println("");
-  }*/
 }
 
 //-----------------------------------------------------------------------------------------------------------------

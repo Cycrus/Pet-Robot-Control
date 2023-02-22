@@ -41,6 +41,7 @@ void startDisplay(ST7735_TFT *display)
     display->TFTInitScreenSize(OFFSET_COL, OFFSET_ROW ,
                                TFT_WIDTH , TFT_HEIGHT);
     display->TFTInitPCBType(TFT_ST7735S_Black);
+    display->TFTfillScreen(ST7735_BLACK);
 }
 
 //----------------------------------------------------------------------

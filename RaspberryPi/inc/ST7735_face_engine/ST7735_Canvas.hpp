@@ -6,6 +6,9 @@
  * combination with gavinlyonsrepos ST7735_TFT_RPI library
  * https://github.com/gavinlyonsrepo/ST7735_TFT_RPI
  * 
+ * !!!Programs using the SPI bus need to be called as sudo!!!
+ * Otherwise you will get a segmentation fault.
+ * 
  * Author: Cyril Marx
  * Created: August 2022
  **********************************************************************/

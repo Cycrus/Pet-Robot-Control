@@ -14,8 +14,8 @@
 # Compiler Definitions
 #
 
-CC = gcc -Wall -std=c17
-CXX = g++ -Wall -std=c++17 -pthread
+CC = gcc -g -Wall -std=c17
+CXX = g++ -g -Wall -std=c++17 -pthread
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Compiler Flags
