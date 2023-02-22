@@ -11,7 +11,7 @@
 #ifndef WT61MODULE_HPP
 #define WT61MODULE_HPP
 
-#include "../base_libraries/Module.hpp"
+#include "../utilities/Module.hpp"
 #include "../base_libraries/JY901.h"
 
 #define WT61_UART Serial2

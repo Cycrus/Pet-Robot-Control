@@ -12,7 +12,7 @@
 #define HUMIDITYMODULE_HPP
 
 #include <DHT.h>
-#include "../base_libraries/Module.hpp"
+#include "../utilities/Module.hpp"
 
 class HumidityModule : public Module
 {

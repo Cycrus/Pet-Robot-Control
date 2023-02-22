@@ -12,7 +12,7 @@
 #define GPSMODULE_HPP
 
 #include <TinyGPSPlus.h>
-#include "../base_libraries/Module.hpp"
+#include "../utilities/Module.hpp"
 
 #define GPS_UART Serial1
 

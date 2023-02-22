@@ -12,7 +12,7 @@
 #define GASMODULE_HPP
 
 #include "../base_libraries/MQ135.h"
-#include "../base_libraries/Module.hpp"
+#include "../utilities/Module.hpp"
 
 class GasModule : public Module
 {

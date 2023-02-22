@@ -13,7 +13,7 @@
 
 #include <SPI.h>
 #include "../base_libraries/MFRC522.h"
-#include "../base_libraries/Module.hpp"
+#include "../utilities/Module.hpp"
 
 #define MSG_LEN 18
 

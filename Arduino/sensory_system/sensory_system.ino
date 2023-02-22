@@ -129,7 +129,6 @@ void loop() {
   data_sender->addData(gps_module->getCourse());
   data_sender->addData(gps_module->getSatelliteNumber());
   data_sender->addData(fps);
-  data_sender->addData(uint8_t(13)); // Testing length of message
 
   bool has_sent = data_sender->triggerModule(curr_time);
 

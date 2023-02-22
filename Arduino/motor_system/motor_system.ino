@@ -8,13 +8,28 @@
  * Created: September 2022
  **********************************************************************/
 
+#include "src/utilities/DataReceiver.hpp"
+
+//-----------------------------------------------------------------------------------------------------------------
+// Timers
+uint32_t curr_time = 0;
+
+//-----------------------------------------------------------------------------------------------------------------
+// DataReceiver
+DataReceiver *data_receiver = new DataReceiver(115200, 200);
+
 void setup()
 {
-  Serial.begin(9600);
+  data_receiver->initModule();
 }
 
 void loop()
 {
-  Serial.println("hi");
-  delay(1000);
+  uint32_t fps_check_time = millis();
+  uint32_t frame_delay = fps_check_time - curr_time;
+  uint16_t fps = 1000 / frame_delay;
+
+  curr_time = millis();
+
+  data_receiver->triggerModule(curr_time);
 }
