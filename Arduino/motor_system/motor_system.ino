@@ -16,7 +16,7 @@ uint32_t curr_time = 0;
 
 //-----------------------------------------------------------------------------------------------------------------
 // DataReceiver
-DataReceiver *data_receiver = new DataReceiver(115200, 200);
+DataReceiver *data_receiver = new DataReceiver(9600, 200);
 
 void setup()
 {

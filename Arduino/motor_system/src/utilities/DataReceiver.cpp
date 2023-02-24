@@ -14,7 +14,7 @@ baud_rate_(baud_rate),
 max_buffer_size_(buffer_size),
 curr_buffer_size_(0),
 data_buffer_(nullptr),
-read_state_(ReadState::SEARCH_DATA)
+read_state_(ReadState::READ_SIZE)
 {
   time_list_[0] = 0;
   setMaxSteps(1);
@@ -32,15 +32,24 @@ DataReceiver::~DataReceiver()
 //-----------------------------------------------------------------------------------------------------------------
 void DataReceiver::initModule()
 {
-  if(!Serial)
-  {
-    Serial.begin(baud_rate_);
-  }
+  Serial.begin(baud_rate_);
   data_buffer_ = (uint8_t*)malloc(max_buffer_size_);
   for(uint16_t byte = 0; byte < max_buffer_size_; byte++)
   {
     data_buffer_[byte] = 0;
   }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+uint8_t *DataReceiver::getBuffer()
+{
+  return data_buffer_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+uint16_t DataReceiver::getSize()
+{
+  return curr_buffer_size_;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -147,14 +156,16 @@ void DataReceiver::receiveData()
   uint8_t end_flag_counter = 0;
   uint16_t data_size = 0;
 
-  while(true)
+  while(Serial.available())
   {
     if(read_state_ == ReadState::READ_SIZE)
     {
       uint8_t size_bytes[2];
+      delay(2);
       size_bytes[0] = Serial.read();
       size_bytes[1] = Serial.read();
-      uint16_t size_buffer = *((uint16_t*)(&size_bytes)) - 6;
+      uint16_t size_buffer = *((uint16_t*)(&size_bytes));
+      size_buffer = size_buffer - 6;
       if(size_buffer > max_buffer_size_)
       {
         read_state_ = ReadState::SEARCH_DATA;
@@ -179,7 +190,7 @@ void DataReceiver::receiveData()
     else
     {
       uint8_t byte = Serial.read();
-      if(byte == 0xFF)
+      if(byte == 0xFE)
       {
         end_flag_counter++;
       }

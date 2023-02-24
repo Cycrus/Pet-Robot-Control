@@ -47,6 +47,18 @@ class DataReceiver : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
+  /// Returns a pointer to the first element of the buffer.
+  //
+  uint8_t *getBuffer();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the current size of the buffer.
+  //
+  uint16_t getSize();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
   /// Getters to receive the data in various data types at certain positions.
   ///
   /// @param  pos   The position of the desired data in the data_buffer_.

@@ -11,7 +11,8 @@ SENSORY_PORT = /dev/ttyACM0
 SENSORY_BAUD = 115200
 
 MOTOR_PORT = /dev/ttyACM1
-MOTOR_BAUD = 115200
+MOTOR_BAUD = 9600
+MOTOR_MESSAGE = 9,0,25,26,27,254,254,254,254
 
 TESTFILE = infrared_transmitter/infrared_transmitter.ino
 TESTFILE_BOARD = arduino:avr:uno 
@@ -36,6 +37,10 @@ connect_motor:
 	@echo "Connecting to motor system via CLI terminal."
 	python3 ../UtilityScripts/uart_listener.py $(MOTOR_PORT) $(MOTOR_BAUD)
 	# minicom -D $(MOTOR_PORT) -b $(MOTOR_BAUD)
+
+send_motor:
+	@echo "Sending state message to motor system."
+	python3 ../UtilityScripts/uart_sender.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MOTOR_MESSAGE)
 
 build_testfile:
 	@echo "Building and uploading testfile."
