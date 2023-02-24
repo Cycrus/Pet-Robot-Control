@@ -48,7 +48,6 @@ void LedRing::setColor(uint8_t r, uint8_t g, uint8_t b)
   color_ = led_element_->Color(r, g, b);
 }
 
-
 //-----------------------------------------------------------------------------------------------------------------
 void LedRing::stepOne()
 {
