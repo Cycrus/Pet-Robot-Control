@@ -11,8 +11,8 @@ SENSORY_PORT = /dev/ttyACM0
 SENSORY_BAUD = 115200
 
 MOTOR_PORT = /dev/ttyACM1
-MOTOR_BAUD = 9600
-MOTOR_MESSAGE = 9,0,25,26,27,254,254,254,254
+MOTOR_BAUD = 115200
+MOTOR_MESSAGE = 9,0,0,0,0,254,254,254,254
 
 TESTFILE = infrared_transmitter/infrared_transmitter.ino
 TESTFILE_BOARD = arduino:avr:uno 

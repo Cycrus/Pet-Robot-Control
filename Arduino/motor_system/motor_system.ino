@@ -9,6 +9,7 @@
  **********************************************************************/
 
 #include "src/utilities/DataReceiver.hpp"
+#include "src/effectors/LedRing.hpp"
 
 //-----------------------------------------------------------------------------------------------------------------
 // Timers
@@ -16,11 +17,16 @@ uint32_t curr_time = 0;
 
 //-----------------------------------------------------------------------------------------------------------------
 // DataReceiver
-DataReceiver *data_receiver = new DataReceiver(9600, 200);
+DataReceiver *data_receiver = new DataReceiver(115200, 200);
+
+//-----------------------------------------------------------------------------------------------------------------
+// Effectors
+LedRing *led_ring = new LedRing(13, 12);
 
 void setup()
 {
   data_receiver->initModule();
+  led_ring->initModule();
 }
 
 void loop()
@@ -32,4 +38,13 @@ void loop()
   curr_time = millis();
 
   data_receiver->triggerModule(curr_time);
+
+  if(data_receiver->getSize() == 3)
+  {
+    led_ring->setColor(data_receiver->getByte(0),
+                       data_receiver->getByte(1),
+                       data_receiver->getByte(2));
+  }
+
+  led_ring->triggerModule(curr_time);
 }

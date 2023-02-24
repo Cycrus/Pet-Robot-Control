@@ -76,7 +76,14 @@ class DataReceiver : public Module
   ///
   /// Fills the whole data buffer with zeroes.
   //
+  void clearDataBuffer();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Sets the size of the data buffer to 0.
+  //
   void resetDataBuffer();
+  
 
   private:
   uint32_t baud_rate_;
