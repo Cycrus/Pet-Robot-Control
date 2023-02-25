@@ -25,20 +25,31 @@ def strToBytes(array):
   return byte_array, num_array
 
 if __name__ == "__main__":
-  if len(sys.argv) != 4:
-    print("[ERROR] Program arguments: <port> <baud_rate> <message>.")
+  if len(sys.argv) != 3:
+    print("[ERROR] Program arguments: <port> <baud_rate>.")
     exit()
 
   port = sys.argv[1]
   baud_rate = int(sys.argv[2])
-  con = serial.Serial(port, baud_rate, timeout = 0.01)
-  byte_msg1, int_msg1 = strToBytes(sys.argv[3])
+  con = serial.Serial(port, baud_rate, timeout = 0.005)
 
-  byte_ret, int_ret = strToBytes("13,0,0,0,0,0,0,0,0,254,254,254,254")
+  message_len = "13,0,"
+  end_bytes = ",254,254,254,254"
 
-  print(f"\n[INFO] Starting general UART listener on port {port} with rate {baud_rate}.\n")
+  str_msg1 = message_len + "55,255,200,0,10,0,0" + end_bytes
+  byte_msg1, int_msg1 = strToBytes(str_msg1)
+  str_msg2 = message_len + "200,0,55,255,0,10,0" + end_bytes
+  byte_msg2, int_msg2 = strToBytes(str_msg2)
+  str_msg3 = message_len + "120,0,120,0,0,0,10" + end_bytes
+  byte_msg3, int_msg3 = strToBytes(str_msg3)
+
+  str_ret = message_len + "0,0,0,0,0,0,0" + end_bytes
+  byte_ret, int_ret = strToBytes(str_ret)
+
+  print(f"\n[INFO] Starting motor system check on port {port} with rate {baud_rate}.\n")
   
   time.sleep(2)
+
   i = 0
   try:
     while True:
@@ -46,7 +57,13 @@ if __name__ == "__main__":
       if i == 50:
         con.write(byte_msg1)
         print(f"[INFO] Sent data <{byte_msg1}> or <{int_msg1}>")
-      elif i == 200:
+      elif i == 350:
+        con.write(byte_msg2)
+        print(f"[INFO] Sent data <{byte_msg2}> or <{int_msg2}>")
+      elif i == 650:
+        con.write(byte_msg3)
+        print(f"[INFO] Sent data <{byte_msg3}> or <{int_msg3}>")
+      elif i == 950:
         con.write(byte_ret)
         print(f"[INFO] Sent data <{byte_ret}> or <{int_ret}>")
         print("[INFO] Finished check.")

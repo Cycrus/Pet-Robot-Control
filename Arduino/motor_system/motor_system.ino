@@ -24,7 +24,7 @@ DataReceiver *data_receiver = new DataReceiver(57600, 200);
 // Effectors
 LedRing *led_ring = new LedRing(13, 12);
 DCMotor *right_motor = new DCMotor(3, 2, 1.0);
-DCMotor *left_motor = new DCMotor(9, 8, 0.66);
+DCMotor *left_motor = new DCMotor(9, 8, 0.86);
 
 void setup()
 {

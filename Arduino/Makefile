@@ -12,7 +12,7 @@ SENSORY_BAUD = 115200
 
 MOTOR_PORT = /dev/ttyACM1
 MOTOR_BAUD = 57600
-MOTOR_MESSAGE = 13,0,200,0,200,0,0,10,0,254,254,254,254
+MOTOR_MESSAGE = 13,0,55,255,200,0,0,10,0,254,254,254,254
 
 TESTFILE = infrared_transmitter/infrared_transmitter.ino
 TESTFILE_BOARD = arduino:avr:uno 
@@ -48,12 +48,12 @@ connect_motor:
 # Instructions to send messages to the motor system.
 #
 send_motor:
-	@echo "Sending state message to motor system."
+	@echo "Sending a single state message to motor system."
 	python3 ../UtilityScripts/uart_sender.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MOTOR_MESSAGE)
 
 check_motor:
 	@echo "Sending state message to motor system."
-	python3 ../UtilityScripts/motor_check.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MOTOR_MESSAGE)
+	python3 ../UtilityScripts/motor_check.py $(MOTOR_PORT) $(MOTOR_BAUD)
 
 #-------------------------------------------------------------------------------------
 # Instruction to build and upload test sketches.
