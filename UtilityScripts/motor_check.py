@@ -32,10 +32,9 @@ if __name__ == "__main__":
   port = sys.argv[1]
   baud_rate = int(sys.argv[2])
   con = serial.Serial(port, baud_rate, timeout = 0.01)
-  byte_msg1, int_msg1 = strToBytes("9,0,0,10,0,254,254,254,254")
-  byte_msg2, int_msg2 = strToBytes("9,0,10,0,0,254,254,254,254")
-  byte_msg3, int_msg3 = strToBytes("9,0,0,0,10,254,254,254,254")
-  byte_msg4, int_msg4 = strToBytes("9,0,0,0,0,254,254,254,254")
+  byte_msg1, int_msg1 = strToBytes(sys.argv[3])
+
+  byte_ret, int_ret = strToBytes("13,0,0,0,0,0,0,0,0,254,254,254,254")
 
   print(f"\n[INFO] Starting general UART listener on port {port} with rate {baud_rate}.\n")
   
@@ -44,18 +43,14 @@ if __name__ == "__main__":
   try:
     while True:
       print(i)
-      if i == 0:
+      if i == 50:
         con.write(byte_msg1)
         print(f"[INFO] Sent data <{byte_msg1}> or <{int_msg1}>")
-      elif i == 100:
-        con.write(byte_msg2)
-        print(f"[INFO] Sent data <{byte_msg2}> or <{int_msg2}>")
-      elif i == 120:
-        con.write(byte_msg3)
-        print(f"[INFO] Sent data <{byte_msg3}> or <{int_msg3}>")
       elif i == 200:
-        con.write(byte_msg4)
-        print(f"[INFO] Sent data <{byte_msg4}> or <{int_msg4}>")
+        con.write(byte_ret)
+        print(f"[INFO] Sent data <{byte_ret}> or <{int_ret}>")
+        print("[INFO] Finished check.")
+        break
 
       try:
         line = con.readline()
