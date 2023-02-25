@@ -185,10 +185,20 @@ void DataReceiver::receiveData()
 
     else if(read_state_ == ReadState::READ_DATA)
     {
-      for(uint16_t byte_pos = 0; byte_pos < curr_buffer_size_; byte_pos++)
+      uint8_t byte_pos = 0;
+      while(true)
       {
-        uint8_t byte = Serial.read();
-        data_buffer_[byte_pos] = byte;
+        if(Serial.available())
+        {
+          uint8_t byte = Serial.read();
+          data_buffer_[byte_pos] = byte;
+          byte_pos++;
+        }
+
+        if(byte_pos >= curr_buffer_size_)
+        {
+          break;
+        }
       }
       read_state_ = ReadState::SEARCH_DATA;
     }

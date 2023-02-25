@@ -15,6 +15,7 @@ import serial
 import sys
 import struct
 import os
+import time
 
 def strToBytes(array):
   num_array = array.split(",")
@@ -30,29 +31,36 @@ if __name__ == "__main__":
 
   port = sys.argv[1]
   baud_rate = int(sys.argv[2])
-  con = serial.Serial(port, baud_rate)
-  byte_msg1, int_msg1 = strToBytes(sys.argv[3])
-  byte_msg2, int_msg2 = strToBytes("11,0,66,67,68,69,70,254,254,254,254")
-  byte_msg3, int_msg3 = strToBytes("7,0,186,254,254,254,254")
+  con = serial.Serial(port, baud_rate, timeout = 0.01)
+  byte_msg1, int_msg1 = strToBytes("9,0,0,10,0,254,254,254,254")
+  byte_msg2, int_msg2 = strToBytes("9,0,10,0,0,254,254,254,254")
+  byte_msg3, int_msg3 = strToBytes("9,0,0,0,10,254,254,254,254")
+  byte_msg4, int_msg4 = strToBytes("9,0,0,0,0,254,254,254,254")
 
   print(f"\n[INFO] Starting general UART listener on port {port} with rate {baud_rate}.\n")
   
+  time.sleep(2)
   i = 0
   try:
     while True:
-      if i == 50:
+      print(i)
+      if i == 0:
         con.write(byte_msg1)
         print(f"[INFO] Sent data <{byte_msg1}> or <{int_msg1}>")
       elif i == 100:
         con.write(byte_msg2)
         print(f"[INFO] Sent data <{byte_msg2}> or <{int_msg2}>")
-      elif i == 150:
+      elif i == 120:
         con.write(byte_msg3)
         print(f"[INFO] Sent data <{byte_msg3}> or <{int_msg3}>")
+      elif i == 200:
+        con.write(byte_msg4)
+        print(f"[INFO] Sent data <{byte_msg4}> or <{int_msg4}>")
 
-      line = con.readline()
       try:
-        print("[RECEIVED] " + line.decode("utf-8"))
+        line = con.readline()
+        if len(line) > 0:
+          print("[RECEIVED] " + line.decode("utf-8"))
       except UnicodeDecodeError:
         print("[ERROR] Could not decode message to utf-8.")
 

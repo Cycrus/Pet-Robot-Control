@@ -54,7 +54,16 @@ class LedRing : public Module
   //
   void setColor(uint8_t r, uint8_t g, uint8_t b);
 
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the current color of the module.
+  ///
+  /// @return   The color of the module as a single 32 bit number.
+  //
+  uint32_t getColor();
+
   private:
+  uint32_t prev_color_;
   uint32_t color_;
   uint8_t r_;
   uint8_t g_;

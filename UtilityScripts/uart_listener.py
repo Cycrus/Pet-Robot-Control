@@ -32,7 +32,10 @@ if __name__ == "__main__":
   try:
     while True:
       line = con.readline()
-      print(line.decode("utf-8"))
+      try:
+        print(line.decode("utf-8"))
+      except UnicodeDecodeError:
+        print("[WARNING] Unable to decode bytestream.")
 
   except KeyboardInterrupt:
     os.system("clear")

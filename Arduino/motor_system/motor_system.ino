@@ -37,6 +37,7 @@ void loop()
 
   curr_time = millis();
 
+  Serial.flush();
   data_receiver->triggerModule(curr_time);
 
   if(data_receiver->getSize() == 3)

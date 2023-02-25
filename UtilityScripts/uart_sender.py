@@ -15,6 +15,7 @@ import serial
 import sys
 import struct
 import os
+import time
 
 
 def strToBytes(array):
@@ -34,6 +35,8 @@ if __name__ == "__main__":
   baud_rate = int(sys.argv[2])
   con = serial.Serial(port, baud_rate)
   byte_msg, int_msg = strToBytes(sys.argv[3])
+  print("[INFO] Wating for a few seconds to let the board reset due to opened Serial connection.")
+  time.sleep(2)
 
   con.write(byte_msg)
-  print(f"[INFO] Sent data <{int_msg}>")
+  print(f"[INFO] Sent data <{byte_msg}> or <{int_msg}>")
