@@ -72,11 +72,19 @@ class ServoMotor : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Returns the current step size of the driver.
+  /// Returns the current force of the servo on a scale between 0 and 100.
   ///
-  /// @return   The current step size of the driver.
+  /// @return   The current force of the servo.
   //
-  int8_t getStepSize();
+  int8_t getForce();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the current position of the servo in a range between 0 and 100.
+  ///
+  /// @return   The current position of the servo.
+  //
+  uint8_t getCurrPosition();
 
   private:
   uint8_t servo_id_;

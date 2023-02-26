@@ -54,19 +54,39 @@ Adafruit_PWMServoDriver *ServoMotor::getDriver()
 //-----------------------------------------------------------------------------------------------------------------
 void ServoMotor::setForce(int8_t speed)
 {
-  // time_list_[0]
-  // step_size_
-
-  uint8_t max_input_value = 128;
+  uint8_t max_input_value = 100;
   uint16_t step_size_range = max_step_size_ - min_step_size_;
 
   step_size_ = ((float)speed / (float)max_input_value) * step_size_range;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-int8_t ServoMotor::getStepSize()
+int8_t ServoMotor::getForce()
 {
-  return step_size_;
+  int8_t normalized_force = 0;
+  uint16_t force_range = max_step_size_ - min_step_size_;
+
+  if(step_size_ > 0)
+  {
+    normalized_force = ((float)step_size_ - (float)min_step_size_) / (force_range) * 100.0;
+  }
+  else if(step_size_ < 0)
+  {
+    normalized_force = ((float)step_size_ + (float)min_step_size_) / (force_range) * 100.0;
+  }
+  else
+  {
+    normalized_force = 0;
+  }
+
+  return normalized_force;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+uint8_t ServoMotor::getCurrPosition()
+{
+  uint8_t normalized_pos = ((float)curr_pos_ - (float)min_pos_) / ((float)max_pos_ - (float)min_pos_) * 100.0;
+  return normalized_pos;
 }
 
 //-----------------------------------------------------------------------------------------------------------------

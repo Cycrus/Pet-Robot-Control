@@ -8,6 +8,7 @@
  * Created: September 2022
  **********************************************************************/
 
+#include "src/utilities/DataSender.hpp"
 #include "src/utilities/DataReceiver.hpp"
 #include "src/effectors/LedRing.hpp"
 #include "src/effectors/DCMotor.hpp"
@@ -22,23 +23,31 @@ uint32_t curr_time = 0;
 DataReceiver *data_receiver = new DataReceiver(57600, 200);
 
 //-----------------------------------------------------------------------------------------------------------------
+// DataSender
+DataSender *data_sender = new DataSender(57600, 50);
+
+//-----------------------------------------------------------------------------------------------------------------
 // Effectors
 LedRing *led_ring = new LedRing(13, 12);
 DCMotor *right_motor = new DCMotor(3, 2, 1.0);
-DCMotor *left_motor = new DCMotor(9, 8, 0.9);
-ServoMotor *x_axis_servo = new ServoMotor(0, 350, 220, 430);
-ServoMotor *z_axis_servo = new ServoMotor(1, 400, 270, 520);
+DCMotor *left_motor = new DCMotor(9, 8, 0.85);
+ServoMotor *x_axis_servo = new ServoMotor(0, 350, 250, 450);
+ServoMotor *z_axis_servo = new ServoMotor(1, 400, 300, 500);
 
 //-----------------------------------------------------------------------------------------------------------------
 void setup()
 {
   data_receiver->initModule();
+
   led_ring->initModule();
   right_motor->initModule();
   left_motor->initModule();
+
   x_axis_servo->initModule();
   z_axis_servo->assignDriver(x_axis_servo->getDriver());
   z_axis_servo->initModule();
+
+  data_sender->initModule();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -50,7 +59,6 @@ void loop()
 
   curr_time = millis();
 
-  Serial.flush();
   data_receiver->triggerModule(curr_time);
 
   if(data_receiver->getSize() == 7)
@@ -72,4 +80,15 @@ void loop()
   left_motor->triggerModule(curr_time);
   x_axis_servo->triggerModule(curr_time);
   z_axis_servo->triggerModule(curr_time);
+  
+  data_sender->addData(right_motor->getForce());
+  data_sender->addData(left_motor->getForce());
+  data_sender->addData(x_axis_servo->getCurrPosition());
+  data_sender->addData(x_axis_servo->getForce());
+  data_sender->addData(z_axis_servo->getCurrPosition());
+  data_sender->addData(z_axis_servo->getForce());
+
+  data_sender->triggerModule(curr_time);
+
+  data_sender->resetData();
 }

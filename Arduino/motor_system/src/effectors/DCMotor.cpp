@@ -31,7 +31,16 @@ void DCMotor::initModule()
 //-----------------------------------------------------------------------------------------------------------------
 void DCMotor::setForce(int8_t force)
 {
-  uint8_t max_input_value = 128;
+  if(force > 100)
+  {
+    force = 100;
+  }
+  else if(force < -100)
+  {
+    force = -100;
+  }
+
+  uint8_t max_input_value = 100;
   uint16_t force_range = max_force_ - min_force_;
 
   if(force == 0)
@@ -44,12 +53,34 @@ void DCMotor::setForce(int8_t force)
   }
   else if(force < 0)
   {
-    force_ = -min_force_ - ((float)force / (float)max_input_value) * force_range;
+    force_ = -min_force_ + ((float)force / (float)max_input_value) * force_range;
   }
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 int8_t DCMotor::getForce()
+{
+  int8_t normalized_force = 0;
+  uint16_t force_range = max_force_ - min_force_;
+
+  if(force_ > 0)
+  {
+    normalized_force = ((float)force_ - (float)min_force_) / (force_range) * 100.0;
+  }
+  else if(force_ < 0)
+  {
+    normalized_force = - ((float)force_ + (float)min_force_) / (force_range) * 100.0;
+  }
+  else
+  {
+    normalized_force = 0;
+  }
+
+  return normalized_force;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+int16_t DCMotor::getRawForce()
 {
   return force_;
 }
@@ -65,7 +96,7 @@ void DCMotor::stepOne()
   else
   {
     digitalWrite(direction_gpio_, HIGH);
-    analogWrite(force_gpio_, force_ * correction_factor_ * -1);
+    analogWrite(force_gpio_, -force_ * correction_factor_);
   }
 }
 

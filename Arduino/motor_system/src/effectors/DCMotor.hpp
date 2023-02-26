@@ -53,11 +53,19 @@ class DCMotor : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Returns the force of the motor.
+  /// Returns the force of the motor on a scale between 0 and 100.
   ///
   /// @param  force   The force of the motor.
   //
   int8_t getForce();
+
+  //-----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the raw, unscaled force value of the motor.
+  ///
+  /// @param  force   The force of the motor.
+  //
+  int16_t getRawForce();
 
   private:
   uint8_t force_gpio_;

@@ -36,12 +36,12 @@ build_motor: motor_system/motor_system.ino
 #
 connect_sensor:
 	@echo "Connecting to sensory system via CLI terminal."
-	python3 ../UtilityScripts/sensor_listener.py $(SENSORY_PORT) $(SENSORY_BAUD)
+	python3 ../UtilityScripts/sensor_connector.py $(SENSORY_PORT) $(SENSORY_BAUD)
 	# minicom -D $(SENSORY_PORT) -b $(SENSORY_BAUD)
 
 connect_motor:
 	@echo "Connecting to motor system via CLI terminal."
-	python3 ../UtilityScripts/uart_listener.py $(MOTOR_PORT) $(MOTOR_BAUD)
+	python3 ../UtilityScripts/motor_connector.py $(MOTOR_PORT) $(MOTOR_BAUD)
 	# minicom -D $(MOTOR_PORT) -b $(MOTOR_BAUD)
 
 #-------------------------------------------------------------------------------------
@@ -65,3 +65,8 @@ build_testfile:
 build_servo_ref:
 	@echo "Building servo motor referencing."
 	arduino --upload tools/servo_referencing/servo_referencing.ino --port $(MOTOR_PORT) --board $(TESTFILE_BOARD)
+
+reset:
+	@echo "Reset Arduino board state."
+	python3 ../UtilityScripts/reset_boards.py $(SENSORY_PORT)
+	python3 ../UtilityScripts/reset_boards.py $(MOTOR_PORT)

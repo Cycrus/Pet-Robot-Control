@@ -111,8 +111,11 @@ void DataSender::addData(double data)
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::formatData()
 {
-  uint32_t end_of_message = -1;
-  addBytes((uint8_t*)(&end_of_message), 4);
+  uint8_t end_of_message = -2;
+  addBytes((uint8_t*)(&end_of_message), 1);
+  addBytes((uint8_t*)(&end_of_message), 1);
+  addBytes((uint8_t*)(&end_of_message), 1);
+  addBytes((uint8_t*)(&end_of_message), 1);
   changeBytes((uint8_t*)(&curr_buffer_size_), 2, 0);
 }
 

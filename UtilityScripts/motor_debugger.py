@@ -1,5 +1,5 @@
 #**********************************************************************
-# motor_check.py
+# motor_debugger.py
 # 
 # A small script to listen to the motor messages while writing something.
 # Works best with characters written in the stream.
@@ -37,7 +37,7 @@ if __name__ == "__main__":
   message_len = "13,0"
   end_bytes = "254,254,254,254"
 
-  dc_plus = "10"
+  dc_plus = "50"
   dc_minus = str(255 - int(dc_plus))
   servo_plus = "10"
   servo_minus = str(255 - int(servo_plus))
