@@ -45,11 +45,11 @@ class DCMotor : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Sets the force of the motor. -128 - 128.
+  /// Sets the force of the motor.
   ///
   /// @param  force   The force of the motor.
   //
-  void setForce(int16_t force);
+  void setForce(int8_t force);
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
@@ -63,6 +63,8 @@ class DCMotor : public Module
   uint8_t force_gpio_;
   uint8_t direction_gpio_;
   int16_t force_;
+  int16_t min_force_;
+  int16_t max_force_;
   float correction_factor_;
 
   //-----------------------------------------------------------------------------------------------------------------

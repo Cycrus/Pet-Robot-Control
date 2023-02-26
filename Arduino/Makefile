@@ -12,7 +12,7 @@ SENSORY_BAUD = 115200
 
 MOTOR_PORT = /dev/ttyACM1
 MOTOR_BAUD = 57600
-MOTOR_MESSAGE = 13,0,55,255,200,0,0,10,0,254,254,254,254
+MOTOR_MESSAGE = 13,0,0,0,0,0,0,0,0,254,254,254,254
 
 TESTFILE = infrared_transmitter/infrared_transmitter.ino
 TESTFILE_BOARD = arduino:avr:uno 
@@ -56,8 +56,12 @@ check_motor:
 	python3 ../UtilityScripts/motor_check.py $(MOTOR_PORT) $(MOTOR_BAUD)
 
 #-------------------------------------------------------------------------------------
-# Instruction to build and upload test sketches.
+# Instruction to build and upload test and tool sketches.
 #
 build_testfile:
 	@echo "Building and uploading testfile."
 	arduino --upload test_sketches/$(TESTFILE) --port $(MOTOR_PORT) --board $(TESTFILE_BOARD)
+
+build_servo_ref:
+	@echo "Building servo motor referencing."
+	arduino --upload tools/servo_referencing/servo_referencing.ino --port $(MOTOR_PORT) --board $(TESTFILE_BOARD)

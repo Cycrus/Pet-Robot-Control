@@ -11,6 +11,7 @@
 #include "src/utilities/DataReceiver.hpp"
 #include "src/effectors/LedRing.hpp"
 #include "src/effectors/DCMotor.hpp"
+#include "src/effectors/ServoMotor.hpp"
 
 //-----------------------------------------------------------------------------------------------------------------
 // Timers
@@ -24,16 +25,23 @@ DataReceiver *data_receiver = new DataReceiver(57600, 200);
 // Effectors
 LedRing *led_ring = new LedRing(13, 12);
 DCMotor *right_motor = new DCMotor(3, 2, 1.0);
-DCMotor *left_motor = new DCMotor(9, 8, 0.86);
+DCMotor *left_motor = new DCMotor(9, 8, 0.9);
+ServoMotor *x_axis_servo = new ServoMotor(0, 350, 220, 430);
+ServoMotor *z_axis_servo = new ServoMotor(1, 400, 270, 520);
 
+//-----------------------------------------------------------------------------------------------------------------
 void setup()
 {
   data_receiver->initModule();
   led_ring->initModule();
   right_motor->initModule();
   left_motor->initModule();
+  x_axis_servo->initModule();
+  z_axis_servo->assignDriver(x_axis_servo->getDriver());
+  z_axis_servo->initModule();
 }
 
+//-----------------------------------------------------------------------------------------------------------------
 void loop()
 {
   uint32_t fps_check_time = millis();
@@ -47,8 +55,11 @@ void loop()
 
   if(data_receiver->getSize() == 7)
   {
-    right_motor->setForce(data_receiver->getSignedShort(0));
-    left_motor->setForce(data_receiver->getSignedShort(2));
+    right_motor->setForce(data_receiver->getSignedByte(0));
+    left_motor->setForce(data_receiver->getSignedByte(1));
+
+    x_axis_servo->setForce(data_receiver->getSignedByte(2));
+    z_axis_servo->setForce(data_receiver->getSignedByte(3));
     
     led_ring->setColor(data_receiver->getByte(4),
                        data_receiver->getByte(5),
@@ -59,4 +70,6 @@ void loop()
   led_ring->triggerModule(curr_time);
   right_motor->triggerModule(curr_time);
   left_motor->triggerModule(curr_time);
+  x_axis_servo->triggerModule(curr_time);
+  z_axis_servo->triggerModule(curr_time);
 }

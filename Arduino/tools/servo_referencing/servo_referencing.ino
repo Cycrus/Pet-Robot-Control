@@ -39,6 +39,7 @@ void loop() {
 
   if(servo_pos != prev_servo_pos)
   {
+    pwm.setPWM(0, 0, servo_pos);
     pwm.setPWM(1, 0, servo_pos);
   }
 

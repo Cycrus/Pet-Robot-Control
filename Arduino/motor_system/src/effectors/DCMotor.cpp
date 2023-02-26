@@ -13,7 +13,9 @@ DCMotor::DCMotor(uint8_t force_gpio, uint8_t direction_gpio, float correction_fa
 force_gpio_(force_gpio),
 direction_gpio_(direction_gpio),
 correction_factor_(correction_factor),
-force_(0)
+force_(0),
+min_force_(110),
+max_force_(250)
 {
   time_list_[0] = 0;
   setMaxSteps(1);
@@ -27,9 +29,23 @@ void DCMotor::initModule()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void DCMotor::setForce(int16_t force)
+void DCMotor::setForce(int8_t force)
 {
-  force_ = force;
+  uint8_t max_input_value = 128;
+  uint16_t force_range = max_force_ - min_force_;
+
+  if(force == 0)
+  {
+    force_ = 0;
+  }
+  else if(force > 0)
+  {
+    force_ = min_force_ + ((float)force / (float)max_input_value) * force_range;
+  }
+  else if(force < 0)
+  {
+    force_ = -min_force_ - ((float)force / (float)max_input_value) * force_range;
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------------------

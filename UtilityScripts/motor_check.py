@@ -33,17 +33,21 @@ if __name__ == "__main__":
   baud_rate = int(sys.argv[2])
   con = serial.Serial(port, baud_rate, timeout = 0.005)
 
-  message_len = "13,0,"
-  end_bytes = ",254,254,254,254"
+  message_len = "13,0"
+  end_bytes = "254,254,254,254"
 
-  str_msg1 = message_len + "55,255,200,0,10,0,0" + end_bytes
+  dc_plus = "10"
+  dc_minus = str(255 - int(dc_plus))
+  servo_plus = "10"
+  servo_minus = str(255 - int(servo_plus))
+  str_msg1 = f"{message_len},{dc_minus},{dc_plus},{servo_plus},0,10,0,0,{end_bytes}"
   byte_msg1, int_msg1 = strToBytes(str_msg1)
-  str_msg2 = message_len + "200,0,55,255,0,10,0" + end_bytes
+  str_msg2 = f"{message_len},{dc_plus},{dc_minus},{servo_minus},{servo_plus},0,10,0,{end_bytes}"
   byte_msg2, int_msg2 = strToBytes(str_msg2)
-  str_msg3 = message_len + "120,0,120,0,0,0,10" + end_bytes
+  str_msg3 = f"{message_len},{dc_plus},{dc_plus},0,{servo_minus},0,0,10,{end_bytes}"
   byte_msg3, int_msg3 = strToBytes(str_msg3)
 
-  str_ret = message_len + "0,0,0,0,0,0,0" + end_bytes
+  str_ret = message_len + ",0,0,0,0,0,0,0," + end_bytes
   byte_ret, int_ret = strToBytes(str_ret)
 
   print(f"\n[INFO] Starting motor system check on port {port} with rate {baud_rate}.\n")
@@ -53,7 +57,7 @@ if __name__ == "__main__":
   i = 0
   try:
     while True:
-      print(i)
+      # print(i)
       if i == 50:
         con.write(byte_msg1)
         print(f"[INFO] Sent data <{byte_msg1}> or <{int_msg1}>")
