@@ -48,6 +48,7 @@ ModuleSyncer *ultrasonic = new ModuleSyncer();
 
 // DataSender
 DataSender *data_sender = new DataSender(115200, 200);
+uint8_t i = 0;
 
 //-----------------------------------------------------------------------------------------------------------------
 void setup() {
@@ -79,15 +80,15 @@ void loop() {
   curr_time = millis();
 
   ultrasonic->triggerModule(curr_time);
-  bmp280->triggerModule(curr_time);
-  dht11->triggerModule(curr_time);
-  mq135->triggerModule(curr_time);
+  //bmp280->triggerModule(curr_time);
+  //dht11->triggerModule(curr_time);
+  //mq135->triggerModule(curr_time);
   rfid_reader->triggerModule(curr_time);
 
-  compass->triggerModule(curr_time);
+  /*compass->triggerModule(curr_time);
   current_1->triggerModule(curr_time);
   current_2->triggerModule(curr_time);
-  current_3->triggerModule(curr_time);
+  current_3->triggerModule(curr_time);*/
 
   data_sender->addData(distance_front->getDistance());
   data_sender->addData(distance_back->getDistance());
@@ -140,6 +141,8 @@ void loop() {
   }
 
   data_sender->resetData();
+
+  delay(10);
 }
 
 //-----------------------------------------------------------------------------------------------------------------

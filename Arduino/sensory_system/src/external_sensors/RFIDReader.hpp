@@ -16,6 +16,7 @@
 #include "../utilities/Module.hpp"
 
 #define MSG_LEN 18
+#define RFID_RESET_TIME 500
 
 class RFIDReader : public Module
 {
@@ -65,23 +66,18 @@ class RFIDReader : public Module
   private:
   MFRC522 module_object_;
   uint8_t message_code_;
+  uint32_t message_time_;
   MFRC522::MIFARE_Key rfid_key_;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Sets the general requirements of triggering this module. Mainly that an RFID card is present.
-  //
-  bool triggeringRequirements() override;
-
-  //-----------------------------------------------------------------------------------------------------------------
-  ///
-  /// Step 1. Resets the collected message code.
+  /// Step 1. Collects a new message if an RFID chip is detected in triggeringRequirements().
   //
   void stepOne() override;
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Step 2. Collects a new message if an RFID chip is detected in triggeringRequirements().
+  /// Step 2. Is not called.
   //
   void stepTwo() override;
 

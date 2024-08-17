@@ -31,11 +31,17 @@ if __name__ == "__main__":
   print(f"\n[INFO] Starting sensor UART listener on port {port} with rate {baud_rate}.\n")
 
   time.sleep(2)
-  
+  i = 0
   try:
     while True:
-      byte = con.read()
+      i += 1
+      #print("")
+      #print(f"in_waiting 1 = {con.in_waiting}")
+      #print(f"i = {i}")
+      byte = con.read(1)
+      #print(f"byte = {byte}")
       byte_val = int.from_bytes(bytes = byte, byteorder  = "little", signed = False)
+      #print(f"byte_val = {byte_val}")
 
       if byte_val == 254:
         end_byte_num = end_byte_num + 1
@@ -46,10 +52,14 @@ if __name__ == "__main__":
         read_data = True
 
       if read_data:
+        #print("reading size")
         data_size = con.read(2)
+        #print("converting size")
         data_size_val = int.from_bytes(bytes = data_size, byteorder  = "little", signed = False)
-        data = con.read(data_size_val - 6)
-
+        #print(f"data_size_val = {data_size_val}")
+        #print("reading data")
+        data = con.read(data_size_val)
+        
         distance_front = int.from_bytes(bytes = data[0:2], byteorder  = "little", signed = True)
         distance_back = int.from_bytes(bytes = data[2:4], byteorder  = "little", signed = True)
         temperature = int.from_bytes(bytes = data[4:6], byteorder  = "little", signed = True)
@@ -90,10 +100,11 @@ if __name__ == "__main__":
         satellite_number = data[114]
         frequency = int.from_bytes(bytes = data[115:117], byteorder  = "little", signed = False)
 
-        print_lines = 30
+        print_lines = 31
         empty_cells = "                                                               "
-
+        
         print("**************************************************")
+        print(f"Iteration {i}:")
         print(f"Distance Front = {distance_front}{empty_cells}")
         print(f"Distance Back = {distance_back}{empty_cells}")
         print(f"Temperature = {temperature}{empty_cells}")
@@ -125,8 +136,11 @@ if __name__ == "__main__":
         print(f"GPS Satellite Number = {satellite_number}{empty_cells}")
         print(f"Frequency = {frequency}{empty_cells}")
         print("**************************************************", end = ("\033[A" * (print_lines)) + "\033[F")
+        
+        #con.reset_input_buffer()
 
         read_data = False
+      
 
   except KeyboardInterrupt:
     print("[INFO] User exit.")

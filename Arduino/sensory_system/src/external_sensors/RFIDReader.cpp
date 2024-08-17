@@ -11,11 +11,11 @@
 
 RFIDReader::RFIDReader(uint8_t ss_pin, uint8_t rst_pin) :
 module_object_(ss_pin, rst_pin),
-message_code_(0)
+message_code_(0),
+message_time_(0)
 {
   time_list_[0] = 100;
-  time_list_[1] = 1;
-  setMaxSteps(2);
+  setMaxSteps(1);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,9 @@ uint8_t RFIDReader::getMessageCode()
 //-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::resetMessageCode()
 {
-  message_code_ = 0;
+  uint32_t reset_time = millis();
+  if(reset_time - message_time_ >= RFID_RESET_TIME)
+    message_code_ = 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -69,33 +71,17 @@ bool RFIDReader::checkByteArray(byte *arr, String str)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-bool RFIDReader::triggeringRequirements()
-{
-  if(getCurrStep() == 0)
-  {
-    return true;
-  }
-  
-  if(!module_object_.PICC_IsNewCardPresent()) {
-    return false;
-  }
-
-  if(!module_object_.PICC_ReadCardSerial()) {
-    return false;
-  }
-
-  return true;
-}
-
-//-----------------------------------------------------------------------------------------------------------------
 void RFIDReader::stepOne()
 {
   resetMessageCode();
-}
 
-//-----------------------------------------------------------------------------------------------------------------
-void RFIDReader::stepTwo()
-{
+  if(!module_object_.PICC_IsNewCardPresent()) {
+    return;
+  }
+  if(!module_object_.PICC_ReadCardSerial()) {
+    return;
+  }
+
   MFRC522::StatusCode status;
   
   uint8_t block = 1;
@@ -106,7 +92,6 @@ void RFIDReader::stepTwo()
   if(status != MFRC522::STATUS_OK)
   {
     module_object_.PCD_StopCrypto1();
-    resetCurrStep();
     return;
   }
 
@@ -114,15 +99,21 @@ void RFIDReader::stepTwo()
   if(status != MFRC522::STATUS_OK)
   {
     module_object_.PCD_StopCrypto1();
-    resetCurrStep();
     return;
   }
   else
   {
+    message_time_ = millis();
     message_code_ = payload_buffer[0];
   }
   
   module_object_.PCD_StopCrypto1();
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void RFIDReader::stepTwo()
+{
+  // Not used.
 }
 
 //-----------------------------------------------------------------------------------------------------------------
