@@ -111,32 +111,32 @@ void DataSender::addData(double data)
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::formatData()
 {
-  uint8_t end_of_message = -2;
-  addBytes((uint8_t*)(&end_of_message), 1);
-  addBytes((uint8_t*)(&end_of_message), 1);
-  addBytes((uint8_t*)(&end_of_message), 1);
-  addBytes((uint8_t*)(&end_of_message), 1);
+  uint32_t end_of_message = -2;
+  addBytes((uint8_t*)(&end_of_message), 4);
   changeBytes((uint8_t*)(&curr_buffer_size_), 2, 0);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::sendData()
 {
-  Serial.flush();
+  uint8_t start_signature[START_SIGNATURE_BYTE_NUM];
+  for(int i = 0; i < START_SIGNATURE_BYTE_NUM; i++)
+    start_signature[i] = PACKET_START_SIGNATURE;
+  Serial.write(start_signature, START_SIGNATURE_BYTE_NUM);
+  Serial.write((uint8_t*)&curr_buffer_size_, 2);
   Serial.write(data_buffer_, curr_buffer_size_);
+  Serial.flush();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::resetData()
 {
   curr_buffer_size_ = MIN_BUFFER_SIZE;
-  changeBytes((uint8_t*)(&curr_buffer_size_), 2, 0);
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void DataSender::stepOne()
 {
-  formatData();
   sendData();
 }
 
