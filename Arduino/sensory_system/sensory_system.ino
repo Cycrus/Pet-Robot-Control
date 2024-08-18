@@ -80,15 +80,15 @@ void loop() {
   curr_time = millis();
 
   ultrasonic->triggerModule(curr_time);
-  //bmp280->triggerModule(curr_time);
+  //bmp280->triggerModule(curr_time);  // New sensor 1
   //dht11->triggerModule(curr_time);
   //mq135->triggerModule(curr_time);
   rfid_reader->triggerModule(curr_time);
 
-  /*compass->triggerModule(curr_time);
-  current_1->triggerModule(curr_time);
-  current_2->triggerModule(curr_time);
-  current_3->triggerModule(curr_time);*/
+  compass->triggerModule(curr_time);
+  //current_1->triggerModule(curr_time);
+  //current_2->triggerModule(curr_time);
+  //current_3->triggerModule(curr_time);
 
   data_sender->addData(distance_front->getDistance());
   data_sender->addData(distance_back->getDistance());
