@@ -13,7 +13,9 @@
 
 #include "Module.hpp"
 
-#define MIN_BUFFER_SIZE 2
+#define MIN_BUFFER_SIZE 0
+#define PACKET_START_SIGNATURE 254
+#define START_SIGNATURE_BYTE_NUM 4
 
 class DataSender : public Module
 {

@@ -1,7 +1,7 @@
 """
 A test script to publish data to the locally running MQTT broker.
 Command to start broker:
-docker run -it -p 1883:1883 -p 9001:9001 -v /opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf -v /opt/mosquitto/data:/mosquitto/data -v /opt/mosquitto/log:/mosquitto/log eclipse-mosquitto --restart unless-stopped
+docker run -d --restart unless-stopped -p 1883:1883 -p 9001:9001 -v /opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf -v /opt/mosquitto/data:/mosquitto/data -v /opt/mosquitto/log:/mosquitto/log eclipse-mosquitto
 """
 
 import paho.mqtt.client as mqtt

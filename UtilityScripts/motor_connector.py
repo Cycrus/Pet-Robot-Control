@@ -84,8 +84,13 @@ if __name__ == "__main__":
         print("[INFO] Finished check.")
         break
 
-      byte = con.read()
+      #print("")
+      #print(f"in_waiting 1 = {con.in_waiting}")
+      #print(f"i = {i}")
+      byte = con.read(1)
+      #print(f"byte = {byte}")
       byte_val = int.from_bytes(bytes = byte, byteorder  = "little", signed = False)
+      #print(f"byte_val = {byte_val}")
 
       if byte_val == 254:
         end_byte_num = end_byte_num + 1
@@ -98,7 +103,7 @@ if __name__ == "__main__":
       if read_data:
         data_size = con.read(2)
         data_size_val = int.from_bytes(bytes = data_size, byteorder  = "little", signed = False)
-        data = con.read(data_size_val - 6)
+        data = con.read(data_size_val)
 
         try:
           right_force = uByteTosByte(data[0])

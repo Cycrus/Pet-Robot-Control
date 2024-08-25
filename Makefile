@@ -47,23 +47,12 @@ connect_mqtt:
 	python3 UtilityScripts/mqtt_test_injector.py $(SENSORY_PORT) $(SENSORY_BAUD) $(MOTOR_PORT) $(MOTOR_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
 
 #-------------------------------------------------------------------------------------
-# Instructions to send messages to the motor system.
-#
-send_motor:
-	@echo "Sending a single state message to motor system."
-	python3 UtilityScripts/uart_sender.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MOTOR_MESSAGE)
-
-check_motor:
-	@echo "Sending state message to motor system."
-	python3 UtilityScripts/motor_check.py $(MOTOR_PORT) $(MOTOR_BAUD)
-
-#-------------------------------------------------------------------------------------
 # Instruction to build and upload test and tool sketches.
 #
 build_servo_ref:
 	$(MAKE) -C Arduino/ build_servo_ref
 
-reset:
+arduino_reset:
 	@echo "Reset Arduino board state."
 	python3 UtilityScripts/reset_boards.py $(SENSORY_PORT)
 	python3 UtilityScripts/reset_boards.py $(MOTOR_PORT)
