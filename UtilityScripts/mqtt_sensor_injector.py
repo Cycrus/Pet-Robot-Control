@@ -6,7 +6,7 @@
 # Call the script with python3 sensor_listener.py <PORT> <BAUD_RATE>.
 # 
 # Author: Cyril Marx
-# Created: February 2023
+# Created: August 2024
 #**********************************************************************
 
 import serial
@@ -124,19 +124,17 @@ def get_sensor_data(output_dict, con):
 def inject_mqtt_data(data_dict, mqtt_con, prefix):
   for key in data_dict:
     data = data_dict[key]
-    mqttc.publish(prefix + "/" + key, data)
+    mqtt_con.publish(prefix + "/" + key, data)
 
 if __name__ == "__main__":
-  if len(sys.argv) != 7:
-    print("[ERROR] Program arguments: <sensor_port> <sensor_baud_rate> <motor_port> <motor_baud_rate> <mqtt_address> <mqtt_port>.")
+  if len(sys.argv) != 5:
+    print("[ERROR] Program arguments: <sensor_port> <sensor_baud_rate> <mqtt_address> <mqtt_port>.")
     exit()
 
   sensor_port = sys.argv[1]
   sensor_baud_rate = int(sys.argv[2])
-  motor_port = sys.argv[3]
-  motor_baud_rate = int(sys.argv[4])
-  mqtt_address = sys.argv[5]
-  mqtt_port = int(sys.argv[6])
+  mqtt_address = sys.argv[3]
+  mqtt_port = int(sys.argv[4])
 
   print(f"[Info] Connecting to MQTT broker on {mqtt_address}:{mqtt_port}")
   mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
@@ -145,8 +143,6 @@ if __name__ == "__main__":
 
   print(f"\n[Info] Starting sensor UART listener on port {sensor_port} with rate {sensor_baud_rate}.\n")
   sensor_con = serial.Serial(sensor_port, sensor_baud_rate)
-  #print(f"\n[Info] Starting motor UART listener on port {motor_port} with rate {motor_baud_rate}.\n")
-  #motor_con = serial.Serial(motor_port, motor_baud_rate)
   time.sleep(2)
 
   while True:

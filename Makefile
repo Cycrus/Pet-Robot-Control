@@ -42,9 +42,13 @@ connect_motor:
 	python3 UtilityScripts/motor_connector.py $(MOTOR_PORT) $(MOTOR_BAUD)
 	# minicom -D $(MOTOR_PORT) -b $(MOTOR_BAUD)
 
-connect_mqtt:
+connect_sensor_mqtt:
 	@echo "Connecting to Arduinos and forwarding to MQTT broker."
-	python3 UtilityScripts/mqtt_test_injector.py $(SENSORY_PORT) $(SENSORY_BAUD) $(MOTOR_PORT) $(MOTOR_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
+	python3 UtilityScripts/mqtt_sensor_injector.py $(SENSORY_PORT) $(SENSORY_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
+
+connect_motor_mqtt:
+	@echo "Connecting to Arduinos and forwarding to MQTT broker."
+	python3 UtilityScripts/mqtt_motor_injector.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
 
 #-------------------------------------------------------------------------------------
 # Instruction to build and upload test and tool sketches.
