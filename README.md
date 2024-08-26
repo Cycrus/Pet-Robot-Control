@@ -20,3 +20,7 @@ The Raspberry Pi currently mainly acts as the aggregator for the data the Arduin
 
 You can click on the image below to find a video showing the facial engine in action.
 [![Robot Facial Animation Sample](Images/face.jpg)](https://youtu.be/GpnrCt8D4pI)
+
+## Dependencies
+https://github.com/eclipse/paho.mqtt.cpp
+

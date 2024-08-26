@@ -20,7 +20,7 @@ MQTT_PORT = 1883
 #-------------------------------------------------------------------------------------
 # Building and Uploading instructions
 #
-build: build_sensor build_motor
+build: build_sensor build_motor build_raspi
 	@echo "Finished Job."
 
 build_sensor:
@@ -28,6 +28,9 @@ build_sensor:
 
 build_motor:
 	$(MAKE) -C Arduino/ build_motor
+	
+build_raspi:
+	$(MAKE) -C RaspberryPi/c++/ tests
 
 #-------------------------------------------------------------------------------------
 # Instructions to connect to the Arduino systems.

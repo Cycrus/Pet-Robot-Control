@@ -15,6 +15,14 @@
 #include "ST7735_Eye.hpp"
 #include "ST7735_TFT.hpp"
 
+enum Emotion
+{
+  Neutral,
+  Happy,
+  Angry,
+  Sad
+};
+
 class ST7735_Face
 {
     public:
@@ -47,6 +55,25 @@ class ST7735_Face
         /// Default destructor.
         //
         ~ST7735_Face() = default;
+
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Renders a certain emotion onto the face.
+        ///
+        /// @param emotion    The emotion to render.
+        /// @param strength   A float between 0 and 1 to indicate the strength of the emotion.
+        //
+        void setEmotion(Emotion emotion, float strength);
+
+
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Moves the eyes to look at a certain direction.
+        ///
+        /// @param x    A float between -1 and 1 indicating the x direction to look at.
+        /// @param y    A float between -1 and 1 indicating the y direction to look at.
+        //
+        void lookAt(float x, float y);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
@@ -61,6 +88,14 @@ class ST7735_Face
         /// Sets the running_ parameter to false and stops the FaceLoop() method therefore.
         //
         void stopFaceLoop();
+
+        //-----------------------------------------------------------------------------------------------------------------
+        ///
+        /// Starts the face loop and sets the running_ parameter to true.
+        ///
+        /// @param frequency  The frequency to render the face with.
+        //
+        void startFaceLoop(ST7735_TFT *display, int frequency);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///
@@ -68,8 +103,9 @@ class ST7735_Face
         /// Should be changed and run on it's own thread.
         ///
         /// @param display    The display the face is rendered onto.
+        /// @param frequency  The frequency to render the face with.
         //
-        void faceLoop(ST7735_TFT *display);
+        void faceLoop(ST7735_TFT *display, int frequency);
         
         //-----------------------------------------------------------------------------------------------------------------
         ///

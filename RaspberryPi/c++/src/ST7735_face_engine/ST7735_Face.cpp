@@ -18,6 +18,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include <chrono>
+#include <thread>
+
 
 ST7735_Face::ST7735_Face(int16_t screen_width,
                          int16_t screen_height,
@@ -37,6 +40,18 @@ running_(false)
 }
 
 //-----------------------------------------------------------------------------------------------------------------
+void ST7735_Face::setEmotion(Emotion emotion, float strength)
+{
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Face::lookAt(float x, float y)
+{
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 void ST7735_Face::render(ST7735_TFT *display)
 {
     frame_.fill(face_color_);
@@ -52,14 +67,23 @@ void ST7735_Face::stopFaceLoop()
 }
 
 //-----------------------------------------------------------------------------------------------------------------
-void ST7735_Face::faceLoop(ST7735_TFT *display)
+void ST7735_Face::startFaceLoop(ST7735_TFT *display, int frequency)
 {
-    running_ = true;
-    
-    while(running_)
-    {
-        // do something here...
-    }
+  std::thread face_thread(&ST7735_Face::faceLoop, this, display, frequency);
+  face_thread.detach();
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void ST7735_Face::faceLoop(ST7735_TFT *display, int frequency)
+{
+  running_ = true;
+  int sleep_time = 1000 / frequency;
+
+  while(running_)
+  {
+      render(display);
+      bcm2835_delay(sleep_time);
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------------------

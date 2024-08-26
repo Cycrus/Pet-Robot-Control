@@ -1,0 +1,249 @@
+/**********************************************************************
+ * DataReceiver.cpp
+ * 
+ * Implementation of the DataReceiver.
+ * 
+ * Author: Cyril Marx
+ * Created: February 2023
+ **********************************************************************/
+
+#include "DataReceiver.hpp"
+
+DataReceiver::DataReceiver(uint32_t baud_rate, uint16_t buffer_size) :
+baud_rate_(baud_rate),
+max_buffer_size_(buffer_size),
+curr_buffer_size_(0),
+data_buffer_(nullptr),
+read_state_(ReadState::READ_SIZE)
+{
+  time_list_[0] = 0;
+  setMaxSteps(1);
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+DataReceiver::~DataReceiver()
+{
+  if(data_buffer_ != nullptr)
+  {
+    free(data_buffer_);
+  }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::initModule()
+{
+  Serial.begin(baud_rate_);
+  data_buffer_ = (uint8_t*)malloc(max_buffer_size_);
+  for(uint16_t byte = 0; byte < max_buffer_size_; byte++)
+  {
+    data_buffer_[byte] = 0;
+  }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+uint8_t *DataReceiver::getBuffer()
+{
+  return data_buffer_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+uint16_t DataReceiver::getSize()
+{
+  return curr_buffer_size_;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+int8_t DataReceiver::getSignedByte(uint16_t pos)
+{
+  if(pos >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  int8_t data = (int8_t)data_buffer_[pos];
+  return data;
+}
+
+int16_t DataReceiver::getSignedShort(uint16_t pos)
+{
+  if(pos + 1 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  int16_t data = *((int16_t*)(&data_buffer_[pos]));
+  return data;
+}
+
+int32_t DataReceiver::getSignedInt(uint16_t pos)
+{
+  if(pos + 3 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  int32_t data = *((int32_t*)(&data_buffer_[pos]));
+  return data;
+}
+
+float DataReceiver::getFloat(uint16_t pos)
+{
+  if(pos + 3 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  float data = *((float*)(&data_buffer_[pos]));
+  return data;
+}
+
+double DataReceiver::getDouble(uint16_t pos)
+{
+  if(pos + 7 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  double data = *((double*)(&data_buffer_[pos]));
+  return data;
+}
+
+uint8_t DataReceiver::getByte(uint16_t pos)
+{
+  if(pos >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  uint8_t data = (uint8_t)data_buffer_[pos];
+  return data;
+}
+
+uint16_t DataReceiver::getShort(uint16_t pos)
+{
+  if(pos + 1 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  uint16_t data = *((uint16_t*)(&data_buffer_[pos]));
+  return data;
+}
+
+uint32_t DataReceiver::getInt(uint16_t pos)
+{
+  if(pos + 3 >= curr_buffer_size_)
+  {
+    return 0;
+  }
+
+  uint32_t data = *((uint32_t*)(&data_buffer_[pos]));
+  return data;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::clearDataBuffer()
+{
+  for(uint16_t pos = 0; pos < curr_buffer_size_; pos++)
+  {
+    data_buffer_[pos] = 0;
+  }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::resetDataBuffer()
+{
+  curr_buffer_size_ = 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::receiveData()
+{
+  uint8_t end_flag_counter = 0;
+  uint16_t data_size = 0;
+
+  while(Serial.available())
+  {
+    if(read_state_ == ReadState::READ_SIZE)
+    {
+      uint8_t size_bytes[2];
+      delay(2);
+      size_bytes[0] = Serial.read();
+      size_bytes[1] = Serial.read();
+      uint16_t size_buffer = *((uint16_t*)(&size_bytes));
+      size_buffer = size_buffer - 6;
+      if(size_buffer > max_buffer_size_)
+      {
+        read_state_ = ReadState::SEARCH_DATA;
+      }
+      else
+      {
+        curr_buffer_size_ = size_buffer;
+        read_state_ = ReadState::READ_DATA;
+      }
+    }
+
+    else if(read_state_ == ReadState::READ_DATA)
+    {
+      uint8_t byte_pos = 0;
+      while(true)
+      {
+        if(Serial.available())
+        {
+          uint8_t byte = Serial.read();
+          data_buffer_[byte_pos] = byte;
+          byte_pos++;
+        }
+
+        if(byte_pos >= curr_buffer_size_)
+        {
+          break;
+        }
+      }
+      read_state_ = ReadState::SEARCH_DATA;
+    }
+
+    else
+    {
+      uint8_t byte = Serial.read();
+      if(byte == 0xFE)
+      {
+        end_flag_counter++;
+      }
+      else
+      {
+        end_flag_counter = 0;
+      }
+
+      if(end_flag_counter >= 4)
+      {
+        read_state_ = ReadState::READ_SIZE;
+        break;
+      }
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::stepOne()
+{
+  receiveData();
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::stepTwo()
+{
+  // Not used.
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::stepThree()
+{
+  // Not used.
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+void DataReceiver::stepFour()
+{
+  // Not used.
+}

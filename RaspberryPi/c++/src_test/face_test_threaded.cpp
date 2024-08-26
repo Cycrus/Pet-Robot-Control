@@ -42,6 +42,14 @@ void startDisplay(ST7735_TFT *display)
     display->TFTInitScreenSize(OFFSET_COL, OFFSET_ROW ,
                                TFT_WIDTH , TFT_HEIGHT);
     display->TFTInitPCBType(TFT_ST7735S_Black);
+    display->TFTfillScreen(ST7735_BLACK);
+}
+
+//----------------------------------------------------------------------
+void stopFace(ST7735_Face* face)
+{
+  face->stopFaceLoop();
+  bcm2835_delay(DELAY2);
 }
 
 //----------------------------------------------------------------------
@@ -59,21 +67,23 @@ void stopDisplay(ST7735_TFT *display)
 }
 
 //----------------------------------------------------------------------
-void testFace(ST7735_TFT *display)
+ST7735_Face* startFace(ST7735_TFT *display)
 {
     std::cout << std::endl;
-    std::cout << "Testing Facial Feature Module (Threaded)." << std::endl;
+    std::cout << "Testing Facial Feature Module." << std::endl;
     std::cout << "******************************" << std::endl;
     
-    ST7735_Face face(display->getWidth(), display->getHeight(),
-                     ST7735_Utils::rgb888To565(0x000000),
-                     ST7735_Utils::rgb888To565(0xFFFFFF),
-                     ST7735_Utils::rgb888To565(0xFFFFFF),
-                     ST7735_Utils::rgb888To565(0xFFFFFF));
+    ST7735_Face* face = new ST7735_Face(display->getWidth(), display->getHeight(),
+                                        ST7735_Utils::rgb888To565(0x000000),
+                                        ST7735_Utils::rgb888To565(0xFFFFFF),
+                                        ST7735_Utils::rgb888To565(0xFFFFFF),
+                                        ST7735_Utils::rgb888To565(0xFFFFFF));
                      
-    face.faceDemoLoop(display);
+    face->startFaceLoop(display, 30);
     
-    bcm2835_delay(DELAY2);
+    bcm2835_delay(DELAY1);
+
+    return face;
 }
 
 //----------------------------------------------------------------------
@@ -89,9 +99,11 @@ int main(void)
     
     //bcm2835_delay(DELAY1);
     startDisplay(display);
-    
-    testFace(display);
+    ST7735_Face* face = startFace(display);
 
+    bcm2835_delay(DELAY2);
+
+    stopFace(face);
     stopDisplay(display);
     return 0;
 }
