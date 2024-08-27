@@ -3,21 +3,38 @@
 FROM ubuntu:22.04
 
 ARG interface_name=DefaultInterface
-ENV INTERFACE_NAME=${interface_name}
 
 WORKDIR /
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y build-essential cmake wget i2c-tools
+
+# Install SPI dependency
+WORKDIR /root
+RUN wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58.tar.gz
+RUN tar xvfz bcm2835-1.58.tar.gz
+WORKDIR /root/bcm2835-1.58
+RUN ./configure
+RUN make
+RUN make install
+
+# Install i2c dependency
+WORKDIR /root
+RUN wget https://mirrors.edge.kernel.org/pub/software/utils/i2c-tools/i2c-tools-4.3.tar.xz
+RUN tar -xf i2c-tools-4.3.tar.xz
+WORKDIR /root/i2c-tools-4.3
+RUN make
+RUN make install
 
 RUN mkdir -p /opt/RaspberryPi/interfaces/c++/${interface_name}
 RUN mkdir -p /opt/RaspberryPi/lib/c++
 
 COPY interfaces/c++/${interface_name} /opt/RaspberryPi/interfaces/c++/${interface_name}
-COPY lib/c++ /opt/RaspberryPi/interfaces/lib
+COPY lib/c++ /opt/RaspberryPi/lib/c++
 WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}
 
-RUN apt-get update && apt-get install -y build-essential
-
-RUN mkdir build
-WORKDIR build
-RUN cmake ..
-RUN make
-CMD ["./main"]
+WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}
+#RUN mkdir build
+#WORKDIR build
+#RUN cmake ..
+#RUN make
+#CMD ["./main"]

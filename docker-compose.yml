@@ -1,0 +1,42 @@
+version: '2.8'
+ 
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    hostname: mosquitto
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /opt/mosquitto/data:/mosquitto/data
+      - /opt/mosquitto/log:/mosquitto/log
+    networks:
+      - internal
+      - external
+
+  face_controller:
+    image: robot/face_controller
+    build:
+      context: ./RaspberryPi
+      dockerfile: interfaces/c++/ST7735_face_engine/Dockerfile
+    ports:
+      - 80:80
+    environment:
+      - "interface_name=ST7735_face_engine"
+    restart: unless-stopped
+    volumes: 
+      - /usr/bin/ld:/usr/bin/ld
+      - /sys/bus:/sys/bus
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    external: false
+  external:
+    driver: bridge
+    external: true
