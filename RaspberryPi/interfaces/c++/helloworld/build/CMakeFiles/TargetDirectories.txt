@@ -1,0 +1,10 @@
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/CMakeFiles/rebuild_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/CMakeFiles/edit_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/CMakeFiles/main.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/CMakeFiles/InterfaceLibrary.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/ST7735_TFT_driver/CMakeFiles/rebuild_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/ST7735_TFT_driver/CMakeFiles/edit_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/keyboard_input/CMakeFiles/rebuild_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/keyboard_input/CMakeFiles/edit_cache.dir
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/helloworld/build/keyboard_input/CMakeFiles/keyboard_input.dir

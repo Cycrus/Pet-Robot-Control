@@ -10,7 +10,7 @@ import paho.mqtt.client as mqtt
 if __name__ == "__main__":
   address = "localhost"
   port = 1883
-  topic = "input/motor/left_motor_force"
+  topic = "input/motor/led_r"
   print(f"[Info] Connecting to MQTT broker on {address}:{port}")
   mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
   mqttc.connect(address, port, 60)
