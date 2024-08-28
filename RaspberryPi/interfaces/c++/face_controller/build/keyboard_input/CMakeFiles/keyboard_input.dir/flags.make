@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -Dkeyboard_input_EXPORTS
 
-CXX_INCLUDES = -I/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/../../../lib/c++/ST7735_TFT_driver/inc -I/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/inc
+CXX_INCLUDES = -I/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/../../../lib/c++/ST7735_TFT_driver/inc -I/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/inc
 
 CXX_FLAGS = -fPIC
 

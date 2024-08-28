@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/../../../lib/c++/ST7735_TFT_driver/inc"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/../../../lib/c++/ST7735_TFT_driver/inc"
   "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/inc"
   )
 

@@ -10,4 +10,4 @@ CMakeFiles/face_test.dir/face_test.cpp.o
  ../inc/ST7735_Canvas.hpp
  ../inc/ST7735_Eye.hpp
  ../inc/ST7735_Face.hpp
- /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/face_test.cpp
+ /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/face_test.cpp

@@ -7,4 +7,4 @@ CMakeFiles/graphics_test.dir/graphics_test.cpp.o
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT_graphics.hpp
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_Utils.hpp
  ../inc/ST7735_Canvas.hpp
- /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/graphics_test.cpp
+ /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/graphics_test.cpp

@@ -1,4 +1,4 @@
-# Install script for directory: /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine
+# Install script for directory: /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/cmake_install.cmake")
+  include("/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input/cmake_install.cmake")
+  include("/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -60,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,18 +1,18 @@
 services:
   face_controller:
-    container_name: robot/face_controller
+    container_name: face_controller
     build:
       context: ../RaspberryPi
       dockerfile: ../RaspberryPi/interfaces/c++/face_controller/Dockerfile
       args:
         interface_name: "face_controller"
     ports:
-      - "1883:1883"
+      - "1884:1883"
     depends_on:
       - mosquitto
     restart: unless-stopped
     volumes: 
-      - /usr/bin/ld:/usr/bin/ld
       - /sys/bus:/sys/bus
     networks:
-      - internal
+      - internal-net
+    privileged: true

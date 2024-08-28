@@ -56,7 +56,7 @@ vector
 ST7735_TFT.hpp
 ../inc/ST7735_TFT.hpp
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/graphics_test.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/graphics_test.cpp
 bcm2835.h
 -
 iostream
@@ -68,9 +68,9 @@ array
 cmath
 -
 ST7735_TFT.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_TFT.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_TFT.hpp
 ST7735_Canvas.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_Canvas.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_Canvas.hpp
 ST7735_Utils.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_Utils.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_Utils.hpp
 

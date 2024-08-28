@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/face_test_threaded.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles/face_test_threaded.dir/face_test_threaded.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/face_test_threaded.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/face_test_threaded.dir/face_test_threaded.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,9 +17,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles/InterfaceLibrary.dir/DependInfo.cmake"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/DependInfo.cmake"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input/CMakeFiles/keyboard_input.dir/DependInfo.cmake"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/InterfaceLibrary.dir/DependInfo.cmake"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/DependInfo.cmake"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input/CMakeFiles/keyboard_input.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/graphics_test.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/graphics_test.dir/graphics_test.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/main.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/main.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

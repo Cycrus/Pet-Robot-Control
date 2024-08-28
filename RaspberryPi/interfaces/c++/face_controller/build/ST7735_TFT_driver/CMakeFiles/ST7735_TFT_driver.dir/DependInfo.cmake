@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.o"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT_Print.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.o"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT_graphics.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.o"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_Utils.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT_Print.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_TFT_graphics.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver/src/ST7735_Utils.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

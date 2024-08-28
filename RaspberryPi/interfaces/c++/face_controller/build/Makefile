@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine
+CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build
+CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -167,6 +167,19 @@ face_test: cmake_check_build_system
 face_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/face_test.dir/build.make CMakeFiles/face_test.dir/build
 .PHONY : face_test/fast
+
+#=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 #=============================================================================
 # Target rules for targets named InterfaceLibrary
@@ -288,6 +301,33 @@ graphics_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphics_test.dir/build.make CMakeFiles/graphics_test.dir/graphics_test.cpp.s
 .PHONY : graphics_test.cpp.s
 
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 src/ST7735_Canvas.o: src/ST7735_Canvas.cpp.o
 
 .PHONY : src/ST7735_Canvas.o
@@ -383,6 +423,7 @@ help:
 	@echo "... face_test_threaded"
 	@echo "... graphics_test"
 	@echo "... keyboard_input"
+	@echo "... main"
 	@echo "... face_test.o"
 	@echo "... face_test.i"
 	@echo "... face_test.s"
@@ -392,6 +433,9 @@ help:
 	@echo "... graphics_test.o"
 	@echo "... graphics_test.i"
 	@echo "... graphics_test.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/ST7735_Canvas.o"
 	@echo "... src/ST7735_Canvas.i"
 	@echo "... src/ST7735_Canvas.s"

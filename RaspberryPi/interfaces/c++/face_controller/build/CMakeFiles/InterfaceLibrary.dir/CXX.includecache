@@ -70,27 +70,27 @@ ST7735_Eye.hpp
 ST7735_TFT.hpp
 ../inc/ST7735_TFT.hpp
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Canvas.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Canvas.cpp
 ST7735_Canvas.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Canvas.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Canvas.hpp
 cmath
 -
 ST7735_Utils.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Utils.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Utils.hpp
 iostream
 -
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Eye.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Eye.cpp
 ST7735_Eye.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Eye.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Eye.hpp
 iostream
 -
 ST7735_Utils.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Utils.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Utils.hpp
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Face.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Face.cpp
 ST7735_Face.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Face.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Face.hpp
 bcm2835.h
 -
 iostream

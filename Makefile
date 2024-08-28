@@ -17,6 +17,16 @@ MOTOR_MESSAGE = 13,0,0,0,0,0,0,0,0,254,254,254,254
 MQTT_ADDRESS = localhost
 MQTT_PORT = 1883
 
+create_network:
+	docker network create external-net
+
+run_docker:
+	sudo docker run --privileged \
+	--device /dev/mem \
+  --device /dev/gpiomem \
+	-v /sys/class/gpio:/sys/class/gpio \
+	-it pet-robot-control-face_controller
+
 #-------------------------------------------------------------------------------------
 # Building and Uploading instructions
 #

@@ -79,6 +79,8 @@ void ST7735_Face::faceLoop(ST7735_TFT *display, int frequency)
   running_ = true;
   int sleep_time = 1000 / frequency;
 
+  display->TFTfillScreen(0x0000);
+
   while(running_)
   {
       render(display);

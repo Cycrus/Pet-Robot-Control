@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine
+CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build
+CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,14 +99,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input//CMakeFiles/progress.marks
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles 0
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input//CMakeFiles/progress.marks
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/clean
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/clean
 .PHONY : clean
 
 # The main clean target
@@ -116,22 +116,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/preinstall
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/preinstall
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 keyboard_input/CMakeFiles/keyboard_input.dir/rule:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/CMakeFiles/keyboard_input.dir/rule
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 keyboard_input/CMakeFiles/keyboard_input.dir/rule
 .PHONY : keyboard_input/CMakeFiles/keyboard_input.dir/rule
 
 # Convenience name for target.
@@ -141,7 +141,7 @@ keyboard_input: keyboard_input/CMakeFiles/keyboard_input.dir/rule
 
 # fast build rule for target.
 keyboard_input/fast:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/build
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/build
 .PHONY : keyboard_input/fast
 
 src/KeyInput.o: src/KeyInput.cpp.o
@@ -150,7 +150,7 @@ src/KeyInput.o: src/KeyInput.cpp.o
 
 # target to build an object file
 src/KeyInput.cpp.o:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o
 .PHONY : src/KeyInput.cpp.o
 
 src/KeyInput.i: src/KeyInput.cpp.i
@@ -159,7 +159,7 @@ src/KeyInput.i: src/KeyInput.cpp.i
 
 # target to preprocess a source file
 src/KeyInput.cpp.i:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i
 .PHONY : src/KeyInput.cpp.i
 
 src/KeyInput.s: src/KeyInput.cpp.s
@@ -168,7 +168,7 @@ src/KeyInput.s: src/KeyInput.cpp.s
 
 # target to generate assembly for a file
 src/KeyInput.cpp.s:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f keyboard_input/CMakeFiles/keyboard_input.dir/build.make keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s
 .PHONY : src/KeyInput.cpp.s
 
 # Help Target
@@ -194,6 +194,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

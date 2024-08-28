@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Canvas.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Canvas.cpp.o"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Eye.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Eye.cpp.o"
-  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Face.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Face.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Canvas.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Canvas.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Eye.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Eye.cpp.o"
+  "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Face.cpp" "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles/InterfaceLibrary.dir/src/ST7735_Face.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

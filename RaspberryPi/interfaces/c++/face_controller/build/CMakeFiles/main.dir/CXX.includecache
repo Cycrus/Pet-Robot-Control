@@ -86,7 +86,7 @@ ST7735_Eye.hpp
 ST7735_TFT.hpp
 ../inc/ST7735_TFT.hpp
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/face_test.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/main.cpp
 bcm2835.h
 -
 iostream

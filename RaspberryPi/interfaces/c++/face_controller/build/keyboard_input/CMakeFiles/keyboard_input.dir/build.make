@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine
+CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build
+CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build
 
 # Include any dependencies generated for this target.
 include keyboard_input/CMakeFiles/keyboard_input.dir/depend.make
@@ -78,16 +78,16 @@ include keyboard_input/CMakeFiles/keyboard_input.dir/flags.make
 
 keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o: keyboard_input/CMakeFiles/keyboard_input.dir/flags.make
 keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o: /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o"
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o -c /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o"
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o -c /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp
 
 keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i"
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp > CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp > CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.i
 
 keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s"
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp -o CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input/src/KeyInput.cpp -o CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.s
 
 # Object files for target keyboard_input
 keyboard_input_OBJECTS = \
@@ -99,8 +99,8 @@ keyboard_input_EXTERNAL_OBJECTS =
 keyboard_input/libkeyboard_input.so: keyboard_input/CMakeFiles/keyboard_input.dir/src/KeyInput.cpp.o
 keyboard_input/libkeyboard_input.so: keyboard_input/CMakeFiles/keyboard_input.dir/build.make
 keyboard_input/libkeyboard_input.so: keyboard_input/CMakeFiles/keyboard_input.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libkeyboard_input.so"
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/keyboard_input.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libkeyboard_input.so"
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/keyboard_input.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 keyboard_input/CMakeFiles/keyboard_input.dir/build: keyboard_input/libkeyboard_input.so
@@ -108,10 +108,10 @@ keyboard_input/CMakeFiles/keyboard_input.dir/build: keyboard_input/libkeyboard_i
 .PHONY : keyboard_input/CMakeFiles/keyboard_input.dir/build
 
 keyboard_input/CMakeFiles/keyboard_input.dir/clean:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input && $(CMAKE_COMMAND) -P CMakeFiles/keyboard_input.dir/cmake_clean.cmake
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input && $(CMAKE_COMMAND) -P CMakeFiles/keyboard_input.dir/cmake_clean.cmake
 .PHONY : keyboard_input/CMakeFiles/keyboard_input.dir/clean
 
 keyboard_input/CMakeFiles/keyboard_input.dir/depend:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/keyboard_input/CMakeFiles/keyboard_input.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/keyboard_input /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/keyboard_input/CMakeFiles/keyboard_input.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : keyboard_input/CMakeFiles/keyboard_input.dir/depend
 

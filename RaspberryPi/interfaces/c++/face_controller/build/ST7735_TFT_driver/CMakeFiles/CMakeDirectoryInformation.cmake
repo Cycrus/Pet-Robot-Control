@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/lib/c++/ST7735_TFT_driver")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

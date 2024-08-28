@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine
+CMAKE_SOURCE_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build
+CMAKE_BINARY_DIR = /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,14 +99,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/ST7735_TFT_driver//CMakeFiles/progress.marks
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build/CMakeFiles 0
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/ST7735_TFT_driver//CMakeFiles/progress.marks
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/clean
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/clean
 .PHONY : clean
 
 # The main clean target
@@ -116,22 +116,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/preinstall
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/preinstall
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/rule:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/rule
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/rule
 .PHONY : ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/rule
 
 # Convenience name for target.
@@ -141,7 +141,7 @@ ST7735_TFT_driver: ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/rule
 
 # fast build rule for target.
 ST7735_TFT_driver/fast:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build
 .PHONY : ST7735_TFT_driver/fast
 
 src/ST7735_TFT.o: src/ST7735_TFT.cpp.o
@@ -150,7 +150,7 @@ src/ST7735_TFT.o: src/ST7735_TFT.cpp.o
 
 # target to build an object file
 src/ST7735_TFT.cpp.o:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.o
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.o
 .PHONY : src/ST7735_TFT.cpp.o
 
 src/ST7735_TFT.i: src/ST7735_TFT.cpp.i
@@ -159,7 +159,7 @@ src/ST7735_TFT.i: src/ST7735_TFT.cpp.i
 
 # target to preprocess a source file
 src/ST7735_TFT.cpp.i:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.i
 .PHONY : src/ST7735_TFT.cpp.i
 
 src/ST7735_TFT.s: src/ST7735_TFT.cpp.s
@@ -168,7 +168,7 @@ src/ST7735_TFT.s: src/ST7735_TFT.cpp.s
 
 # target to generate assembly for a file
 src/ST7735_TFT.cpp.s:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT.cpp.s
 .PHONY : src/ST7735_TFT.cpp.s
 
 src/ST7735_TFT_Print.o: src/ST7735_TFT_Print.cpp.o
@@ -177,7 +177,7 @@ src/ST7735_TFT_Print.o: src/ST7735_TFT_Print.cpp.o
 
 # target to build an object file
 src/ST7735_TFT_Print.cpp.o:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.o
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.o
 .PHONY : src/ST7735_TFT_Print.cpp.o
 
 src/ST7735_TFT_Print.i: src/ST7735_TFT_Print.cpp.i
@@ -186,7 +186,7 @@ src/ST7735_TFT_Print.i: src/ST7735_TFT_Print.cpp.i
 
 # target to preprocess a source file
 src/ST7735_TFT_Print.cpp.i:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.i
 .PHONY : src/ST7735_TFT_Print.cpp.i
 
 src/ST7735_TFT_Print.s: src/ST7735_TFT_Print.cpp.s
@@ -195,7 +195,7 @@ src/ST7735_TFT_Print.s: src/ST7735_TFT_Print.cpp.s
 
 # target to generate assembly for a file
 src/ST7735_TFT_Print.cpp.s:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_Print.cpp.s
 .PHONY : src/ST7735_TFT_Print.cpp.s
 
 src/ST7735_TFT_graphics.o: src/ST7735_TFT_graphics.cpp.o
@@ -204,7 +204,7 @@ src/ST7735_TFT_graphics.o: src/ST7735_TFT_graphics.cpp.o
 
 # target to build an object file
 src/ST7735_TFT_graphics.cpp.o:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.o
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.o
 .PHONY : src/ST7735_TFT_graphics.cpp.o
 
 src/ST7735_TFT_graphics.i: src/ST7735_TFT_graphics.cpp.i
@@ -213,7 +213,7 @@ src/ST7735_TFT_graphics.i: src/ST7735_TFT_graphics.cpp.i
 
 # target to preprocess a source file
 src/ST7735_TFT_graphics.cpp.i:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.i
 .PHONY : src/ST7735_TFT_graphics.cpp.i
 
 src/ST7735_TFT_graphics.s: src/ST7735_TFT_graphics.cpp.s
@@ -222,7 +222,7 @@ src/ST7735_TFT_graphics.s: src/ST7735_TFT_graphics.cpp.s
 
 # target to generate assembly for a file
 src/ST7735_TFT_graphics.cpp.s:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_TFT_graphics.cpp.s
 .PHONY : src/ST7735_TFT_graphics.cpp.s
 
 src/ST7735_Utils.o: src/ST7735_Utils.cpp.o
@@ -231,7 +231,7 @@ src/ST7735_Utils.o: src/ST7735_Utils.cpp.o
 
 # target to build an object file
 src/ST7735_Utils.cpp.o:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.o
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.o
 .PHONY : src/ST7735_Utils.cpp.o
 
 src/ST7735_Utils.i: src/ST7735_Utils.cpp.i
@@ -240,7 +240,7 @@ src/ST7735_Utils.i: src/ST7735_Utils.cpp.i
 
 # target to preprocess a source file
 src/ST7735_Utils.cpp.i:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.i
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.i
 .PHONY : src/ST7735_Utils.cpp.i
 
 src/ST7735_Utils.s: src/ST7735_Utils.cpp.s
@@ -249,7 +249,7 @@ src/ST7735_Utils.s: src/ST7735_Utils.cpp.s
 
 # target to generate assembly for a file
 src/ST7735_Utils.cpp.s:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.s
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(MAKE) $(MAKESILENT) -f ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/build.make ST7735_TFT_driver/CMakeFiles/ST7735_TFT_driver.dir/src/ST7735_Utils.cpp.s
 .PHONY : src/ST7735_Utils.cpp.s
 
 # Help Target
@@ -284,6 +284,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

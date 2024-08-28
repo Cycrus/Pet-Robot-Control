@@ -86,7 +86,7 @@ ST7735_Eye.hpp
 ST7735_TFT.hpp
 ../inc/ST7735_TFT.hpp
 
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/face_test_threaded.cpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/face_test_threaded.cpp
 bcm2835.h
 -
 iostream
@@ -98,13 +98,13 @@ array
 cmath
 -
 ST7735_TFT.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_TFT.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_TFT.hpp
 ST7735_Canvas.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_Canvas.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_Canvas.hpp
 ST7735_Utils.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_Utils.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_Utils.hpp
 ST7735_Face.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/ST7735_Face.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/ST7735_Face.hpp
 KeyInput.hpp
-/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/KeyInput.hpp
+/home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/KeyInput.hpp
 

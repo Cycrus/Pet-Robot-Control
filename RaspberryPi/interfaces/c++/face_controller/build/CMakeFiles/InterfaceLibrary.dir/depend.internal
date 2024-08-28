@@ -7,7 +7,7 @@ CMakeFiles/InterfaceLibrary.dir/src/ST7735_Canvas.cpp.o
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT_graphics.hpp
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_Utils.hpp
  ../inc/ST7735_Canvas.hpp
- /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Canvas.cpp
+ /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Canvas.cpp
 CMakeFiles/InterfaceLibrary.dir/src/ST7735_Eye.cpp.o
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT.hpp
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT_Print.hpp
@@ -15,7 +15,7 @@ CMakeFiles/InterfaceLibrary.dir/src/ST7735_Eye.cpp.o
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_Utils.hpp
  ../inc/ST7735_Canvas.hpp
  ../inc/ST7735_Eye.hpp
- /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Eye.cpp
+ /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Eye.cpp
 CMakeFiles/InterfaceLibrary.dir/src/ST7735_Face.cpp.o
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT.hpp
  ../../../../lib/c++/ST7735_TFT_driver/inc/ST7735_TFT_Print.hpp
@@ -23,4 +23,4 @@ CMakeFiles/InterfaceLibrary.dir/src/ST7735_Face.cpp.o
  ../inc/ST7735_Canvas.hpp
  ../inc/ST7735_Eye.hpp
  ../inc/ST7735_Face.hpp
- /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/ST7735_face_engine/src/ST7735_Face.cpp
+ /home/cycrus/Documents/Pet-Robot-Control/RaspberryPi/interfaces/c++/face_controller/src/ST7735_Face.cpp
