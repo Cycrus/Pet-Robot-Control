@@ -30,7 +30,6 @@ RUN mkdir -p /opt/RaspberryPi/lib/c++
 
 COPY interfaces/c++/${interface_name} /opt/RaspberryPi/interfaces/c++/${interface_name}
 COPY lib/c++ /opt/RaspberryPi/lib/c++
-WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}
 
 WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}
 #RUN mkdir build

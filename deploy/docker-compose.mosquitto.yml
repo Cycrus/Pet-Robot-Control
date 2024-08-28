@@ -14,14 +14,3 @@ services:
     networks:
       - internal
       - external
-
-include:
-  - deploy/docker-compose.face_controller.yml
-
-networks:
-  internal:
-    driver: bridge
-    external: false
-  external:
-    driver: bridge
-    external: true
