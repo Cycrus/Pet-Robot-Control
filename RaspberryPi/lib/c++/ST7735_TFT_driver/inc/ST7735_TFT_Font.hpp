@@ -270,11 +270,11 @@ static const unsigned char Font_One[] = {
 // ASCII font file : "Thick" Font 7 by 8 
 // Define the ASCII table as Data array
 // cols left to right 0x00 is off 0xFF is all on
-// Each character is 7 bits wide one byte height. 
+// Each unsigned character is 7 bits wide one byte height. 
 //  
 // NO LOWERCASE LETTERS
 
-static const char Font_Two[] = {
+static const unsigned char Font_Two[] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00, //  
 	0x5f,0x5f,0x00,0x00,0x00,0x00,0x00, // !
 	0x07,0x07,0x00,0x07,0x07,0x00,0x00, // "
@@ -339,7 +339,7 @@ static const char Font_Two[] = {
 // ASCII font file : "Seven Segment" 4 by 8 
 // Define the ASCII table as Data array
 
-static const  char Font_Three[] = {
+static const  unsigned char Font_Three[] = {
 	0x00,0x00,0x00,0x00, //  
 	0x00,0x36,0x00,0x00, // !
 	0x06,0x00,0x00,0x06, // "
@@ -436,9 +436,9 @@ static const  char Font_Three[] = {
 // ASCII font file : "Wide" font 8 by 8 
 // Define the ASCII table as Data array
 // cols left to right 0x00 is  off 0xFF is all on
-// Each character is 8 bits wide one byte height. 
+// Each unsigned character is 8 bits wide one byte height. 
 // NO LOWERCASE LETTERS
-static const  char Font_Four[]  = {
+static const  unsigned char Font_Four[]  = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //  
 	0x00,0x00,0x00,0x5F,0x00,0x00,0x00,0x00, // !
 	0x00,0x03,0x00,0x03,0x00,0x00,0x00,0x00, // "
@@ -503,9 +503,9 @@ static const  char Font_Four[]  = {
 
 // Define the ASCII table as Data array Tiny Font
 // cols left to right, 0x00 is off, 0xFF is all on
-// Each character is 3 bits wide one byte height. 
+// Each unsigned character is 3 bits wide one byte height. 
 
-static const  char Font_Five[]  = {
+static const  unsigned char Font_Five[]  = {
 	0x00,0x00,0x00, //  
 	0x00,0x2e,0x00, // !
 	0x06,0x00,0x06, // "
