@@ -1,22 +1,7 @@
-services:
-  mosquitto:
-    image: eclipse-mosquitto
-    hostname: mosquitto
-    container_name: mosquitto
-    restart: unless-stopped
-    ports:
-      - "1883:1883"
-      - "9001:9001"
-    volumes:
-      - /opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /opt/mosquitto/data:/mosquitto/data
-      - /opt/mosquitto/log:/mosquitto/log
-    networks:
-      - internal-net
-      - external-net
 
 include:
-  - deploy/docker-compose.face_controller.yml
+  - deploy/compose_files/docker-compose.mosquitto.yml
+  - deploy/compose_files/docker-compose.face_controller.yml
 
 networks:
   internal-net:

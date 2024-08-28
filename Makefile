@@ -7,6 +7,11 @@
 #
 #-----------------------------------------------------------------------------------------------------------------------
 
+BUILD_LOCAL ?= 0
+BUILD_USER ?= default
+BUILD_HOST ?= localhost
+BUILD_ARCHITECTURE ?= linux/arm64
+
 SENSORY_PORT = /dev/ttyACM0
 SENSORY_BAUD = 115200
 
@@ -16,6 +21,16 @@ MOTOR_MESSAGE = 13,0,0,0,0,0,0,0,0,254,254,254,254
 
 MQTT_ADDRESS = localhost
 MQTT_PORT = 1883
+
+setup:
+	docker buildx create --use
+
+build:
+ifeq ($(BUILD_LOCAL), 0)
+	./deploy/scripts/remote_deploy.sh $(BUILD_HOST) $(BUILD_USER) $(BUILD_ARCHITECTURE)
+else
+	./deploy/scripts/local_deploy.sh
+endif
 
 create_network:
 	docker network create external-net
@@ -30,7 +45,7 @@ run_docker:
 #-------------------------------------------------------------------------------------
 # Building and Uploading instructions
 #
-build: build_sensor build_motor build_raspi
+build_arduino: build_sensor build_motor build_raspi
 	@echo "Finished Job."
 
 build_sensor:
@@ -38,9 +53,6 @@ build_sensor:
 
 build_motor:
 	$(MAKE) -C Arduino/ build_motor
-	
-build_raspi:
-	$(MAKE) -C RaspberryPi/c++/ tests
 
 #-------------------------------------------------------------------------------------
 # Instructions to connect to the Arduino systems.

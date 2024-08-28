@@ -1,6 +1,7 @@
 services:
   mosquitto:
     image: eclipse-mosquitto
+    platform: ${BUILD_ARCH}
     hostname: mosquitto
     container_name: mosquitto
     restart: unless-stopped
@@ -12,5 +13,5 @@ services:
       - /opt/mosquitto/data:/mosquitto/data
       - /opt/mosquitto/log:/mosquitto/log
     networks:
-      - internal
-      - external
+      - internal-net
+      - external-net
