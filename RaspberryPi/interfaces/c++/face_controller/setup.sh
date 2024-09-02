@@ -7,7 +7,6 @@ cd bcm2835-1.71
 ./configure
 make
 make install
-
 cd ..
 
 # Install i2c dependency
@@ -16,3 +15,7 @@ tar -xf i2c-tools-4.3.tar.xz
 cd i2c-tools-4.3
 make
 make install
+cd ..
+
+rm xvfz bcm2835-1.71.tar.gz i2c-tools-4.3.tar.xz
+rm -r i2c-tools-4.3 bcm2835-1.71
