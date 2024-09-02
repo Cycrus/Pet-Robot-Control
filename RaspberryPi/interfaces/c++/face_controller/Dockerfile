@@ -26,4 +26,5 @@ RUN mkdir build
 WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}/build
 RUN cmake ..
 RUN make
-#CMD ["./main"]
+#CMD ["/bin/bash"]
+CMD ["./main"]

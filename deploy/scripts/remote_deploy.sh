@@ -54,6 +54,8 @@ EOF
 
 ssh $REMOTE_USER@$REMOTE_HOST <<EOF
   sudo mkdir $REMOTE_VOLUME_DIR
+  sudo mkdir -p $REMOTE_VOLUME_DIR/mosquitto/config
+  sudo touch $REMOTE_VOLUME_DIR/mosquitto/config/mosquitto.conf
   cd $REMOTE_IMAGE_DIR
   ./load_docker_images.sh
   docker compose up -d

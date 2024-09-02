@@ -9,7 +9,7 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - /opt/pet-robot/mosquitto/config/mosquitto.conf:/mosquitto/config
+      - /opt/pet-robot/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - /opt/pet-robot/mosquitto/data:/mosquitto/data
       - /opt/pet-robot/mosquitto/log:/mosquitto/log
     networks:
