@@ -6,10 +6,7 @@ ARG interface_name=DefaultInterface
 
 WORKDIR /
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y build-essential cmake wget i2c-tools libcap-dev
-
-USER $USER
-RUN echo 'SUBSYSTEM=="mem", KERNEL=="mem", GROUP="kmem", MODE="0660"' | tee /etc/udev/rules.d/98-mem.rules
+RUN apt-get update && apt-get upgrade -y
 
 RUN mkdir -p /opt/RaspberryPi/interfaces/c++/${interface_name}
 RUN mkdir -p /opt/RaspberryPi/lib/c++
