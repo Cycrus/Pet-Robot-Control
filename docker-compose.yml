@@ -7,6 +7,3 @@ networks:
   internal-net:
     driver: bridge
     external: false
-  external-net:
-    driver: bridge
-    external: true

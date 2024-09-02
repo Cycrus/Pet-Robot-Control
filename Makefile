@@ -24,6 +24,7 @@ MQTT_PORT = 1883
 
 setup:
 	docker buildx create --use
+	./deploy/scripts/remote_setup.sh $(BUILD_HOST) $(BUILD_USER)
 
 build:
 ifeq ($(BUILD_LOCAL), 0)
@@ -31,9 +32,6 @@ ifeq ($(BUILD_LOCAL), 0)
 else
 	./deploy/scripts/local_deploy.sh
 endif
-
-create_network:
-	docker network create external-net
 
 run_docker:
 	sudo docker run --privileged \

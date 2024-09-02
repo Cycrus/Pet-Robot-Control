@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the base directory (current directory)
-BASE_DIR=$(pwd)
+BASE_DIR=$(pwd)/deploy/docker_images
 
 # Find all .tar files in the current directory and all subdirectories
 tarballs=$(find "$BASE_DIR" -type f -name "*.tar")

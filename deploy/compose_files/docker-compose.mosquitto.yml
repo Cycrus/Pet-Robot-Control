@@ -9,9 +9,8 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - /opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /opt/mosquitto/data:/mosquitto/data
-      - /opt/mosquitto/log:/mosquitto/log
+      - /opt/pet-robot/mosquitto/config/mosquitto.conf:/mosquitto/config
+      - /opt/pet-robot/mosquitto/data:/mosquitto/data
+      - /opt/pet-robot/mosquitto/log:/mosquitto/log
     networks:
       - internal-net
-      - external-net
