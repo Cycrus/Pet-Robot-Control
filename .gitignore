@@ -1,5 +1,5 @@
-RaspberryPi/*/build
-RaspberryPi/*/build/*
+RaspberryPi/interfaces/c++/*/build
+RaspberryPi/interfaces/c++/*/build/*
 *.o
 .vscode
 deploy/docker_images
