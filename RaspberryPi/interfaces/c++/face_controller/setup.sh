@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install -y build-essential cmake wget i2c-tools libcap-dev
+
 # Install SPI dependency
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.71.tar.gz
 tar xvfz bcm2835-1.71.tar.gz
@@ -17,5 +19,5 @@ make
 make install
 cd ..
 
-rm xvfz bcm2835-1.71.tar.gz i2c-tools-4.3.tar.xz
+rm bcm2835-1.71.tar.gz i2c-tools-4.3.tar.xz
 rm -r i2c-tools-4.3 bcm2835-1.71
