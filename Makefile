@@ -23,8 +23,11 @@ MQTT_ADDRESS = localhost
 MQTT_PORT = 1883
 
 setup:
-	docker buildx create --use
+ifeq ($(BUILD_LOCAL), 0)
 	./deploy/scripts/remote_setup.sh $(BUILD_HOST) $(BUILD_USER)
+else
+	./deploy/scripts/local_setup.sh
+endif
 
 build:
 ifeq ($(BUILD_LOCAL), 0)

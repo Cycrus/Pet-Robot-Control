@@ -7,6 +7,11 @@ HOST=$1
 USER=$2
 ARCH=$3
 
+if [ "${HOST}" == "" ] || [ "${USER}" == "" ] || [ "${ARCH}" == "" ]; then
+    echo "[Error] Please provide remote hostname, remote user and architecture."
+    exit
+fi
+
 # Build images for specific architecture
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 BUILD_ARCH=$ARCH docker compose pull mosquitto
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 BUILD_ARCH=$ARCH docker compose build
