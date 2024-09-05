@@ -2,6 +2,7 @@
 
 #
 # Loads all tared docker images in ./deploy/docker_images into the system.
+# ./load_docker_images.sh
 #
 
 # Define the base directory (current directory)

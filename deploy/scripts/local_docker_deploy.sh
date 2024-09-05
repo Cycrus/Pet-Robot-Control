@@ -2,6 +2,7 @@
 
 #
 # Builds all docker images and launches them locally.
+# ./local_docker_deploy.sh
 #
 
 echo ""

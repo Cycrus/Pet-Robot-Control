@@ -12,6 +12,9 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
+run:
+./deploy/scripts/local_run.sh
+
 setup:
 ifeq ($(BUILD_LOCAL), 0)
 	./deploy/scripts/remote_setup.sh $(BUILD_HOST) $(BUILD_USER)

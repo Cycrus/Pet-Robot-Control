@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #
-# Uploads an Arduino sketch onto a device.
+# Uploads an Arduino sketch onto a device already including all relevant libraries.
+# ./arduino_deploy.sh <SKETCH_PATH> <BOARD> <PORT>
 #
 
 SKETCH_PATH=$1

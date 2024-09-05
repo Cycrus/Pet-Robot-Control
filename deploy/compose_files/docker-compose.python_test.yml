@@ -1,0 +1,18 @@
+services:
+  python_test:
+    container_name: python_test
+    image: python_test
+    platform: ${BUILD_ARCH}
+    build:
+      context: ../../RaspberryPi
+      dockerfile: ../RaspberryPi/interfaces/python/python_test/Dockerfile
+      args:
+        interface_name: "python_test"
+    depends_on:
+      - mosquitto
+    restart: unless-stopped
+    volumes: 
+      - /sys/bus:/sys/bus
+    networks:
+      - internal-net
+    privileged: true
