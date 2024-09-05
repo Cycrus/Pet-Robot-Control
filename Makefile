@@ -7,20 +7,10 @@
 #
 #-----------------------------------------------------------------------------------------------------------------------
 
-BUILD_LOCAL ?= 0
-BUILD_USER ?= default
-BUILD_HOST ?= localhost
-BUILD_ARCHITECTURE ?= linux/arm64
-
-SENSORY_PORT = /dev/ttyACM0
-SENSORY_BAUD = 115200
-
-MOTOR_PORT = /dev/ttyACM1
-MOTOR_BAUD = 57600
-MOTOR_MESSAGE = 13,0,0,0,0,0,0,0,0,254,254,254,254
-
-MQTT_ADDRESS = localhost
-MQTT_PORT = 1883
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 setup:
 ifeq ($(BUILD_LOCAL), 0)
@@ -31,9 +21,9 @@ endif
 
 build:
 ifeq ($(BUILD_LOCAL), 0)
-	./deploy/scripts/remote_deploy.sh $(BUILD_HOST) $(BUILD_USER) $(BUILD_ARCHITECTURE)
+	./deploy/scripts/remote_docker_deploy.sh $(BUILD_HOST) $(BUILD_USER) $(BUILD_ARCHITECTURE)
 else
-	./deploy/scripts/local_deploy.sh
+	./deploy/scripts/local_docker_deploy.sh
 endif
 
 run_docker:
@@ -46,14 +36,14 @@ run_docker:
 #-------------------------------------------------------------------------------------
 # Building and Uploading instructions
 #
-build_arduino: build_sensor build_motor build_raspi
+arduino_build: build_sensor build_motor
 	@echo "Finished Job."
 
-build_sensor:
-	$(MAKE) -C Arduino/ build_sensor
+arduino_build_sensor:
+	./deploy/scripts/arduino_deploy.sh Arduino/sensory_system/sensory_system.ino $(SENSORY_BOARD) $(SENSORY_PORT)
 
-build_motor:
-	$(MAKE) -C Arduino/ build_motor
+arduino_build_motor:
+	./deploy/scripts/arduino_deploy.sh Arduino/motor_system/motor_system.ino $(MOTOR_BOARD) $(MOTOR_PORT)
 
 #-------------------------------------------------------------------------------------
 # Instructions to connect to the Arduino systems.
@@ -61,7 +51,7 @@ build_motor:
 connect_sensor:
 	@echo "Connecting to sensory system via CLI terminal."
 	python3 UtilityScripts/sensor_connector.py $(SENSORY_PORT) $(SENSORY_BAUD)
-	# minicom -D $(SENSORY_PORT) -b $(SENSORY_BAUD)
+	# minicom -Dsensory_system/sensory_system.ino $(SENSORY_PORT) -b $(SENSORY_BAUD)
 
 connect_motor:
 	@echo "Connecting to motor system via CLI terminal."
@@ -80,7 +70,10 @@ connect_motor_mqtt:
 # Instruction to build and upload test and tool sketches.
 #
 build_servo_ref:
-	$(MAKE) -C Arduino/ build_servo_ref
+	./deploy/scripts/arduino_deploy.sh Arduino/tools/servo_referencing/servo_referencing.ino $(MOTOR_BOARD) $(MOTOR_PORT)
+
+build_rfid_writer:
+	./deploy/scripts/arduino_deploy.sh Arduino/tools/rfid_writer/rfid_writer.ino $(SENSORY_BOARD) $(SENSORY_PORT)
 
 arduino_reset:
 	@echo "Reset Arduino board state."

@@ -2,3 +2,6 @@ Adafruit NeoPixel
 Adafruit PWM Servo Driver Library
 Adafruit BMP280 library
 DHT sensor library
+Adafruit HMC5883 Unified
+TinyGPSPlus
+ArduinoSTL

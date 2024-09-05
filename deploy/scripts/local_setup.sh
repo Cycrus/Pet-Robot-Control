@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# ignore sudo when run as root
+#
+# Installs all dependencies to run the whole stack locally with and without dockerization.
+#
+
+echo ""
+echo "################################################"
+echo "Launching local setup process."
+echo "################################################"
+echo ""
+
+# Ignore sudo when run as root
 sudo() {
   [[ "${EUID}" == 0 ]] || set -- command sudo "${@}"
   "${@}"
@@ -17,8 +27,8 @@ cd /tmp/robot-setup
 
 echo ""
 echo "[Info] Installing default programs with apt."
-sudo apt update
-sudo apt upgrade
+sudo apt update -y
+sudo apt upgrade -y
 sudo apt install -y build-essential cmake wget python3-pip
 
 # Install docker
@@ -47,6 +57,8 @@ else
   sudo chmod +x install.sh
   sudo -E BINDIR=/usr/bin ./install.sh
 fi
+
+arduino-cli core install arduino:avr@1.8.3
 
 # Install Arduino libraries
 echo ""

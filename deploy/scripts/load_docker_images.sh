@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Loads all tared docker images in ./deploy/docker_images into the system.
+#
+
 # Define the base directory (current directory)
 BASE_DIR=$(pwd)/deploy/docker_images
 
