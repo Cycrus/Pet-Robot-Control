@@ -8,8 +8,8 @@
  * Created: September 2022
  **********************************************************************/
 
-#include "src/utilities/DataSender.hpp"
-#include "src/utilities/DataReceiver.hpp"
+#include "DataSender.hpp"
+#include "DataReceiver.hpp"
 #include "src/effectors/LedRing.hpp"
 #include "src/effectors/DCMotor.hpp"
 #include "src/effectors/ServoMotor.hpp"

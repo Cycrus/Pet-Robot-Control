@@ -20,4 +20,4 @@ echo "Deploying arduino file $SKETCH_PATH"
 echo "################################################"
 echo ""
 
-arduino-cli compile -v -b $BOARD -p $PORT -u $SKETCH_PATH
+arduino-cli compile -v -b $BOARD -p $PORT -u $SKETCH_PATH --library Arduino/lib/utilities --library Arduino/lib/thirdparty

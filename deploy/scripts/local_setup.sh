@@ -91,7 +91,14 @@ find "$INTERFACE_SRC_PATH/python" -type d | while read -r subdir; do
     fi
 done
 
+sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/' /boot/firmware/config.txt
+
 echo ""
 echo "[Info] Cleaning up temporary installation location."
 cd /tmp
 rm -r robot-setup
+
+echo ""
+echo "#########################################"
+echo "Please reboot the machine now."
+echo "#########################################"

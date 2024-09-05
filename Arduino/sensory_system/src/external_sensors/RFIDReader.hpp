@@ -12,8 +12,8 @@
 #define RFIDREADER_HPP
 
 #include <SPI.h>
-#include "../base_libraries/MFRC522.h"
-#include "../utilities/Module.hpp"
+#include "MFRC522.h"
+#include "Module.hpp"
 
 #define MSG_LEN 18
 #define RFID_RESET_TIME 500

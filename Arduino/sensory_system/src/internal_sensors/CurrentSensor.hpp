@@ -11,7 +11,7 @@
 #ifndef CURRENTSENSOR_HPP
 #define CURRENTSENSOR_HPP
 
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 
 #define NULLVALUE 531.5
 #define VpA 100           // Value has been empirically derived

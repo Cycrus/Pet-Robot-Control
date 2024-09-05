@@ -10,7 +10,7 @@
 #ifndef SERVOMOTOR_HPP
 #define SERVOMOTOR_HPP
 
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 

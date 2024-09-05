@@ -12,7 +12,7 @@
 #define BMP280MODULE_HPP
 
 #include <Adafruit_BMP280.h>
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 
 class BMP280Module : public Module
 {

@@ -12,7 +12,7 @@
 #ifndef LEDRING_HPP
 #define LEDRING_HPP
 
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 #include <Adafruit_NeoPixel.h>
 
 class LedRing : public Module

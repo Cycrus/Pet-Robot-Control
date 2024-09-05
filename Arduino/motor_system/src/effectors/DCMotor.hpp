@@ -10,7 +10,7 @@
 #ifndef DCMOTOR_HPP
 #define DCMOTOR_HPP
 
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 
 class DCMotor : public Module
 {

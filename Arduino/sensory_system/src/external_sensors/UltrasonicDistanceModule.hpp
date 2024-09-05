@@ -11,7 +11,7 @@
 #ifndef ULTRASONICDISTANCEMODULE_HPP
 #define ULTRASONICDISTANCEMODULE_HPP
 
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 
 #define SONIC_SPEED 0.03432
 #define MAX_DISTANCE 500

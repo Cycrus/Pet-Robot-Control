@@ -19,8 +19,8 @@
 #include "src/internal_sensors/WT61Module.hpp"
 #include "src/internal_sensors/GPSModule.hpp"
 
-#include "src/utilities/ModuleSyncer.hpp"
-#include "src/utilities/DataSender.hpp"
+#include "ModuleSyncer.hpp"
+#include "DataSender.hpp"
 
 //-----------------------------------------------------------------------------------------------------------------
 // Timers

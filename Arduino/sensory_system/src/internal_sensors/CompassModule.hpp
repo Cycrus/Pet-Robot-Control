@@ -13,7 +13,7 @@
 
 #include <Wire.h>
 #include <Adafruit_HMC5883_U.h>
-#include "../utilities/Module.hpp"
+#include "Module.hpp"
 
 class CompassModule : public Module
 {

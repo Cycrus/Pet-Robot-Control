@@ -25,6 +25,10 @@ ssh $USER@$HOST <<EOF
   sudo groupadd docker
   sudo usermod -aG docker $USER
   docker network create internal-net
+  sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/' /boot/firmware/config.txt
 EOF
 
-echo "Please reboot machine now."
+echo ""
+echo "#########################################"
+echo "Please reboot the remote machine now."
+echo "#########################################"

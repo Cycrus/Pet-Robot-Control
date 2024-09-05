@@ -11,8 +11,8 @@
 #ifndef GASMODULE_HPP
 #define GASMODULE_HPP
 
-#include "../base_libraries/MQ135.h"
-#include "../utilities/Module.hpp"
+#include "MQ135.h"
+#include "Module.hpp"
 
 class GasModule : public Module
 {
