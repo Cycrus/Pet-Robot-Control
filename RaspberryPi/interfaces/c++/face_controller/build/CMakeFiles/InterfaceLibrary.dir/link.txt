@@ -1,2 +1,0 @@
-/usr/bin/ar qc libInterfaceLibrary.a CMakeFiles/InterfaceLibrary.dir/src/ST7735_Canvas.cpp.o CMakeFiles/InterfaceLibrary.dir/src/ST7735_Eye.cpp.o CMakeFiles/InterfaceLibrary.dir/src/ST7735_Face.cpp.o
-/usr/bin/ranlib libInterfaceLibrary.a
