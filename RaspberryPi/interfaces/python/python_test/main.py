@@ -1,2 +1,6 @@
+import time
+
 if __name__ == "__main__":
-  print("Hello From the Python Interface.")
+  while True:
+    print("Hello From the Python Interface.")
+    time.sleep(1)

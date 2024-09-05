@@ -1,8 +1,13 @@
 
 #include <iostream>
+#include <unistd.h>
 
 int main(void) 
 {
-    std::cout << "Hello from the C++ Interface."
+    while(true)
+    {
+      std::cout << "Hello from the C++ Interface." << std::endl;
+      sleep(1);
+    }
     return 0;
 }
