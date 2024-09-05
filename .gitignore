@@ -1,7 +1,4 @@
-RaspberryPi/interfaces/c++/*/build
-RaspberryPi/interfaces/c++/*/build/*
 build
-build/*
 *.o
 .vscode
-deploy/docker_images
+docker_images
