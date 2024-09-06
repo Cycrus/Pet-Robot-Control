@@ -25,7 +25,9 @@ echo "Launching python module $INTERFACE_NAME undockerized in $MODE mode."
 echo ""
 
 if [ "$MODE" = "detached" ]; then
-  nohup sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py &>/dev/null &
+  nohup sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python &>/dev/null & 
+  #nohup sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py &>/dev/null &
 else
-  sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py
+  sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
+  #sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py
 fi

@@ -1,3 +1,7 @@
 #!/bin/bash
 
-echo "Now in setup.sh of a Python file."
+# ignore sudo when run as root
+sudo() {
+  [[ "${EUID}" == 0 ]] || set -- command sudo "${@}"
+  "${@}"
+}
