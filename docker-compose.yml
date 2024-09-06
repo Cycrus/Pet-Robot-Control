@@ -1,7 +1,9 @@
 
 include:
   - deploy/compose_files/docker-compose.mosquitto.yml
-  - deploy/compose_files/docker-compose.face_controller.yml
+  #- deploy/compose_files/docker-compose.face_controller.yml
+  - deploy/compose_files/docker-compose.cpp_test.yml
+  - deploy/compose_files/docker-compose.python_test.yml
 
 networks:
   internal-net:

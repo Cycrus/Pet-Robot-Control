@@ -11,8 +11,5 @@ services:
     depends_on:
       - mosquitto
     restart: unless-stopped
-    volumes: 
-      - /sys/bus:/sys/bus
     networks:
       - internal-net
-    privileged: true

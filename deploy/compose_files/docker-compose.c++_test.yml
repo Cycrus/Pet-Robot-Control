@@ -1,18 +1,15 @@
 services:
   c++_test:
-    container_name: c++_test
-    image: c++_test
+    container_name: cpp_test
+    image: cpp_test
     platform: ${BUILD_ARCH}
     build:
       context: ../../RaspberryPi
       dockerfile: ../RaspberryPi/interfaces/c++/c++_test/Dockerfile
       args:
-        interface_name: "c++_test"
+        interface_name: "cpp_test"
     depends_on:
       - mosquitto
     restart: unless-stopped
-    volumes: 
-      - /sys/bus:/sys/bus
     networks:
       - internal-net
-    privileged: true

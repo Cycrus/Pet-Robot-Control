@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1
+
+FROM ubuntu:22.04
+
+ARG interface_name=DefaultInterface
+
+WORKDIR /
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y python3 python3-pip
+
+RUN mkdir -p /opt/RaspberryPi/interfaces/python/${interface_name}
+RUN mkdir -p /opt/RaspberryPi/lib/python
+
+COPY interfaces/python/${interface_name} /opt/RaspberryPi/interfaces/python/${interface_name}
+COPY lib/python /opt/RaspberryPi/lib/pyton
+
+# Install dependencies
+RUN /opt/RaspberryPi/interfaces/python/${interface_name}/setup.sh
+
+CMD ["./run.sh", "/opt/RaspberryPi/interfaces/python/${interface_name} /opt/RaspberryPi/lib/python"]
