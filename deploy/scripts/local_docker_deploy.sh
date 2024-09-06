@@ -12,5 +12,4 @@ echo "################################################"
 echo ""
 
 ARCH=$(uname -m)
-BUILD_ARCH=$ARCH docker compose build
-docker compose up
+BUILD_ARCH=$ARCH docker compose up
