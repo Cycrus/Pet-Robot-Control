@@ -1,11 +1,11 @@
 services:
-  c++_test:
+  cpp_test:
     container_name: cpp_test
     image: cpp_test
     platform: ${BUILD_ARCH}
     build:
       context: ../../RaspberryPi
-      dockerfile: ../RaspberryPi/interfaces/c++/c++_test/Dockerfile
+      dockerfile: ../RaspberryPi/interfaces/c++/cpp_test/Dockerfile
       args:
         interface_name: "cpp_test"
     depends_on:
