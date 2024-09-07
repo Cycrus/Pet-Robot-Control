@@ -17,26 +17,61 @@ fi
 
 if [ "${INTERFACE_NAME}" == "all" ]; then
   # Stop all interfaces if "all" is provided.
+  # All C++ interfaces.
   for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
-    INTERFACE_PID=$(ps aux | grep $(basename "$cpp_interface") | grep -v "grep" | awk '{print $2}' | head -n 1)
-    kill $INTERFACE_PID
+    INAME=$(basename "$cpp_interface")
+    INTERFACE_PID=$(ps aux | grep c++/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    STATUS=$(kill $INTERFACE_PID 2>&1)
+    echo ""
+    if [ "${STATUS}" == "" ]; then
+      echo "Successfully stopped <$INAME>."
+    else
+      echo "[Warning] <$INAME> not running. Could not stop."
+    fi
+    echo ""
   done
   
+  # All python interfaces.
   for python_interface in $INTERFACE_DIRECTORY_PYTHON/*/; do
-    INTERFACE_PID=$(ps aux | grep $(basename "$python_interface") | grep -v "grep" | awk '{print $2}' | head -n 1)
-    kill $INTERFACE_PID
+    INAME=$(basename "$python_interface")
+    INTERFACE_PID=$(ps aux | grep python/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    STATUS=$(kill $INTERFACE_PID 2>&1)
+    echo ""
+    if [ "${STATUS}" == "" ]; then
+      echo "Successfully stopped <$INAME>."
+    else
+      echo "[Warning] <$INAME> not running. Could not stop."
+    fi
+    echo ""
   done
 
 else
   # Stop single process if its name is provided.
+  # One python interface.
   if [ -d "$INTERFACE_DIRECTORY_PYTHON/$INTERFACE_NAME" ]; then
-    INTERFACE_PID=$(ps aux | grep $INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-    kill $INTERFACE_PID
+    INTERFACE_PID=$(ps aux | grep python/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    STATUS=$(kill $INTERFACE_PID 2>&1)
+    echo ""
+    if [ "${STATUS}" == "" ]; then
+      echo "Successfully stopped <$INTERFACE_NAME>."
+    else
+      echo "[Warning] <$INTERFACE_NAME> not running. Could not stop."
+    fi
+    echo ""
     exit
   fi
+
+  # One c++ interface.
   if [ -d "$INTERFACE_DIRECTORY_CPP/$INTERFACE_NAME" ]; then
-    INTERFACE_PID=$(ps aux | grep $INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-    kill $INTERFACE_PID
+    INTERFACE_PID=$(ps aux | grep c++/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    STATUS=$(kill $INTERFACE_PID 2>&1)
+    echo ""
+    if [ "${STATUS}" == "" ]; then
+      echo "Successfully stopped <$INTERFACE_NAME>."
+    else
+      echo "[Warning] <$INTERFACE_NAME> not running. Could not stop."
+    fi
+    echo ""
     exit
   fi
 fi

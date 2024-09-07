@@ -20,14 +20,22 @@ if [ ! -d "$INTERFACE_DIRECTORY" ]; then
   exit
 fi
 
-echo ""
-echo "Launching python module $INTERFACE_NAME undockerized in $MODE mode."
-echo ""
-
-if [ "$MODE" = "detached" ]; then
-  nohup sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python &>/dev/null & 
-  #nohup sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py &>/dev/null &
+# Check if process already running.
+INTERFACE_PID=$(ps aux | grep python/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+if [ "${INTERFACE_PID}" == "" ]; then
+  # Run if no.
+  echo ""
+  echo "Launching python module $INTERFACE_NAME undockerized in $MODE mode."
+  echo ""
+  if [ "$MODE" = "detached" ]; then
+    nohup sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python > $PWD/logs/python/$INTERFACE_NAME.log 2>&1 &
+    #nohup sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py &>/dev/null &
+  else
+    sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
+    #sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py
+  fi
 else
-  sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
-  #sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py
+  echo ""
+  echo "[Warning] <$INTERFACE_NAME> already running. Not launching again."
+  echo ""
 fi

@@ -20,15 +20,24 @@ if [ ! -d "$INTERFACE_DIRECTORY" ]; then
     exit
 fi
 
-echo ""
-echo "Launching c++ module $INTERFACE_NAME undockerized in $MODE mode."
-echo ""
-
 # This step is required to not lose the name identity of the process after launching.
 cd $INTERFACE_DIRECTORY/build
-cd ../..
-if [ "$MODE" = "detached" ]; then
-  nohup sudo ./$INTERFACE_NAME/build/main &>/dev/null &
+cd ../../../../..
+
+# Check if process already running.
+INTERFACE_PID=$(ps aux | grep c++/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+if [ "${INTERFACE_PID}" == "" ]; then
+  # Run if no.
+  echo ""
+  echo "Launching c++ module $INTERFACE_NAME undockerized in $MODE mode."
+  echo ""
+  if [ "$MODE" = "detached" ]; then
+    nohup sudo ./$INTERFACE_DIRECTORY/build/main > $PWD/logs/c++/$INTERFACE_NAME.log 2>&1 &
+  else
+    sudo ./$INTERFACE_DIRECTORY/build/main
+  fi
 else
-  sudo ./$INTERFACE_NAME/build/main
+  echo ""
+  echo "[Warning] <$INTERFACE_NAME> already running. Not launching again."
+  echo ""
 fi
