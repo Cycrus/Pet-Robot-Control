@@ -39,13 +39,27 @@ endif
 # make istop      ... Stops a single or all interfaces
 #
 ibuild:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only build undockerized interfaces with BUILD_LOCAL=1."
+else
 	./deploy/scripts/local_build.sh $(INTERFACE)
+endif
+	
 
 irun:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only run undockerized interfaces with BUILD_LOCAL=1."
+else
 	./deploy/scripts/local_run.sh $(INTERFACE)
+endif
 
 istop:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only stop undockerized interfaces with BUILD_LOCAL=1."
+else
 	./deploy/scripts/local_stop.sh $(INTERFACE)
+endif
+	
 
 #-------------------------------------------------------------------------------------
 # Dockerized, local and remote rules
@@ -65,10 +79,19 @@ arduino_build: build_sensor build_motor
 	@echo "Finished Job."
 
 arduino_build_sensor:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only build and deploy sensor arduino system with BUILD_LOCAL=1."
+else
 	./deploy/scripts/arduino_deploy.sh Arduino/sensory_system/sensory_system.ino $(SENSORY_BOARD) $(SENSORY_PORT)
+endif
+	
 
 arduino_build_motor:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only build and deploy motor arduino system with BUILD_LOCAL=1."
+else
 	./deploy/scripts/arduino_deploy.sh Arduino/motor_system/motor_system.ino $(MOTOR_BOARD) $(MOTOR_PORT)
+endif
 
 #-------------------------------------------------------------------------------------
 # Rules to connect to the Arduino systems.
