@@ -27,9 +27,9 @@ cd /tmp/robot-setup
 
 echo ""
 echo "[Info] Installing default programs with apt."
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt install -y build-essential cmake wget python3-pip
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install -y build-essential cmake wget python3-pip
 
 # Install docker
 echo ""

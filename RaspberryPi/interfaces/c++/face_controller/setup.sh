@@ -7,7 +7,7 @@ sudo() {
 }
 
 # Install general dependencies
-sudo apt install -y build-essential cmake wget i2c-tools libcap-dev
+sudo apt-get install -y build-essential cmake wget i2c-tools libcap-dev
 
 # Install SPI dependency
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.71.tar.gz

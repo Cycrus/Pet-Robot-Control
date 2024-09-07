@@ -7,4 +7,4 @@ sudo() {
 }
 
 # Install general dependencies
-sudo apt install -y build-essential cmake
+sudo apt-get install -y build-essential cmake
