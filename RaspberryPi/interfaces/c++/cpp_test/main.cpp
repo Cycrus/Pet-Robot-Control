@@ -5,11 +5,13 @@
 
 int main(void) 
 {
-    while(true)
-    {
-      std::cout << "Hello from the C++ Interface." << std::endl;
-      std::cout << "Paho is included." << std::endl;
-      sleep(1);
-    }
-    return 0;
+  int i = 0;
+  while(true)
+  {
+    std::cout << "Hello from the C++ Interface: " << i << std::endl;
+    std::cout << "Paho is included." << std::endl;
+    sleep(1);
+    i++;
+  }
+  return 0;
 }

@@ -45,12 +45,18 @@ else
 	./deploy/scripts/local_build.sh $(INTERFACE)
 endif
 	
-
 irun:
 ifeq ($(BUILD_LOCAL), 0)
 	@echo "Can only run undockerized interfaces with BUILD_LOCAL=1."
 else
 	./deploy/scripts/local_run.sh $(INTERFACE)
+endif
+
+iwatch:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only watch undockerized interfaces with BUILD_LOCAL=1."
+else
+	./deploy/scripts/watch_interface.sh $(INTERFACE)
 endif
 
 istop:
