@@ -10,7 +10,7 @@ sudo() {
   "${@}"
 }
 
-sudo apt-get install -y build-essential cmake
+sudo apt-get install -y build-essential cmake libssl-dev
 
 # Install Paho MQTT Library for C++
 git clone https://github.com/eclipse/paho.mqtt.cpp
