@@ -12,7 +12,11 @@ RUN apt-get install -y python3 python3-pip
 RUN mkdir -p /opt/RaspberryPi/interfaces/python/${interface_name}
 RUN mkdir -p /opt/RaspberryPi/lib/python
 
-# Install dependencies
+# Install global dependencies
+COPY deploy/scripts/global_python_dependencies.sh /opt/RaspberryPi/interfaces/python/${interface_name}
+RUN /opt/RaspberryPi/interfaces/python/${interface_name}/global_python_dependencies.sh
+
+# Install specific dependencies
 COPY interfaces/python/${interface_name}/setup.sh /opt/RaspberryPi/interfaces/python/${interface_name}
 RUN /opt/RaspberryPi/interfaces/python/${interface_name}/setup.sh
 

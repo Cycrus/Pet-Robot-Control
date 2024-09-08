@@ -6,5 +6,4 @@ sudo() {
   "${@}"
 }
 
-# Install general dependencies
-sudo apt-get install -y build-essential cmake
+

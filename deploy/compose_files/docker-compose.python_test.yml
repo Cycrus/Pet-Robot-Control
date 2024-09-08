@@ -4,7 +4,7 @@ services:
     image: python_test
     platform: ${BUILD_ARCH}
     build:
-      context: ../../RaspberryPi
+      context: ../..
       dockerfile: ../RaspberryPi/interfaces/python/python_test/Dockerfile
       args:
         interface_name: "python_test"

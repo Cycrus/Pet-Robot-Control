@@ -11,13 +11,17 @@ RUN apt-get update && apt-get upgrade -y
 RUN mkdir -p /opt/RaspberryPi/interfaces/c++/${interface_name}
 RUN mkdir -p /opt/RaspberryPi/lib/c++
 
-# Install dependencies
-COPY interfaces/c++/${interface_name}/setup.sh /opt/RaspberryPi/interfaces/c++/${interface_name}
+# Install global dependencies
+COPY deploy/scripts/global_cpp_dependencies.sh /opt/RaspberryPi/interfaces/c++/${interface_name}
+RUN /opt/RaspberryPi/interfaces/c++/${interface_name}/global_cpp_dependencies.sh
+
+# Install specific dependencies
+COPY RaspberryPi/interfaces/c++/${interface_name}/setup.sh /opt/RaspberryPi/interfaces/c++/${interface_name}
 RUN /opt/RaspberryPi/interfaces/c++/${interface_name}/setup.sh
 
 # Copy all other files
-COPY interfaces/c++/${interface_name} /opt/RaspberryPi/interfaces/c++/${interface_name}
-COPY lib/c++ /opt/RaspberryPi/lib/c++
+COPY RaspberryPi/interfaces/c++/${interface_name} /opt/RaspberryPi/interfaces/c++/${interface_name}
+COPY RaspberryPi/lib/c++ /opt/RaspberryPi/lib/c++
 
 # Build and start main file
 WORKDIR /opt/RaspberryPi/interfaces/c++/${interface_name}

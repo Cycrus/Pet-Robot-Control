@@ -4,7 +4,7 @@ services:
     image: cpp_test
     platform: ${BUILD_ARCH}
     build:
-      context: ../../RaspberryPi
+      context: ../..
       dockerfile: ../RaspberryPi/interfaces/c++/cpp_test/Dockerfile
       args:
         interface_name: "cpp_test"

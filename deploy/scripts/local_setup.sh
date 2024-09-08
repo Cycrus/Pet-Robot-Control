@@ -29,7 +29,7 @@ echo ""
 echo "[Info] Installing default programs with apt."
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get install -y build-essential cmake wget python3-pip
+sudo apt-get install -y build-essential cmake wget python3-pip git
 
 # Install docker
 echo ""
@@ -69,9 +69,15 @@ while IFS= read -r line; do
     arduino-cli lib install "$library_name"
 done < "$ARDUINO_LIBS_FILE"
 
+# Install global dependencies
+echo ""
+echo "[Info] Installing global interface dependencies."
+sudo ./$ROBOT_PROJECT_DIR/deploy/scripts/global_cpp_dependencies.sh
+sudo ./$ROBOT_PROJECT_DIR/deploy/scripts/global_python_dependencies.sh
+
 # Install all interface dependencies
 echo ""
-echo "[Info] Installing all c++ interface dependencies."
+echo "[Info] Installing specific c++ interface dependencies."
 find "$INTERFACE_SRC_PATH/c++" -type d | while read -r subdir; do
     if [[ -x "$subdir/setup.sh" ]]; then
         "$subdir/setup.sh"
@@ -79,7 +85,7 @@ find "$INTERFACE_SRC_PATH/c++" -type d | while read -r subdir; do
 done
 
 echo ""
-echo "[Info] Installing all python interface dependencies."
+echo "[Info] Installing specific python interface dependencies."
 find "$INTERFACE_SRC_PATH/python" -type d | while read -r subdir; do
     if [[ -x "$subdir/setup.sh" ]]; then
         "$subdir/setup.sh"

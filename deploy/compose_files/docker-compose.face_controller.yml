@@ -4,7 +4,7 @@ services:
     image: pet-robot-face-controller
     platform: ${BUILD_ARCH}
     build:
-      context: ../../RaspberryPi
+      context: ../..
       dockerfile: ../RaspberryPi/interfaces/c++/face_controller/Dockerfile
       args:
         interface_name: "face_controller"
