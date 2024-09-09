@@ -52,6 +52,14 @@ else
 	./deploy/scripts/local_run.sh $(INTERFACE)
 endif
 
+ireset:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only reset undockerized interfaces with BUILD_LOCAL=1."
+else
+	./deploy/scripts/local_stop.sh $(INTERFACE)
+	./deploy/scripts/local_run.sh $(INTERFACE)
+endif
+
 iwatch:
 ifeq ($(BUILD_LOCAL), 0)
 	@echo "Can only watch undockerized interfaces with BUILD_LOCAL=1."

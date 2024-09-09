@@ -29,10 +29,8 @@ if [ "${INTERFACE_PID}" == "" ]; then
   echo ""
   if [ "$MODE" = "detached" ]; then
     nohup sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python > $PWD/logs/python/$INTERFACE_NAME.log 2>&1 &
-    #nohup sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py &>/dev/null &
   else
     sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
-    #sudo python3 RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py
   fi
 else
   echo ""
