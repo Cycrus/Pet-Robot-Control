@@ -100,27 +100,6 @@ else
 endif
 
 #-------------------------------------------------------------------------------------
-# Rules to connect to the Arduino systems.
-#
-connect_sensor:
-	@echo "Connecting to sensory system via CLI terminal."
-	python3 UtilityScripts/sensor_connector.py $(SENSORY_PORT) $(SENSORY_BAUD)
-	# minicom -Dsensory_system/sensory_system.ino $(SENSORY_PORT) -b $(SENSORY_BAUD)
-
-connect_motor:
-	@echo "Connecting to motor system via CLI terminal."
-	python3 UtilityScripts/motor_connector.py $(MOTOR_PORT) $(MOTOR_BAUD)
-	# minicom -D $(MOTOR_PORT) -b $(MOTOR_BAUD)
-
-connect_sensor_mqtt:
-	@echo "Connecting to Arduinos and forwarding to MQTT broker."
-	python3 UtilityScripts/mqtt_sensor_injector.py $(SENSORY_PORT) $(SENSORY_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
-
-connect_motor_mqtt:
-	@echo "Connecting to Arduinos and forwarding to MQTT broker."
-	python3 UtilityScripts/mqtt_motor_injector.py $(MOTOR_PORT) $(MOTOR_BAUD) $(MQTT_ADDRESS) $(MQTT_PORT)
-
-#-------------------------------------------------------------------------------------
 # Rules to build and upload test and tool sketches.
 #
 arduino_build_servo_ref:

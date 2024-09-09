@@ -17,18 +17,18 @@ fi
 
 if [ "${INTERFACE_NAME}" == "all" ]; then
   # Stop all interfaces if "all" is provided.
+  STOPPED_SOMETHING=0
   # All C++ interfaces.
   for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
     INAME=$(basename "$cpp_interface")
     INTERFACE_PID=$(ps aux | grep c++/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
     STATUS=$(kill $INTERFACE_PID 2>&1)
-    echo ""
     if [ "${STATUS}" == "" ]; then
+      echo ""
       echo "Successfully stopped <$INAME>."
-    else
-      echo "[Warning] <$INAME> not running. Could not stop."
+      echo ""
+      STOPPED_SOMETHING=1
     fi
-    echo ""
   done
   
   # All python interfaces.
@@ -36,14 +36,19 @@ if [ "${INTERFACE_NAME}" == "all" ]; then
     INAME=$(basename "$python_interface")
     INTERFACE_PID=$(ps aux | grep python/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
     STATUS=$(kill $INTERFACE_PID 2>&1)
-    echo ""
     if [ "${STATUS}" == "" ]; then
+      echo ""
       echo "Successfully stopped <$INAME>."
-    else
-      echo "[Warning] <$INAME> not running. Could not stop."
+      echo ""
+      STOPPED_SOMETHING=1
     fi
-    echo ""
   done
+
+  if [ "$STOPPED_SOMETHING" == 0 ]; then
+    echo ""
+    echo "[Warning] No interfaces running. Nothing to stop."
+    echo ""
+  fi
 
 else
   # Stop single process if its name is provided.
