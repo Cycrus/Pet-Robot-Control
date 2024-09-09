@@ -8,6 +8,7 @@
 INTERFACE_NAME=$1
 INTERFACE_DIRECTORY_PYTHON=RaspberryPi/interfaces/python
 INTERFACE_DIRECTORY_CPP=RaspberryPi/interfaces/c++
+LOCAL_INTERFACES_LIST=local_interfaces.conf
 
 if [ "${INTERFACE_NAME}" == "" ]; then
   echo "[Error] Please provide an interface name to launch or simply launch \"all\"."
@@ -30,17 +31,20 @@ docker compose up mosquitto -d
 if [ "${INTERFACE_NAME}" == "all" ]; then
   # If "all" is provided as the interface name, then all interfaces are
   # launched in detached mode.
-  # All c++ interfaces.
-  for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
-    INAME=$(basename "$cpp_interface")
-    ./deploy/scripts/local_run_c++.sh $INAME detached
-  done
+  # Launch all uncommented interfaces in the file local_interfaces.conf
+  while IFS= read -r line; do
+    IPATH="${line// /}"
+    IFS='/' read -r ILANGUAGE INAME <<< "$IPATH"
+    if [[ "${IPATH}" != \#* ]]; then
+      if [[ "$ILANGUAGE" == "c++" ]]; then
+        ./deploy/scripts/local_run_c++.sh $INAME detached
+      fi
 
-  # All python interfaces.
-  for python_interface in $INTERFACE_DIRECTORY_PYTHON/*/; do
-    INAME=$(basename "$python_interface")
-    ./deploy/scripts/local_run_python.sh $INAME detached
-  done
+      if [[ "$ILANGUAGE" == "python" ]]; then
+        ./deploy/scripts/local_run_python.sh $INAME detached
+      fi
+    fi
+  done < "$LOCAL_INTERFACES_LIST"
 
 else
   # If a certain interface name is provided, it launches in attached mode.
