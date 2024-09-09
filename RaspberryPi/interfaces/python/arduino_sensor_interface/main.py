@@ -10,11 +10,11 @@
 #**********************************************************************
 
 import os
+import time
 
+i = 0
 if __name__ == "__main__":
   while True:
-    try:
-      print(os.getenv("MQTT_HOST"))
-      print(os.getenv("MQTT_PORT"))
-    except Exception as e:
-      print(e)
+    print(i, flush=True)
+    i += 1
+    time.sleep(0.033)

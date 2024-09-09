@@ -7,6 +7,7 @@
 
 INTERFACE_NAME=$1
 INTERFACE_DIRECTORY_CPP=RaspberryPi/interfaces/c++
+LOCAL_INTERFACES_LIST=local_interfaces.conf
 
 if [ "${INTERFACE_NAME}" == "" ]; then
   echo "[Error] Please provide an interface name to build or simply build \"all\"."
@@ -21,9 +22,15 @@ echo "################################################"
 echo ""
 
 if [ "${INTERFACE_NAME}" == "all" ]; then
-  for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
-    ./deploy/scripts/local_build_c++.sh $(basename "$cpp_interface")
-  done
+  while IFS= read -r line; do
+    IPATH="${line// /}"
+    IFS='/' read -r ILANGUAGE INAME <<< "$IPATH"
+    if [[ "${IPATH}" != \#* ]]; then
+      if [[ "$ILANGUAGE" == "c++" ]]; then
+        ./deploy/scripts/local_build_c++.sh $INAME
+      fi
+    fi
+  done < "$LOCAL_INTERFACES_LIST"
 
 else
   if [ -d "$INTERFACE_DIRECTORY_CPP/$INTERFACE_NAME" ]; then

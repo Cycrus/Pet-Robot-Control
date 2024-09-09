@@ -31,22 +31,18 @@ if [[ "${INTERFACE_NAME}" == "all" ]]; then
       echo "Interface python/$INAME running!"
     fi
   done
+  echo ""
   exit
 fi
 
 # If a specific interface is passed, it logs its stdout and stderr on the console.
 # Check c++ interfaces
-INTERFACE_PID=$(ps aux | grep c++/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-if [ "${INTERFACE_PID}" != "" ]; then
-  watch -n 1 "cat $LOG_DIRECTORY_CPP/$INTERFACE_NAME.log"
+if [ -f "$LOG_DIRECTORY_CPP/$INTERFACE_NAME.log" ]; then
+  tail -f -n 50 $LOG_DIRECTORY_CPP/$INTERFACE_NAME.log
   exit
 fi
 
-INTERFACE_PID=$(ps aux | grep python/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-if [ "${INTERFACE_PID}" != "" ]; then
-  watch -n 1 "cat $LOG_DIRECTORY_PYTHON/$INTERFACE_NAME.log"
+if [ -f "$LOG_DIRECTORY_PYTHON/$INTERFACE_NAME.log" ]; then
+  tail -f -n 50 $LOG_DIRECTORY_PYTHON/$INTERFACE_NAME.log
   exit
 fi
-
-echo ""
-echo "[Warning] Interface $INTERFACE_NAME currently not running."

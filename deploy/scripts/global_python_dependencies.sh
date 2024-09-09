@@ -13,4 +13,4 @@ sudo() {
 sudo apt-get install python3 python3-pip
 
 # Install Paho MQTT Library for Python
-pip3 install paho-mqtt --break-system-packages
+pip3 install paho-mqtt python-dotenv --break-system-packages
