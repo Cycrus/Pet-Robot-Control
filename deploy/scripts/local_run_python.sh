@@ -28,9 +28,9 @@ if [ "${INTERFACE_PID}" == "" ]; then
   echo "Launching python module $INTERFACE_NAME undockerized in $MODE mode."
   echo ""
   if [ "$MODE" = "detached" ]; then
-    nohup sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python > $PWD/logs/python/$INTERFACE_NAME.log 2>&1 &
+    nohup ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python > $PWD/logs/python/$INTERFACE_NAME.log 2>&1 &
   else
-    sudo ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
+    ./RaspberryPi/interfaces/python/$INTERFACE_NAME/run.sh $PWD/RaspberryPi/interfaces/python/$INTERFACE_NAME/main.py $PWD/RaspberryPi/lib/python
   fi
 else
   echo ""

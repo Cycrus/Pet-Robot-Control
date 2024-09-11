@@ -1,3 +1,7 @@
+"""
+Reads the .env file in the root of the project to get its fields.
+"""
+
 import dotenv
 
 

@@ -1,3 +1,8 @@
+"""
+A custom logger which uses a certain datetime format, colors the terminal, and flushes after each line.
+This is required for the file logging which is piped to the stdout meachanism implemented in the framework.
+"""
+
 from datetime import datetime
 
 WHITE = "\033[00m"

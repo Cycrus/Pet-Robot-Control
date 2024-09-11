@@ -29,7 +29,7 @@ echo ""
 echo "[Info] Installing default programs with apt."
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get install -y build-essential cmake wget python3-pip3 git
+sudo apt-get install -y build-essential cmake wget python3-pip git
 
 # Install docker
 echo ""
