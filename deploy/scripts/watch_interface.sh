@@ -9,29 +9,27 @@ INTERFACE_DIRECTORY_PYTHON=RaspberryPi/interfaces/python
 INTERFACE_DIRECTORY_CPP=RaspberryPi/interfaces/c++
 LOG_DIRECTORY_PYTHON=logs/python
 LOG_DIRECTORY_CPP=logs/c++
+LOCAL_INTERFACES_LIST=local_interfaces.conf
 
 
 # If "all" is passed, it checks for the existence of any process.
 if [[ "${INTERFACE_NAME}" == "all" ]]; then
-  for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
-    INAME=$(basename "$cpp_interface")
-    INTERFACE_PID=$(ps aux | grep c++/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-    if [ "${INTERFACE_PID}" != "" ]; then
-      echo ""
-      echo "Interface cpp/$INAME running!"
+  INTERFACE_LIST=""
+  while IFS= read -r line; do
+    IPATH="${line// /}"
+    IFS='/' read -r ILANGUAGE INAME <<< "$IPATH"
+    if [[ "${IPATH}" != \#* ]]; then
+      if [[ "$ILANGUAGE" == "c++" ]]; then
+        INTERFACE_LIST="$INTERFACE_LIST $LOG_DIRECTORY_CPP/$INAME.log"
+      fi
+
+      if [[ "$ILANGUAGE" == "python" ]]; then
+        INTERFACE_LIST="$INTERFACE_LIST $LOG_DIRECTORY_PYTHON/$INAME.log"
+      fi
     fi
-  done
-  
-  # All python interfaces.
-  for python_interface in $INTERFACE_DIRECTORY_PYTHON/*/; do
-    INAME=$(basename "$python_interface")
-    INTERFACE_PID=$(ps aux | grep python/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
-    if [ "${INTERFACE_PID}" != "" ]; then
-      echo ""
-      echo "Interface python/$INAME running!"
-    fi
-  done
-  echo ""
+  done < "$LOCAL_INTERFACES_LIST"
+  echo $INTERFACE_LIST
+  tail -f -n 50 $INTERFACE_LIST | sed "/==>.*<==/d; /^\s*$/d"
   exit
 fi
 

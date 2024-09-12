@@ -21,7 +21,7 @@ if [ "${INTERFACE_NAME}" == "all" ]; then
   # All C++ interfaces.
   for cpp_interface in $INTERFACE_DIRECTORY_CPP/*/; do
     INAME=$(basename "$cpp_interface")
-    INTERFACE_PID=$(ps aux | grep c++/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    INTERFACE_PID=$(ps aux | grep c++/$INAME | grep -v "grep" | grep -v ".log" | awk '{print $2}' | head -n 1)
     STATUS=$(kill $INTERFACE_PID 2>&1)
     if [ "${STATUS}" == "" ]; then
       echo ""
@@ -34,7 +34,7 @@ if [ "${INTERFACE_NAME}" == "all" ]; then
   # All python interfaces.
   for python_interface in $INTERFACE_DIRECTORY_PYTHON/*/; do
     INAME=$(basename "$python_interface")
-    INTERFACE_PID=$(ps aux | grep python/$INAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    INTERFACE_PID=$(ps aux | grep python/$INAME | grep -v "grep" | grep -v ".log" | awk '{print $2}' | head -n 2)
     STATUS=$(kill $INTERFACE_PID 2>&1)
     if [ "${STATUS}" == "" ]; then
       echo ""
@@ -54,7 +54,7 @@ else
   # Stop single process if its name is provided.
   # One python interface.
   if [ -d "$INTERFACE_DIRECTORY_PYTHON/$INTERFACE_NAME" ]; then
-    INTERFACE_PID=$(ps aux | grep python/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    INTERFACE_PID=$(ps aux | grep python/$INTERFACE_NAME | grep -v "grep" | grep -v ".log" | awk '{print $2}' | head -n 2)
     STATUS=$(kill $INTERFACE_PID 2>&1)
     echo ""
     if [ "${STATUS}" == "" ]; then
@@ -68,7 +68,7 @@ else
 
   # One c++ interface.
   if [ -d "$INTERFACE_DIRECTORY_CPP/$INTERFACE_NAME" ]; then
-    INTERFACE_PID=$(ps aux | grep c++/$INTERFACE_NAME | grep -v "grep" | awk '{print $2}' | head -n 1)
+    INTERFACE_PID=$(ps aux | grep c++/$INTERFACE_NAME | grep -v "grep" | grep -v ".log" | awk '{print $2}' | head -n 1)
     STATUS=$(kill $INTERFACE_PID 2>&1)
     echo ""
     if [ "${STATUS}" == "" ]; then

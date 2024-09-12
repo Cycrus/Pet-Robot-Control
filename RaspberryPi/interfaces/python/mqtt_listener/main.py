@@ -1,66 +1,40 @@
-import time
-from config import EnvConfig
-from logger import Logger
-import paho.mqtt.client as mqtt
+from interface import Interface
 
 
-class MqttListener:
+class MqttListener(Interface):
   def __init__(self):
-    self.name = "MqttListener"
-    self.logger = Logger(self.name)
-    self.env = EnvConfig()
-    self.mqtt_id = (self.env.getValue("MQTT_HOST"), int(self.env.getValue("MQTT_PORT")))
-    self.mqttc = None
-    self.running = True
-
-  def close(self):
-    self.running = False
-    self.close_mqtt_client()
-
-  def subscribe_mqtt(self, topic):
-    self.mqttc.on_message = self.echo_message
-    self.mqttc.subscribe(topic)
-
-  def loop_mqtt(self):
-    self.mqttc.loop_forever()
+    super().__init__("MqttListener")
+    self.on_exit(self.close)
 
   def echo_message(self, client, userdata, msg):
+    """
+    Prints the arriving message.
+    """
     self.logger.debug(msg.topic + " " + str(msg.payload))
 
-  def connect_mqtt_client(self):
+  def subscribe_topics(self, client, userdata, flags, reason_code, properties):
     """
-    Connects an MQTT client to the broker.
+    Subscribes to all relevant topics.
     """
-    self.logger.info(f"Setting up MQTT client to {self.mqtt_id[0]}:{self.mqtt_id[1]}.")
-    try:
-      if self.mqttc is None:
-        self.mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-        self.mqttc.connect(self.mqtt_id[0], self.mqtt_id[1])
-        self.logger.success("MQTT client connected.")
-      else:
-        self.logger.warning("MQTT client already running. Not setting up again.")
-    except Exception as e:
-      self.logger.error(f"Cannot setup MQTT client. {e}.")
-      self.mqttc = None
+    self.mqtt_client.subscribe("output/sensor/distance_front")
+    self.mqtt_client.subscribe("output/sensor/distance_back")
 
-  def close_mqtt_client(self):
+  def close(self):
     """
-    Closes an established MQTT client connection.
+    Closes the MQTT client. is handed as a callback to the exit signal function.
     """
-    self.logger.info(f"Closing MQTT cient to {self.mqtt_id[0]}:{self.mqtt_id[1]}")
-    try:
-      if self.arduino is not None:
-        self.mqttc.loop_stop()
-        self.mqttc = None
-        self.logger.success(f"Successfully closed MQTT client.")
-      else:
-        self.logger.warning("MQTT client already closed. Not closing again.")
-    except Exception as e:
-      self.logger.error(f"MQTT client could not be closed. {e}.")
+    self.mqtt_client.stop_loop()
+    self.mqtt_client.close()
+
+  def main(self):
+    self.mqtt_client.on_message(self.echo_message)
+    self.mqtt_client.on_connect(self.subscribe_topics)
+    self.mqtt_client.connect()
+    self.mqtt_client.start_loop(blocking = True)
 
 
 if __name__ == "__main__":
-  listener = MqttListener()
-  listener.connect_mqtt_client()
-  listener.subscribe_mqtt("output/sensor/distance_front")
-  listener.loop_mqtt()
+  interface = MqttListener()
+  interface.main()
+  interface.exit_event.wait(interface.exit_timeout)
+  interface.logger.success("Gracefully exited interface.")

@@ -35,5 +35,5 @@ class Logger:
   def _print(self, msg: str, level: str, color: str):
     log_time = datetime.now()
     log_time_str = log_time.strftime(self._datetime_format)
-    print(f"{color}{log_time_str} [{level}] <{self._interface_name}>: {msg}{WHITE}", flush = True)
+    print(f"{self._interface_name} | {log_time_str} {color}[{level}] {msg}{WHITE}", flush = True)
 

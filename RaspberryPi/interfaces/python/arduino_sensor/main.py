@@ -1,60 +1,22 @@
-import time
-from config import EnvConfig
-from logger import Logger
 import serial
-import paho.mqtt.client as mqtt
 import struct
+from interface import Interface
 
 
-class SensorArduino:
+class SensorArduino(Interface):
   def __init__(self):
-    self.name = "ArduinoSensor"
-    self.logger = Logger(self.name)
-    self.env = EnvConfig()
-    self.mqtt_id = (self.env.getValue("MQTT_HOST"), int(self.env.getValue("MQTT_PORT")))
+    super().__init__("SensorArduino")
+    #self.on_exit(self.close)
+
     self.arduino_port = self.env.getValue("SENSORY_PORT")
     self.arduino_baud = self.env.getValue("SENSORY_BAUD")
     self.sensor_dict = {}
     self.mqttc = None
     self.arduino = None
-    self.running = True
 
   def close(self):
-    self.running = False
-    self.close_arduino()
-    self.close_mqtt_client()
-
-  def connect_mqtt_client(self):
-    """
-    Connects an MQTT client to the broker.
-    """
-    self.logger.info(f"Setting up MQTT client to {self.mqtt_id[0]}:{self.mqtt_id[1]}.")
-    try:
-      if self.mqttc is None:
-        self.mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-        self.mqttc.connect(self.mqtt_id[0], self.mqtt_id[1])
-        self.mqttc.loop_start()
-        self.logger.success("MQTT client connected.")
-      else:
-        self.logger.warning("MQTT client already running. Not setting up again.")
-    except Exception as e:
-      self.logger.error(f"Cannot setup MQTT client. {e}.")
-      self.mqttc = None
-
-  def close_mqtt_client(self):
-    """
-    Closes an established MQTT client connection.
-    """
-    self.logger.info(f"Closing MQTT cient to {self.mqtt_id[0]}:{self.mqtt_id[1]}")
-    try:
-      if self.arduino is not None:
-        self.mqttc.loop_stop()
-        self.mqttc = None
-        self.logger.success(f"Successfully closed MQTT client.")
-      else:
-        self.logger.warning("MQTT client already closed. Not closing again.")
-    except Exception as e:
-      self.logger.error(f"MQTT client could not be closed. {e}.")
+    self.mqtt_client.stop_loop()
+    self.mqtt_client.close()
 
   def connect_arduino(self):
     """
@@ -84,7 +46,7 @@ class SensorArduino:
       else:
         self.warning("Arduino connection already closes. Not closing again.")
     except Exception as e:
-      self.logger.error("Arduino connection could not be closed. {e}.")
+      self.logger.error(f"Arduino connection could not be closed. {e}.")
 
   def get_sensor_data(self):
     """
@@ -94,7 +56,7 @@ class SensorArduino:
     data_size = 0
     read_data = False
     
-    while self.running:
+    while not self.exit_event.is_set():
       byte = self.arduino.read(1)
       byte_val = int.from_bytes(bytes = byte, byteorder  = "little", signed = False)
 
@@ -192,26 +154,25 @@ class SensorArduino:
         self.sensor_dict["frequency"] = frequency
 
         return
-      
-  def publish_sensor_data(self, prefix):
-    """
-    Publishes the sensor data from the Arduino on MQTT topics.
-    """
-    for key in self.sensor_dict:
-      data = self.sensor_dict[key]
-      self.mqttc.publish(prefix + "/" + key, data)
+    
+  def main(self):
+    self.connect_arduino()
+    self.mqtt_client.connect()
+    self.mqtt_client.start_loop(blocking = False)
+
+    while not self.exit_event.is_set():
+      try:
+        self.get_sensor_data()
+        self.mqtt_client.publish("output/sensor", self.sensor_dict)
+      except Exception as e:
+        self.logger.error(f"{self.name} died. {e}.")
+        break
+
+    self.close()
 
 
 if __name__ == "__main__":
-  sensor_interface = SensorArduino()
-  sensor_interface.connect_arduino()
-  sensor_interface.connect_mqtt_client()
-
-  while True:
-    try:
-      sensor_interface.get_sensor_data()
-      sensor_interface.publish_sensor_data("output/sensor")
-    except Exception as e:
-      sensor_interface.logger.error(f"{sensor_interface.name} died. {e}.")
-      sensor_interface.close()
-      exit(0)
+  interface = SensorArduino()
+  interface.main()
+  interface.exit_event.wait(interface.exit_timeout)
+  interface.logger.success("Gracefully exited interface.")

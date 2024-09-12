@@ -67,6 +67,13 @@ else
 	./deploy/scripts/watch_interface.sh $(INTERFACE)
 endif
 
+istate:
+ifeq ($(BUILD_LOCAL), 0)
+	@echo "Can only check undockerized interface states with BUILD_LOCAL=1."
+else
+	./deploy/scripts/check_interface_state.sh $(INTERFACE)
+endif
+
 istop:
 ifeq ($(BUILD_LOCAL), 0)
 	@echo "Can only stop undockerized interfaces with BUILD_LOCAL=1."
