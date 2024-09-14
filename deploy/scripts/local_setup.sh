@@ -19,6 +19,7 @@ sudo() {
 ROBOT_PROJECT_DIR=$(pwd)
 ARDUINO_LIBS_FILE=$ROBOT_PROJECT_DIR/Arduino/lib_requirements.txt
 INTERFACE_SRC_PATH=$ROBOT_PROJECT_DIR/RaspberryPi/interfaces
+AUTOSTART_COMMAND="@reboot $PWD && ./deploy/scripts/local_autostart.sh"
 
 echo ""
 echo "[Info] Setting up temporary installation location."
@@ -92,7 +93,21 @@ find "$INTERFACE_SRC_PATH/python" -type d | while read -r subdir; do
     fi
 done
 
+# Activating Raspberry Pi SPI
 sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/' /boot/firmware/config.txt
+
+# Create autostart entry if not already present
+echo ""
+echo "[Info] Installing autostart routine using crontab."
+crontab -l > tmp_cron
+if grep -Fxq "$AUTOSTART_COMMAND" tmp_cron
+then
+    echo "The autostart cron job already exists."
+else
+    echo "$AUTOSTART_COMMAND" >> mycron
+    crontab mycron
+    echo "New autostart cron job added."
+fi
 
 echo ""
 echo "[Info] Cleaning up temporary installation location."
