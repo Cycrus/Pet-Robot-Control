@@ -1,12 +1,16 @@
+"""
+A class to automatically connect to the MQTT broker specified in the .env file.
+"""
+
 import paho.mqtt.client as mqtt
 from config import EnvConfig
 from logger import Logger
 
 
 class MqttClient:
-  def __init__(self, interface_name: str):
+  def __init__(self, logger: Logger, interface_name: str):
     self.env = EnvConfig()
-    self.logger = Logger(interface_name)
+    self.logger = logger
     self.mqtt_id = (self.env.getValue("MQTT_HOST"), int(self.env.getValue("MQTT_PORT")))
     self.mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id = interface_name)
 

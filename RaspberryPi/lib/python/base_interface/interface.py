@@ -15,7 +15,7 @@ class Interface:
     self.name: str = name
     self.logger: Logger = Logger(self.name)
     self.env: EnvConfig = EnvConfig()
-    self.mqtt_client: MqttClient = MqttClient(self.name)
+    self.mqtt_client: MqttClient = MqttClient(self.logger, self.name)
 
     self.exit_timeout = 2
     self.exit_event = threading.Event()

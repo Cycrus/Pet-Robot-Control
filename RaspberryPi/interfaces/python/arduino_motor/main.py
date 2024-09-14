@@ -6,13 +6,13 @@ from arduinoconn import ArduinoSerial
 
 class SensorArduino(Interface):
   def __init__(self):
-    super().__init__("SensorArduino")
+    super().__init__("MotorArduino")
 
     self.arduino_port = self.env.getValue("SENSORY_PORT")
     self.arduino_baud = self.env.getValue("SENSORY_BAUD")
     self.sensor_dict = {}
     self.mqttc = None
-    self.arduino = ArduinoSerial(self.arduino_port, self.arduino_baud, self.logger)
+    self.arduino = ArduinoSerial(self.arduino_port, self.arduino_baud)
     self.data_format = {
       "distance_front": "int16",
       "distance_back": "int16",
@@ -22,14 +22,12 @@ class SensorArduino(Interface):
       "humidity": "uint8",
       "gas": "float32",
       "rfid": "uint8",
-
       "compass_x": "float32",
       "compass_y": "float32",
       "compass_z": "float32",
       "compass_heading": "float32",
       "current_per_hour": "float32",
       "current": "float32",
-
       "accx": "float32",
       "accy": "float32",
       "accz": "float32",
@@ -41,18 +39,15 @@ class SensorArduino(Interface):
       "angz": "float32",
       "gps_lon": "float64",
       "gps_lat": "float64",
-
       "year": "uint16",
       "month": "uint16",
       "day": "uint16",
       "hour": "uint16",
-      "minute": "uint16",
       "second": "uint16",
       "centisecond": "uint16",
       "altitude_2": "uint16",
       "speed": "float32",
       "course": "uint16",
-      
       "satellite_number": "uint8",
       "frequency": "uint16"
     }
@@ -67,10 +62,12 @@ class SensorArduino(Interface):
     self.mqtt_client.start_loop(blocking = False)
 
     while not self.exit_event.is_set():
+      self.logger.debug("heeeeeeewwooooooo")
       try:
-        _, self.sensor_dict = self.arduino.receive_arduino_data(self.data_format, "little", self.exit_event)
-        if self.sensor_dict is not None:
-          self.mqtt_client.publish("output/sensor", self.sensor_dict)
+        size_matches, self.sensor_dict = self.arduino.receive_arduino_data(self.data_format, "little", self.exit_event)
+        if not size_matches:
+          self.logger.warning("Size of format specifier does not match.")
+        self.mqtt_client.publish("output/sensor", self.sensor_dict)
       except Exception as e:
         self.logger.error(f"{self.name} died. {e}.")
         break

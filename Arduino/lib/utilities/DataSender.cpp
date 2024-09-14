@@ -15,7 +15,7 @@ max_buffer_size_(buffer_size),
 curr_buffer_size_(MIN_BUFFER_SIZE),
 data_buffer_(nullptr)
 {
-  time_list_[0] = 33;
+  time_list_[0] = 1;
   setMaxSteps(1);
 }
 

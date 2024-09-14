@@ -95,14 +95,6 @@ class DataSender : public Module
 
   //-----------------------------------------------------------------------------------------------------------------
   ///
-  /// Formats the data to allow for structured communication.
-  /// Adds the length of the message to the start of the message as a 2 byte value.
-  /// Adds four completely set bytes to the end of the message to act as a
-  //
-  void formatData();
-
-  //-----------------------------------------------------------------------------------------------------------------
-  ///
   /// Sends all data via the UART serial connection.
   //
   void sendData();
