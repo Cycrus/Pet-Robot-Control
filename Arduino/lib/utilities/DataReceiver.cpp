@@ -14,7 +14,7 @@ baud_rate_(baud_rate),
 max_buffer_size_(buffer_size),
 curr_buffer_size_(0),
 data_buffer_(nullptr),
-read_state_(ReadState::READ_SIZE)
+read_state_(ReadState::SEARCH_DATA)
 {
   time_list_[0] = 0;
   setMaxSteps(1);
@@ -164,7 +164,26 @@ void DataReceiver::receiveData()
 
   while(Serial.available())
   {
-    if(read_state_ == ReadState::READ_SIZE)
+    if(read_state_ == ReadState::SEARCH_DATA)
+    {
+      uint8_t byte = Serial.read();
+      if(byte == 0xFE)
+      {
+        end_flag_counter++;
+      }
+      else
+      {
+        end_flag_counter = 0;
+      }
+
+      if(end_flag_counter >= 4)
+      {
+        read_state_ = ReadState::READ_SIZE;
+        break;
+      }
+    }
+
+    else if(read_state_ == ReadState::READ_SIZE)
     {
       uint8_t size_bytes[2];
       delay(2);
@@ -205,21 +224,7 @@ void DataReceiver::receiveData()
 
     else
     {
-      uint8_t byte = Serial.read();
-      if(byte == 0xFE)
-      {
-        end_flag_counter++;
-      }
-      else
-      {
-        end_flag_counter = 0;
-      }
-
-      if(end_flag_counter >= 4)
-      {
-        read_state_ = ReadState::READ_SIZE;
-        break;
-      }
+      read_state_ = ReadState::SEARCH_DATA;
     }
   }
 }

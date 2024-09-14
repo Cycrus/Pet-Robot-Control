@@ -9,6 +9,91 @@ import threading
 from logger import Logger
 from typing import Optional, Tuple
 
+
+class ArduinoMessage:
+  def __init__(self, endianness: str = "little"):
+    self.msg_bytes = b""
+    self.msg_len = 2
+    self.finished = False
+    self.endianness = endianness
+
+  def get_bytes(self):
+    return self.msg_bytes
+  
+  def reset(self):
+    """
+    Resets and empties the message buffer. Can be rewritten afterwards.
+    """
+    self.msg_bytes = b""
+    self.msg_len = 2
+    self.finished = False
+
+  def add_int(self, value: int, size: int, signed: bool = False) -> bool:
+    """
+    Concatenates an integer to the message.
+    :param value: The integer to append.
+    :param size: In bytes the size of the integer bytes to append.
+    :param signed: If true, the integer is interpreted as signed.
+    :return: True if everything went ok.
+    """
+    if self.finished:
+      return False
+    if size != 1 and size != 2 and size != 4 and size != 8:
+      return False
+
+    self.msg_bytes += value.to_bytes(size, byteorder = self.endianness, signed = signed)
+    self.msg_len += size
+    return True
+
+  def add_float(self, value: float, size: int) -> bool:
+    """
+    Concatenates a float to the message.
+    :param value: The float to append.
+    :param size: In bytes the size of the float bytes to append.
+    :return: True if everything went ok.
+    """
+    if self.finished:
+      return False
+    if size != 2 and size != 4 and size != 8:
+      return False
+
+    if self.endianness == "little":
+      sign = "<"
+    elif self.endianness == "big":
+      sign = ">"
+    else:
+      return False
+
+    if size == 2:
+      self.msg_bytes += struct.pack(f"{sign}e", value)
+    elif size == 4:
+      self.msg_bytes += struct.pack(f"{sign}f", value)
+    elif size == 8:
+      self.msg_bytes += struct.pack(f"{sign}d", value)
+
+    self.msg_len += size
+    return True
+
+  def finish(self, msg_start_signature: int, msg_start_signature_number: int) -> bool:
+    """
+    Prepares and finishes the message in order to be sent. After calling this method, the message is
+    frozen and cannot be modified anymore.
+    :param msg_start_signature: The signature which is always appended at the start of every message.
+    :param msg_start_signature_number: The amount of times the message signature is appended.
+    :return: True if everything went ok.
+    """
+    if self.finished:
+      return False
+    
+    self.msg_len += msg_start_signature_number
+    
+    self.msg_bytes = bytes([msg_start_signature] * msg_start_signature_number) +\
+                     self.msg_len.to_bytes(2, byteorder = self.endianness, signed = False) +\
+                     self.msg_bytes
+    self.finished = True
+    return True
+
+
 class ArduinoSerial:
   def __init__(self, port: str, baud: int, logger: Logger):
     self.arduino = None
@@ -88,6 +173,7 @@ class ArduinoSerial:
     """
     if size != 1 and size != 2 and size != 4 and size != 8:
       self.logger.error(f"Incorrect size of {size} given to receive integer from Arduino.")
+      return None
 
     byte_data = self.receive_bytes(size)
     try:
@@ -105,6 +191,7 @@ class ArduinoSerial:
     """
     if size != 2 and size != 4 and size != 8:
       self.logger.error(f"Incorrect size of {size} given to receive float from Arduino.")
+      return None
 
     if endianness == "little":
       sign = "<"
@@ -187,12 +274,12 @@ class ArduinoSerial:
           data_dict[name] = self.receive_float(8, endianness)
           check_size -= 8
 
-        elif format.contains("string"):
+        elif "string" in format:
           str_size = format.split(":")[1]
           data_dict[name] = self.receive_string(str_size)
           check_size -= str_size
 
-        elif format.contains("bytes"):
+        elif "bytes" in format:
           byte_size = format.split(":")[1]
           data_dict[name] = self.receive_bytes(byte_size)
           check_size -= byte_size
@@ -242,3 +329,20 @@ class ArduinoSerial:
         return received_data
       
     return True, None
+
+  def send_arduino_data(self, message: ArduinoMessage) -> bool:
+    """
+    Sends a well formed message to the Arduino.
+    :param message: The message to send. Should be populated beforehand with data.
+    :return: True if everything went ok.
+    """
+    try:
+      if message.msg_len <= 0:
+        self.logger.error(f"Cannot send an empty message to the Arduino on port {self.port}.")
+        return False
+      message.finish(self.msg_start_signature, self.msg_start_signature_number)
+      self.arduino.write(message.get_bytes())
+      return True
+    except Exception as e:
+      self.logger.error(f"Could not send Arduino message {message.get_bytes()} to Arduino on port {self.port}. {e}.")
+      return False
