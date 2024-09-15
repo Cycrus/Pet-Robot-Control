@@ -109,6 +109,15 @@ else
     echo "New autostart cron job added."
 fi
 
+# Config mosquitto to be reachable on the network
+echo ""
+echo "[Info] Configuring Mosquitto MQTT broker."
+if [ ! -d /opt/pet-robot/mosquitto/config/ ]; then
+  sudo mkdir -p /opt/pet-robot/mosquitto/config
+fi
+sudo bash -c 'echo "listener 1883" > /opt/pet-robot/mosquitto/config/mosquitto.conf'
+sudo bash -c 'echo "allow_anonymous true" >> /opt/pet-robot/mosquitto/config/mosquitto.conf'
+
 echo ""
 echo "[Info] Cleaning up temporary installation location."
 cd /tmp
