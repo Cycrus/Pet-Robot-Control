@@ -2,6 +2,7 @@
 A class to automatically connect to the MQTT broker specified in the .env file.
 """
 
+import time
 import paho.mqtt.client as mqtt
 from config import EnvConfig
 from logger import Logger
@@ -14,19 +15,31 @@ class MqttClient:
     self.mqtt_id = (self.env.getValue("MQTT_HOST"), int(self.env.getValue("MQTT_PORT")))
     self.mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id = interface_name)
 
-  def connect(self) -> bool:
+  def connect(self, retry: bool = False, timeout: float = 10.0) -> bool:
     """
     Connects an MQTT client to the broker.
     """
     self.logger.info(f"Setting up MQTT client to {self.mqtt_id[0]}:{self.mqtt_id[1]}.")
-    try:
-      self.mqtt_client.connect(self.mqtt_id[0], self.mqtt_id[1])
-      self.logger.success("MQTT client connected.")
-      return True
-    except Exception as e:
-      self.logger.error(f"Cannot setup MQTT client. {e}.")
-      self.mqtt_client = None
-      return False
+    if retry:
+      tries = timeout
+    else:
+      tries = 1
+
+    while tries >= 0:
+      try:
+        self.mqtt_client.connect(self.mqtt_id[0], self.mqtt_id[1])
+        self.logger.success("MQTT client connected.")
+        return True
+      except Exception as e:
+        self.logger.error(f"Cannot setup MQTT client. {e}.")
+        self.mqtt_client = None
+        
+      tries -= 1
+      if retry:
+        time.sleep(1.0)
+
+
+    return False
 
   def on_connect(self, callback: callable) -> bool:
     """

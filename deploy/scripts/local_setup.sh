@@ -19,7 +19,7 @@ sudo() {
 ROBOT_PROJECT_DIR=$(pwd)
 ARDUINO_LIBS_FILE=$ROBOT_PROJECT_DIR/Arduino/lib_requirements.txt
 INTERFACE_SRC_PATH=$ROBOT_PROJECT_DIR/RaspberryPi/interfaces
-AUTOSTART_COMMAND="@reboot $PWD && ./deploy/scripts/local_autostart.sh"
+AUTOSTART_COMMAND="@reboot cd $PWD && ./deploy/scripts/local_autostart.sh"
 
 echo ""
 echo "[Info] Setting up temporary installation location."
