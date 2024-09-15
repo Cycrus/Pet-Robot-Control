@@ -17,7 +17,10 @@ class MqttClient:
 
   def connect(self, retry: bool = False, timeout: float = 10.0) -> bool:
     """
-    Connects an MQTT client to the broker.
+    Connects an MQTT client to the broker. Can be set to retry multiple times or only a single time.
+    :param retry: If set to True, it retries until connection is achieved or until timeout is reached..
+    :param timeout: A timeout in seconds until the retry fails. Is only computated very roughly.
+    :return: True if everything went ok.
     """
     self.logger.info(f"Setting up MQTT client to {self.mqtt_id[0]}:{self.mqtt_id[1]}.")
     if retry:
@@ -33,11 +36,9 @@ class MqttClient:
       except Exception as e:
         self.logger.error(f"Cannot setup MQTT client. {e}.")
         self.mqtt_client = None
-        
       tries -= 1
       if retry:
         time.sleep(1.0)
-
 
     return False
 
