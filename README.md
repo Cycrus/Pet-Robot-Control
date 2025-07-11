@@ -1,4 +1,15 @@
-# Pet Robot Control
+<div align="center">
+  <img src="Images/pet_robot_control_logo.png" alt="MiniMile VR Logo" width="250">
+  <h1>Pet Robot Control</h1>
+  <h2>A custom framework for a pet robot (populated with some functions)</h2>
+</div>
+
+<div align="center">
+  <img alt="License" src=https://img.shields.io/badge/License-GPL_3.0-green?style=flat-square>
+  <img alt="OS" src=https://img.shields.io/badge/OS-Linux-yellow?style=flat-square>
+  <img alt="Platforms" src=https://img.shields.io/badge/Platforms-x86__64,ARM64-blue?style=flat-square>
+  <img alt="Languages" src=https://img.shields.io/badge/Languages-C++,Python-red?style=flat-square>
+</div>
 
 ## Introduction
 The present repository is a collection of all programs and scripts to control my "pet robot". It is designed in a way to offer as many different inputs/outputs as possible without a predefined purpose. It is designed as a platform for trying out controllers and software.
